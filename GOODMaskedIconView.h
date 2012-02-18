@@ -29,5 +29,12 @@ typedef void (^DrawingBlock)(CGContextRef context);
 - (id)initWithImage:(UIImage *)image;
 
 - (void)configureWithImage:(UIImage *)image;
+- (void)configureWithImage:(UIImage *)image size:(CGSize)size;
+- (void)configureWithImageNamed:(NSString *)imageName;
+- (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
+- (void)configureWithPDFNamed:(NSString *)pdfName;
+- (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+
+- (UIImage *)renderToImage;
 
 @end

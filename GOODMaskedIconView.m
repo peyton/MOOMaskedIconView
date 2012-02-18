@@ -9,9 +9,13 @@
 #import "GOODMaskedIconView.h"
 
 static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
+static NSString * const GOODMaskedIconViewMaskKey = @"mask";
+
 @interface GOODMaskedIconView ()
 
 @property (nonatomic, assign) CGImageRef mask;
+
++ (NSURL *)_resourceURL:(NSString *)resourceName;
 
 @end
 
@@ -38,10 +42,10 @@ static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
     
     // Set up observing
     [self addObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:GOODMaskedIconViewMaskKey options:0 context:NULL];
 
     return self;
 }
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -50,9 +54,13 @@ static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
 
 - (void)dealloc;
 {
-    self.mask = NULL;
-    
     [self removeObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey];
+    [self removeObserver:self forKeyPath:GOODMaskedIconViewMaskKey];
+
+    self.color = nil;
+    self.drawingBlock = NULL;
+    self.highlightedColor = nil;
+    self.mask = NULL;
 }
 
 #pragma mark - Drawing and layout methods
@@ -92,9 +100,25 @@ static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
     return CGSizeMake(CGImageGetWidth(self.mask) / scale, CGImageGetHeight(self.mask) / scale);
 }
 
+#pragma mark - Getters and setters
+
+- (void)setMask:(CGImageRef)mask;
+{
+    if (mask == self.mask)
+        return;
+    
+    CGImageRelease(self.mask);
+    _mask = CGImageRetain(mask);
+}
+
 #pragma mark - Configuration methods
 
 - (void)configureWithImage:(UIImage *)image;
+{
+    [self configureWithImage:image size:CGSizeZero];
+}
+
+- (void)configureWithImage:(UIImage *)image size:(CGSize)size;
 {
     if (image == nil)
     {
@@ -103,7 +127,80 @@ static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
     }
     
     CGImageRef imageRef = image.CGImage;
-    self.mask = CGImageMaskCreate(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef), CGImageGetBitsPerComponent(imageRef), CGImageGetBitsPerPixel(imageRef), CGImageGetBytesPerRow(imageRef), CGImageGetDataProvider(imageRef), NULL, NO);;
+    CGSize imageSize = CGSizeZero;
+    size_t bytesPerRow = 0;
+    
+    if (size.width > 0.0f && size.height > 0.0f) 
+    {
+        imageSize = size;
+        bytesPerRow = CGImageGetWidth(imageRef) * CGColorSpaceGetNumberOfComponents(CGImageGetColorSpace(imageRef));
+    }
+    else 
+    {
+        imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
+        bytesPerRow = CGImageGetBytesPerRow(imageRef);
+    }
+    
+    CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), CGImageGetBitsPerPixel(imageRef), bytesPerRow, CGImageGetDataProvider(imageRef), NULL, NO);
+    self.mask = maskRef;
+    CGImageRelease(maskRef);
+}
+
+- (void)configureWithImageNamed:(NSString *)imageName;
+{
+    return [self configureWithImageNamed:imageName size:CGSizeZero];
+}
+
+- (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
+{
+    NSURL *imageURL = [GOODMaskedIconView _resourceURL:imageName];
+    UIImage *image = [UIImage imageWithContentsOfFile:[imageURL absoluteString]];
+    [self configureWithImage:image size:size];
+}
+
+- (void)configureWithPDFNamed:(NSString *)pdfName;
+{
+    [self configureWithPDFNamed:pdfName size:CGSizeZero];
+}
+
+- (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+{
+    if (!pdfName)
+        return;
+    
+    // Grab pdf
+    NSURL *pdfURL = [GOODMaskedIconView _resourceURL:pdfName];
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((__bridge CFURLRef)pdfURL);
+    CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
+    
+    if (firstPage == NULL)
+        return;
+    
+    // Calculate metrics
+    CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
+    CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
+    
+    // Set up context
+    UIGraphicsBeginImageContextWithOptions(pdfSize, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Draw background
+    [[UIColor whiteColor] set];
+    CGContextFillRect(context, CGRectMake(0.0f, 0.0f, pdfSize.width, pdfSize.height));
+    
+    // Draw pdf
+    CGContextDrawPDFPage(context, firstPage);
+    CGPDFDocumentRelease(pdf);
+
+    // Create image to mask
+    CGImageRef imageToMask = CGBitmapContextCreateImage(context);
+    UIGraphicsEndImageContext();
+    
+    // Create image mask
+    CGImageRef maskRef = CGImageMaskCreate(CGImageGetWidth(imageToMask), CGImageGetHeight(imageToMask), CGImageGetBitsPerComponent(imageToMask), CGImageGetBitsPerPixel(imageToMask), CGImageGetBytesPerRow(imageToMask), CGImageGetDataProvider(imageToMask), NULL, NO);
+    CGImageRelease(imageToMask);
+    self.mask = maskRef;
+    CGImageRelease(maskRef);
 }
 
 #pragma mark - KVO methods
@@ -114,5 +211,23 @@ static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
         [self setNeedsDisplay];
 }
 
+#pragma mark -
+
+- (UIImage *)renderToImage;
+{
+    [self sizeToFit];
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+#pragma mark - FOR PRIVATE EYES ONLY
+
++ (NSURL *)_resourceURL:(NSString *)resourceName
+{
+    return (resourceName) ? [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:resourceName ofType:nil]] : nil;
+}
 
 @end
