@@ -6,7 +6,8 @@
 
 typedef void (^DrawingBlock)(CGContextRef context);
 
-@interface GOODMaskedIconView : UIView {
+@interface GOODMaskedIconView : UIView
+{
     BOOL _highlighted;
     
     UIColor *_color;
@@ -25,9 +26,13 @@ typedef void (^DrawingBlock)(CGContextRef context);
 @property (nonatomic, assign, readonly) CGImageRef mask;
 
 - (id)initWithImage:(UIImage *)image;
+- (id)initWithImage:(UIImage *)image size:(CGSize)size;
 - (id)initWithImageNamed:(NSString *)imageName;
+- (id)initWithImageNamed:(NSString *)imageName size:(CGSize)size;
 - (id)initWithPDFNamed:(NSString *)pdfName;
+- (id)initWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
 - (id)initWithResourceNamed:(NSString *)resourceName;
+- (id)initWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
 - (void)configureWithImage:(UIImage *)image;
 - (void)configureWithImage:(UIImage *)image size:(CGSize)size;
@@ -39,5 +44,6 @@ typedef void (^DrawingBlock)(CGContextRef context);
 - (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
 - (UIImage *)renderImage;
+- (UIImage *)renderHighlightedImage;
 
 @end

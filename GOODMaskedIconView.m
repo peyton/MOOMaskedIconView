@@ -13,6 +13,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 @property (nonatomic, assign) CGImageRef mask;
 
+- (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 + (NSURL *)_resourceURL:(NSString *)resourceName;
 
 @end
@@ -44,41 +45,61 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 - (id)initWithImage:(UIImage *)image;
 {
+    return [self initWithImage:image size:CGSizeZero];
+}
+
+- (id)initWithImage:(UIImage *)image size:(CGSize)size;
+{
     if (!(self = [self initWithFrame:CGRectZero]))
         return nil;
     
     // Configure with image
-    [self configureWithImage:image];
+    [self configureWithImage:image size:size];
 
     return self;
 }
 
 - (id)initWithImageNamed:(NSString *)imageName;
 {
+    return [self initWithImageNamed:imageName size:CGSizeZero];
+}
+
+- (id)initWithImageNamed:(NSString *)imageName size:(CGSize)size;
+{
     if (!(self = [self initWithFrame:CGRectZero]))
         return nil;
     
-    [self configureWithImageNamed:imageName];
+    [self configureWithImageNamed:imageName size:size];
     
     return self;
 }
 
 - (id)initWithPDFNamed:(NSString *)pdfName;
 {
+    return [self initWithPDFNamed:pdfName size:CGSizeZero];
+}
+
+- (id)initWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+{
     if (!(self = [self initWithFrame:CGRectZero]))
         return nil;
     
-    [self configureWithPDFNamed:pdfName];
+    [self configureWithPDFNamed:pdfName size:size];
     
     return self;
 }
 
 - (id)initWithResourceNamed:(NSString *)resourceName;
 {
+    return [self initWithResourceNamed:resourceName size:CGSizeZero];
+}
+
+- (id)initWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
+{
     if (!(self = [self initWithFrame:CGRectZero]))
         return nil;
     
-    [self configureWithResourceNamed:resourceName];
+    [self configureWithResourceNamed:resourceName size:size];
     
     return self;
 }
@@ -140,6 +161,10 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     
     CGImageRelease(_mask);
     _mask = CGImageRetain(mask);
+    
+    // Resize view when mask changes
+    [self sizeToFit];
+    [self setNeedsDisplay];
 }
 
 #pragma mark - Configuration methods
@@ -223,9 +248,9 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     [[UIColor whiteColor] set];
     CGContextFillRect(context, CGRectMake(0.0f, 0.0f, pdfSize.width, pdfSize.height));
     
-    // Flip context right-side-up
-    CGContextScaleCTM(context, 1.0f, -1.0f);
-    CGContextTranslateCTM(context, 0.0f, -pdfSize.height);
+    // Scale and flip context right-side-up
+    CGContextScaleCTM(context, pdfSize.width / mediaRect.size.width, -pdfSize.height / mediaRect.size.height);
+    CGContextTranslateCTM(context, 0.0f, -mediaRect.size.height);
     
     // Draw pdf
     CGContextDrawPDFPage(context, firstPage);
@@ -251,9 +276,9 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 {
     NSString *extension = [resourceName pathExtension];
     if ([extension isEqualToString:@"pdf"])
-        [self configureWithPDFNamed:resourceName];
+        [self configureWithPDFNamed:resourceName size:size];
     else 
-        [self configureWithImageNamed:resourceName];
+        [self configureWithImageNamed:resourceName size:size];
 }
 
 #pragma mark - KVO methods
@@ -264,19 +289,37 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
         [self setNeedsDisplay];
 }
 
-#pragma mark -
+#pragma mark - Image rendering
 
 - (UIImage *)renderImage;
 {
-    [self sizeToFit];
+    return [self _renderImageHighlighted:NO];
+}
+
+- (UIImage *)renderHighlightedImage;
+{
+    return [self _renderImageHighlighted:YES];
+}
+
+#pragma mark - FOR PRIVATE EYES ONLY
+
+- (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
+{
+    // Save state
+    BOOL wasHighlighted = self.isHighlighted;
+    
+    // Render image
+    self.highlighted = shouldBeHighlighted;
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    // Restore state
+    self.highlighted = wasHighlighted;
+    
     return image;
 }
-
-#pragma mark - FOR PRIVATE EYES ONLY
 
 + (NSURL *)_resourceURL:(NSString *)resourceName
 {
