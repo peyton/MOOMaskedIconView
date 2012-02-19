@@ -138,7 +138,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     if (mask == self.mask)
         return;
     
-    CGImageRelease(self.mask);
+    CGImageRelease(_mask);
     _mask = CGImageRetain(mask);
 }
 
@@ -206,7 +206,10 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
     
     if (firstPage == NULL)
+    {
+        CGPDFDocumentRelease(pdf);
         return;
+    }
     
     // Calculate metrics
     CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
