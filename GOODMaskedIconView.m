@@ -1,9 +1,7 @@
 //
-//  HATMaskedIcon.m
-//  Hat
+//  GOODMaskedIconView.m
 //
 //  Created by Peyton Randolph on 2/6/12.
-//  Copyright (c) 2012 pandolph. All rights reserved.
 //
 
 #import "GOODMaskedIconView.h"
@@ -28,28 +26,61 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
 
-- (id)initWithImage:(UIImage *)image;
+- (id)initWithFrame:(CGRect)frame
 {
-    if (!(self = [super initWithFrame:CGRectZero]))
+    if (!(self = [super initWithFrame:frame]))
         return nil;
     
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
-    self.color = [UIColor darkGrayColor];
-    
-    // Configure with image
-    [self configureWithImage:image];
+    self.color = [UIColor blackColor];
     
     // Set up observing
     [self addObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewMaskKey options:0 context:NULL];
+    
+    return self;
+}
+
+- (id)initWithImage:(UIImage *)image;
+{
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    // Configure with image
+    [self configureWithImage:image];
 
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithImageNamed:(NSString *)imageName;
 {
-    @throw([NSException exceptionWithName:NSInternalInconsistencyException reason:@"Called -initWithFrame: method on HATMaskedIcon. Use -initWithImage: instead." userInfo:nil]);
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    [self configureWithImageNamed:imageName];
+    
+    return self;
+}
+
+- (id)initWithPDFNamed:(NSString *)pdfName;
+{
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    [self configureWithPDFNamed:pdfName];
+    
+    return self;
+}
+
+- (id)initWithResourceNamed:(NSString *)resourceName;
+{
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    [self configureWithResourceNamed:resourceName];
+    
+    return self;
 }
 
 - (void)dealloc;
@@ -154,7 +185,8 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 - (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
 {
     NSURL *imageURL = [GOODMaskedIconView _resourceURL:imageName];
-    UIImage *image = [UIImage imageWithContentsOfFile:[imageURL absoluteString]];
+    UIImage *image = [UIImage imageWithContentsOfFile:[imageURL relativePath]];
+
     [self configureWithImage:image size:size];
 }
 
@@ -188,6 +220,10 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     [[UIColor whiteColor] set];
     CGContextFillRect(context, CGRectMake(0.0f, 0.0f, pdfSize.width, pdfSize.height));
     
+    // Flip context right-side-up
+    CGContextScaleCTM(context, 1.0f, -1.0f);
+    CGContextTranslateCTM(context, 0.0f, -pdfSize.height);
+    
     // Draw pdf
     CGContextDrawPDFPage(context, firstPage);
     CGPDFDocumentRelease(pdf);
@@ -203,6 +239,20 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     CGImageRelease(maskRef);
 }
 
+- (void)configureWithResourceNamed:(NSString *)resourceName;
+{
+    [self configureWithResourceNamed:resourceName size:CGSizeZero];
+}
+
+- (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
+{
+    NSString *extension = [resourceName pathExtension];
+    if ([extension isEqualToString:@"pdf"])
+        [self configureWithPDFNamed:resourceName];
+    else 
+        [self configureWithImageNamed:resourceName];
+}
+
 #pragma mark - KVO methods
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
@@ -213,7 +263,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 #pragma mark -
 
-- (UIImage *)renderToImage;
+- (UIImage *)renderImage;
 {
     [self sizeToFit];
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);

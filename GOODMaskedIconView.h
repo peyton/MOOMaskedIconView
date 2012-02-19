@@ -1,6 +1,5 @@
 //
-//  HATMaskedIcon.h
-//  Hat
+//  GOODMaskedIconView.h
 //
 //  Created by Peyton Randolph on 2/6/12.
 //  Copyright (c) 2012 pandolph. All rights reserved.
@@ -27,6 +26,9 @@ typedef void (^DrawingBlock)(CGContextRef context);
 @property (nonatomic, assign, readonly) CGImageRef mask;
 
 - (id)initWithImage:(UIImage *)image;
+- (id)initWithImageNamed:(NSString *)imageName;
+- (id)initWithPDFNamed:(NSString *)pdfName;
+- (id)initWithResourceNamed:(NSString *)resourceName;
 
 - (void)configureWithImage:(UIImage *)image;
 - (void)configureWithImage:(UIImage *)image size:(CGSize)size;
@@ -34,7 +36,9 @@ typedef void (^DrawingBlock)(CGContextRef context);
 - (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
 - (void)configureWithPDFNamed:(NSString *)pdfName;
 - (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+- (void)configureWithResourceNamed:(NSString *)resourceName;
+- (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
-- (UIImage *)renderToImage;
+- (UIImage *)renderImage;
 
 @end
