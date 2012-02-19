@@ -18,6 +18,8 @@ xcuserdata
 *.xcuserstate
 *.xcworkspace
 
+# Moved aside
+*.moved-aside
 
 # Generated files
 VersionX-revision.h
