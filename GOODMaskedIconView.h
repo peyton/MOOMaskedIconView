@@ -2,7 +2,6 @@
 //  GOODMaskedIconView.h
 //
 //  Created by Peyton Randolph on 2/6/12.
-//  Copyright (c) 2012 pandolph. All rights reserved.
 //
 
 typedef void (^DrawingBlock)(CGContextRef context);
