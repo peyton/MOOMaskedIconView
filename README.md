@@ -1,15 +1,15 @@
-![Masked Icons](https://s3.amazonaws.com/peyton.github.com/Why.png)
+![Masked Icons](https://s3.amazonaws.com/peyton.github.com/GOODMaskedIconView/Why.png)
 
 #Introduction
 ----------
 
 GOODMaskedIconView is a UIView subclass that uses black-and-white masks to draw icons of different
 styles at various sizes and resolutions. It uses the same technique as
-UITabBar to generate disparate effects with a single icon file.
+UITabBar to generate disparate effects from a single icon file.
 
-![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/Tab-bar.png)
+![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/GOODMaskedIconView/Tab-bar.png)
 
-GOODMaskedIconView accepts common image formats and PDFs, the native vector file format of iOS and
+GOODMaskedIconView displays common image formats and PDFs, the native vector file format of iOS and
 OS X. PDFs are best—they're easy to maintain and resolution independent.
 
 #Examples
@@ -75,25 +75,33 @@ you should uncheck "Copy items into destination group's folder (if needed)."
 
     git pull
 
-#Creating icon masks
+#Creating image masks
 ---------
 
-For more information about Quartz image masking, see
+![Image mask process](https://s3.amazonaws.com/peyton.github.com/GOODMaskedIconView/Mask.png)
+
+An image mask is a black-and-white image that clips when drawing. Here's how mask pixels correspond to the final image:
+
+* Black pixels render opaquely.
+* White pixels render transparently.
+* Gray pixels render with an alpha value of 1 - *source pixel's gray value*.
+
+Mask images may not use an alpha channel, so icons with transparency must be set on a white background. For more information about Quartz image masking, see
 the [Quartz 2D Programming Guide](https://developer.apple.com/library/ios/#documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/dq_images.html%23//apple_ref/doc/uid/TP30001066-CH212-CJBHDDBE).
 
 #Scalable icons with PDFs
 ---------
 
-GOODMaskedIconView makes it easy to use PDF icons, eliminating "\*@2x.\*" files.
+GOODMaskedIconView makes it easy to use PDFs as icons, eliminating "\*@2x.\*" files.
 Many Apple applications on OS X use PDF icons for resolution independence.
 
-Next to the network, the biggest source of latency on an iPhone is the disk. For small, simple icons the PDF format adds about 3KB of overhead over PNG.
-Because the iPhone's page size is 4KB, in practice the difference in loading time is nothing. For larger icons a PDF of vectors can *save* space.
+Next to the network, the biggest source of latency on an iPhone is the disk. For small, simple icons the PDF format adds a few KB of overhead over PNG.
+Because the iPhone loads data in chunks, in practice the difference in loading time is nothing. For larger icons a PDF of vectors can *save* space.
 
 Some editors need a little massaging to export PDFs suitable for
-iOS icons. Here are [instructions](https://github.com/peyton/GOODMaskedIconView/wiki/Exporting-PDFs).
+iOS icons. Quick how-to instructions are [here](https://github.com/peyton/GOODMaskedIconView/wiki/Exporting-PDFs).
 
 #Contributing
 --------
 
-Forks, patches, and other suggestions are always welcome. Here's a [quick guide](https://github.com/peyton/GOODMaskedIconView/wiki/Contributing) if you're new to the process.
+Forks, patches, and other suggestions are always welcome. Here's a [quick guide](https://github.com/peyton/GOODMaskedIconView/wiki/Contributing) to the process.

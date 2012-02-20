@@ -32,6 +32,7 @@
     
     // Yellow squished PNG
     GOODMaskedIconView *icon2 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.png" size:CGSizeMake(52.0f, 70.0f)];
+    icon2.backgroundColor = self.view.backgroundColor;
     icon2.color = [UIColor yellowColor];
     CGRect icon2Frame = icon2.frame;
     icon2Frame.origin.x = CGRectGetMaxX(icon1.frame);
@@ -64,6 +65,7 @@
     
     // Large white flipped PDF
     GOODMaskedIconView *icon5 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame))];
+    icon5.backgroundColor = self.view.backgroundColor;
     icon5.color = [UIColor whiteColor];
     CGRect icon5Frame = icon5.frame;
     icon5Frame.origin.y = CGRectGetMaxY(icon1.frame);
