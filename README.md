@@ -9,8 +9,8 @@ UITabBar to generate disparate effects with a single icon file.
 
 ![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/Tab-bar.png)
 
-GOODMaskedIconView accepts common image formats and PDFs,
-the native vector file format of iOS and OS X. PDFs are best—they're easy to maintain resolution independent.
+GOODMaskedIconView accepts common image formats and PDFs, the native vector file format of iOS and
+OS X. PDFs are best—they're easy to maintain and resolution independent.
 
 #Examples
 ---------

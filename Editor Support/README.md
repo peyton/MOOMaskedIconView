@@ -1,3 +1,1 @@
-Pick your editor:
-
-* [Photoshop](https://github.com/pandolph/GOODMaskedIconView/wiki/Photoshop)
+https://github.com/peyton/GOODMaskedIconView/wiki/Exporting-PDFs
