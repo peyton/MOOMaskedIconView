@@ -6,6 +6,8 @@
 
 #import "GOODMaskedIconView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
 static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 

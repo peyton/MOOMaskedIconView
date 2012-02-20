@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9C36411414F28E33005DE008 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C36411314F28E33005DE008 /* UIKit.framework */; };
+		9C36411614F28E33005DE008 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C36411514F28E33005DE008 /* Foundation.framework */; };
+		9C36411814F28E33005DE008 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C36411714F28E33005DE008 /* CoreGraphics.framework */; };
+		9C36411E14F28E33005DE008 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C36411C14F28E33005DE008 /* InfoPlist.strings */; };
+		9C36412014F28E33005DE008 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36411F14F28E33005DE008 /* main.m */; };
+		9C36412414F28E33005DE008 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412314F28E33005DE008 /* AppDelegate.m */; };
+		9C36412714F28E33005DE008 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412614F28E33005DE008 /* ViewController.m */; };
+		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; };
+		9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413A14F2A2BA005DE008 /* Beer.pdf */; };
+		9C36413E14F2A2BA005DE008 /* Beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413B14F2A2BA005DE008 /* Beer.png */; };
+		9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413C14F2A2BA005DE008 /* Beer@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GOODMaskedIconView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C36411314F28E33005DE008 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9C36411514F28E33005DE008 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9C36411714F28E33005DE008 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9C36411B14F28E33005DE008 /* GOODMaskedIconView Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GOODMaskedIconView Demo-Info.plist"; sourceTree = "<group>"; };
+		9C36411D14F28E33005DE008 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9C36411F14F28E33005DE008 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9C36412114F28E33005DE008 /* GOODMaskedIconView Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GOODMaskedIconView Demo-Prefix.pch"; sourceTree = "<group>"; };
+		9C36412214F28E33005DE008 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9C36412314F28E33005DE008 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9C36412514F28E33005DE008 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9C36412614F28E33005DE008 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9C36413614F28EB1005DE008 /* GOODMaskedIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GOODMaskedIconView.h; path = ../GOODMaskedIconView.h; sourceTree = "<group>"; };
+		9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GOODMaskedIconView.m; path = ../GOODMaskedIconView.m; sourceTree = "<group>"; };
+		9C36413A14F2A2BA005DE008 /* Beer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Beer.pdf; path = "GOODMaskedIconView Demo/Beer.pdf"; sourceTree = "<group>"; };
+		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "GOODMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
+		9C36413C14F2A2BA005DE008 /* Beer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Beer@2x.png"; path = "GOODMaskedIconView Demo/Beer@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C36410C14F28E33005DE008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C36411414F28E33005DE008 /* UIKit.framework in Frameworks */,
+				9C36411614F28E33005DE008 /* Foundation.framework in Frameworks */,
+				9C36411814F28E33005DE008 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C36410414F28E33005DE008 = {
+			isa = PBXGroup;
+			children = (
+				9C36411914F28E33005DE008 /* GOODMaskedIconView Demo */,
+				9C36413014F28E78005DE008 /* External */,
+				9C36411214F28E33005DE008 /* Frameworks */,
+				9C36411014F28E33005DE008 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9C36411014F28E33005DE008 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C36411214F28E33005DE008 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C36411314F28E33005DE008 /* UIKit.framework */,
+				9C36411514F28E33005DE008 /* Foundation.framework */,
+				9C36411714F28E33005DE008 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C36411914F28E33005DE008 /* GOODMaskedIconView Demo */ = {
+			isa = PBXGroup;
+			children = (
+				9C36412214F28E33005DE008 /* AppDelegate.h */,
+				9C36412314F28E33005DE008 /* AppDelegate.m */,
+				9C36412514F28E33005DE008 /* ViewController.h */,
+				9C36412614F28E33005DE008 /* ViewController.m */,
+				9C36414014F2A2BF005DE008 /* Icons */,
+				9C36411A14F28E33005DE008 /* Supporting Files */,
+			);
+			path = "GOODMaskedIconView Demo";
+			sourceTree = "<group>";
+		};
+		9C36411A14F28E33005DE008 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C36411B14F28E33005DE008 /* GOODMaskedIconView Demo-Info.plist */,
+				9C36411C14F28E33005DE008 /* InfoPlist.strings */,
+				9C36411F14F28E33005DE008 /* main.m */,
+				9C36412114F28E33005DE008 /* GOODMaskedIconView Demo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C36413014F28E78005DE008 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				9C36413114F28E7F005DE008 /* GOODMaskedIconView */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		9C36413114F28E7F005DE008 /* GOODMaskedIconView */ = {
+			isa = PBXGroup;
+			children = (
+				9C36413614F28EB1005DE008 /* GOODMaskedIconView.h */,
+				9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */,
+			);
+			name = GOODMaskedIconView;
+			sourceTree = "<group>";
+		};
+		9C36414014F2A2BF005DE008 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9C36413A14F2A2BA005DE008 /* Beer.pdf */,
+				9C36413B14F2A2BA005DE008 /* Beer.png */,
+				9C36413C14F2A2BA005DE008 /* Beer@2x.png */,
+			);
+			name = Icons;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C36410E14F28E33005DE008 /* GOODMaskedIconView Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "GOODMaskedIconView Demo" */;
+			buildPhases = (
+				9C36410B14F28E33005DE008 /* Sources */,
+				9C36410C14F28E33005DE008 /* Frameworks */,
+				9C36410D14F28E33005DE008 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GOODMaskedIconView Demo";
+			productName = "GOODMaskedIconView Demo";
+			productReference = 9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C36410614F28E33005DE008 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = pandolph;
+			};
+			buildConfigurationList = 9C36410914F28E33005DE008 /* Build configuration list for PBXProject "GOODMaskedIconView Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9C36410414F28E33005DE008;
+			productRefGroup = 9C36411014F28E33005DE008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C36410E14F28E33005DE008 /* GOODMaskedIconView Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C36410D14F28E33005DE008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C36411E14F28E33005DE008 /* InfoPlist.strings in Resources */,
+				9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */,
+				9C36413E14F2A2BA005DE008 /* Beer.png in Resources */,
+				9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C36410B14F28E33005DE008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */,
+				9C36412014F28E33005DE008 /* main.m in Sources */,
+				9C36412414F28E33005DE008 /* AppDelegate.m in Sources */,
+				9C36412714F28E33005DE008 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9C36411C14F28E33005DE008 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C36411D14F28E33005DE008 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9C36412B14F28E33005DE008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9C36412C14F28E33005DE008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C36412E14F28E33005DE008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
+				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9C36412F14F28E33005DE008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
+				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C36410914F28E33005DE008 /* Build configuration list for PBXProject "GOODMaskedIconView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C36412B14F28E33005DE008 /* Debug */,
+				9C36412C14F28E33005DE008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "GOODMaskedIconView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C36412E14F28E33005DE008 /* Debug */,
+				9C36412F14F28E33005DE008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C36410614F28E33005DE008 /* Project object */;
+}
