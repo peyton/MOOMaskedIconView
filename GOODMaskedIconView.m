@@ -325,7 +325,17 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 + (NSURL *)_resourceURL:(NSString *)resourceName
 {
-    return (resourceName) ? [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:resourceName ofType:nil]] : nil;
+    if (!resourceName)
+        return nil;
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:resourceName ofType:nil];
+    if (!path)
+    {
+        NSLog(@"File named %@ not found by %@. Check capitalization?", resourceName, self);
+        return nil;
+    }
+    
+    return [NSURL fileURLWithPath:path];
 }
 
 @end
