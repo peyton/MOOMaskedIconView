@@ -150,7 +150,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 - (CGSize)sizeThatFits:(CGSize)size;
 {
-    CGFloat scale = [UIScreen mainScreen].scale;
+    const CGFloat scale = [UIScreen mainScreen].scale;
     return CGSizeMake(CGImageGetWidth(self.mask) / scale, CGImageGetHeight(self.mask) / scale);
 }
 
@@ -178,28 +178,48 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 - (void)configureWithImage:(UIImage *)image size:(CGSize)size;
 {
+    // If no image is passed, clear mask
     if (image == nil)
     {
         self.mask = NULL;
         return;
     }
     
-    CGImageRef imageRef = image.CGImage;
+    // Variables for image creation
+    CGImageRef imageRef = CGImageRetain(image.CGImage);
     CGSize imageSize = CGSizeZero;
     size_t bytesPerRow = 0;
+    const CGFloat scale = [UIScreen mainScreen].scale;
     
     if (size.width > 0.0f && size.height > 0.0f) 
     {
+        // Custom size
         imageSize = size;
-        bytesPerRow = CGImageGetWidth(imageRef) * CGColorSpaceGetNumberOfComponents(CGImageGetColorSpace(imageRef));
+        imageSize.width *= scale;
+        imageSize.height *= scale;
+        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
+        bytesPerRow = imageSize.width * CGColorSpaceGetNumberOfComponents(colorspace);
+        
+        // Create bitmap context
+        CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), bytesPerRow, colorspace, kCGImageAlphaNone);
+        CGColorSpaceRelease(colorspace);
+
+        CGContextSetInterpolationQuality(context, kCGInterpolationMedium);
+        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, imageSize.width, imageSize.height), imageRef);
+        CGImageRelease(imageRef);
+        imageRef = CGBitmapContextCreateImage(context);
+        CGContextRelease(context);
     }
     else 
     {
+        // Default size
         imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
         bytesPerRow = CGImageGetBytesPerRow(imageRef);
     }
     
+    // Create mask
     CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), CGImageGetBitsPerPixel(imageRef), bytesPerRow, CGImageGetDataProvider(imageRef), NULL, NO);
+    CGImageRelease(imageRef);
     self.mask = maskRef;
     CGImageRelease(maskRef);
 }
@@ -239,8 +259,8 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     }
     
     // Calculate metrics
-    CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
-    CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
+    const CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
+    const CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
     
     // Set up context
     UIGraphicsBeginImageContextWithOptions(pdfSize, YES, 0.0f);
