@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class GOODMaskedIconView;
+
 @interface ViewController : UIViewController
+{
+    GOODMaskedIconView *_icon4;
+}
 
 @end
