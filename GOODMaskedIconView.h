@@ -8,7 +8,7 @@
 
 typedef void (^DrawingBlock)(CGContextRef context);
 
-@interface GOODMaskedIconView : UIView
+@interface GOODMaskedIconView : UIView <NSCopying>
 {
     BOOL _highlighted;
     

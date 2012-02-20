@@ -311,6 +311,20 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
         [self setNeedsDisplay];
 }
 
+#pragma mark - NSCopying methods
+
+- (id)copyWithZone:(NSZone *)zone;
+{
+    GOODMaskedIconView *iconView = [[GOODMaskedIconView alloc] initWithFrame:self.frame];
+    
+    iconView.color = self.color;
+    iconView.drawingBlock = self.drawingBlock;
+    iconView.highlightedColor = self.highlightedColor;
+    iconView.mask = self.mask;
+    
+    return iconView;
+}
+
 #pragma mark - Image rendering
 
 - (UIImage *)renderImage;
