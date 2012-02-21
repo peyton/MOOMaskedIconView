@@ -129,10 +129,15 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     [self removeObserver:self forKeyPath:GOODMaskedIconViewOverlayKey];
 
     self.color = nil;
-    self.drawingBlock = NULL;
     self.highlightedColor = nil;
+    self.gradientStartColor = nil;
+    self.gradientEndColor = nil;
+    self.overlay = nil;
+    self.drawingBlock = NULL;
     self.mask = NULL;
     self.gradient = NULL;
+    
+    AH_SUPER_DEALLOC;
 }
 
 #pragma mark - Drawing and layout methods

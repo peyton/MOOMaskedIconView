@@ -14,7 +14,7 @@
 		9C36412014F28E33005DE008 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36411F14F28E33005DE008 /* main.m */; };
 		9C36412414F28E33005DE008 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412314F28E33005DE008 /* AppDelegate.m */; };
 		9C36412714F28E33005DE008 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412614F28E33005DE008 /* ViewController.m */; };
-		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; };
+		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413A14F2A2BA005DE008 /* Beer.pdf */; };
 		9C36413E14F2A2BA005DE008 /* Beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413B14F2A2BA005DE008 /* Beer.png */; };
 		9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413C14F2A2BA005DE008 /* Beer@2x.png */; };
