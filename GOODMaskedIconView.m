@@ -184,8 +184,6 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     {
         CGContextSaveGState(context);
         CGContextSetInterpolationQuality(context, kCGInterpolationNone);
-        NSLog(@"%f", self.overlay.scale);
-        NSLog(@"%@", NSStringFromCGSize(self.overlay.size));
         CGContextSetBlendMode(context, self.overlayBlendMode);
         CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
         CGContextRestoreGState(context);
