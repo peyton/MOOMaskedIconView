@@ -1,1 +1,1 @@
-https://github.com/peyton/GOODMaskedIconView/wiki/Exporting-PDFs
+https://github.com/peyton/MOOMaskedIconView/wiki/Exporting-PDFs

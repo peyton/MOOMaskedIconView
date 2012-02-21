@@ -14,7 +14,7 @@
 		9C36412014F28E33005DE008 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36411F14F28E33005DE008 /* main.m */; };
 		9C36412414F28E33005DE008 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412314F28E33005DE008 /* AppDelegate.m */; };
 		9C36412714F28E33005DE008 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412614F28E33005DE008 /* ViewController.m */; };
-		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; };
+		9C36413914F28ED6005DE008 /* MOOMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* MOOMaskedIconView.m */; };
 		9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413A14F2A2BA005DE008 /* Beer.pdf */; };
 		9C36413E14F2A2BA005DE008 /* Beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413B14F2A2BA005DE008 /* Beer.png */; };
 		9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413C14F2A2BA005DE008 /* Beer@2x.png */; };
@@ -24,26 +24,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GOODMaskedIconView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C36410F14F28E33005DE008 /* MOOMaskedIconView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MOOMaskedIconView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C36411314F28E33005DE008 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9C36411514F28E33005DE008 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C36411714F28E33005DE008 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9C36411B14F28E33005DE008 /* GOODMaskedIconView Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GOODMaskedIconView Demo-Info.plist"; sourceTree = "<group>"; };
+		9C36411B14F28E33005DE008 /* MOOMaskedIconView Demo-Info.plist */ = {isa = PBXFileReference; path = "MOOMaskedIconView Demo-Info.plist"; sourceTree = "<group>"; };
 		9C36411D14F28E33005DE008 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9C36411F14F28E33005DE008 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9C36412114F28E33005DE008 /* GOODMaskedIconView Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GOODMaskedIconView Demo-Prefix.pch"; sourceTree = "<group>"; };
+		9C36412114F28E33005DE008 /* MOOMaskedIconView Demo-Prefix.pch */ = {isa = PBXFileReference; path = "MOOMaskedIconView Demo-Prefix.pch"; sourceTree = "<group>"; };
 		9C36412214F28E33005DE008 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C36412314F28E33005DE008 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9C36412514F28E33005DE008 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9C36412614F28E33005DE008 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9C36413614F28EB1005DE008 /* GOODMaskedIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GOODMaskedIconView.h; path = ../GOODMaskedIconView.h; sourceTree = "<group>"; };
-		9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GOODMaskedIconView.m; path = ../GOODMaskedIconView.m; sourceTree = "<group>"; };
-		9C36413A14F2A2BA005DE008 /* Beer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Beer.pdf; path = "GOODMaskedIconView Demo/Beer.pdf"; sourceTree = "<group>"; };
-		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "GOODMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
-		9C36413C14F2A2BA005DE008 /* Beer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Beer@2x.png"; path = "GOODMaskedIconView Demo/Beer@2x.png"; sourceTree = "<group>"; };
-		9C36416214F3F8A9005DE008 /* Overlay.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Overlay.pdf; path = "GOODMaskedIconView Demo/Overlay.pdf"; sourceTree = "<group>"; };
-		9C3641B214F43879005DE008 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "GOODMaskedIconView Demo/Icon.png"; sourceTree = "<group>"; };
-		9C3641B314F43879005DE008 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "GOODMaskedIconView Demo/Icon@2x.png"; sourceTree = "<group>"; };
+		9C36413614F28EB1005DE008 /* MOOMaskedIconView.h */ = {isa = PBXFileReference; name = MOOMaskedIconView.h; path = ../MOOMaskedIconView.h; sourceTree = "<group>"; };
+		9C36413714F28EB1005DE008 /* MOOMaskedIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MOOMaskedIconView.m; path = ../MOOMaskedIconView.m; sourceTree = "<group>"; };
+		9C36413A14F2A2BA005DE008 /* Beer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Beer.pdf; path = "MOOMaskedIconView Demo/Beer.pdf"; sourceTree = "<group>"; };
+		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "MOOMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
+		9C36413C14F2A2BA005DE008 /* Beer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Beer@2x.png"; path = "MOOMaskedIconView Demo/Beer@2x.png"; sourceTree = "<group>"; };
+		9C36416214F3F8A9005DE008 /* Overlay.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Overlay.pdf; path = "MOOMaskedIconView Demo/Overlay.pdf"; sourceTree = "<group>"; };
+		9C3641B214F43879005DE008 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "MOOMaskedIconView Demo/Icon.png"; sourceTree = "<group>"; };
+		9C3641B314F43879005DE008 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "MOOMaskedIconView Demo/Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		9C36410414F28E33005DE008 = {
 			isa = PBXGroup;
 			children = (
-				9C36411914F28E33005DE008 /* GOODMaskedIconView Demo */,
+				9C36411914F28E33005DE008 /* MOOMaskedIconView Demo */,
 				9C36413014F28E78005DE008 /* External */,
 				9C36411214F28E33005DE008 /* Frameworks */,
 				9C36411014F28E33005DE008 /* Products */,
@@ -73,7 +73,7 @@
 		9C36411014F28E33005DE008 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */,
+				9C36410F14F28E33005DE008 /* MOOMaskedIconView Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +88,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9C36411914F28E33005DE008 /* GOODMaskedIconView Demo */ = {
+		9C36411914F28E33005DE008 /* MOOMaskedIconView Demo */ = {
 			isa = PBXGroup;
 			children = (
 				9C36412214F28E33005DE008 /* AppDelegate.h */,
@@ -98,16 +98,16 @@
 				9C36414014F2A2BF005DE008 /* Icons */,
 				9C36411A14F28E33005DE008 /* Supporting Files */,
 			);
-			path = "GOODMaskedIconView Demo";
+			path = "MOOMaskedIconView Demo";
 			sourceTree = "<group>";
 		};
 		9C36411A14F28E33005DE008 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9C36411B14F28E33005DE008 /* GOODMaskedIconView Demo-Info.plist */,
+				9C36411B14F28E33005DE008 /* MOOMaskedIconView Demo-Info.plist */,
 				9C36411C14F28E33005DE008 /* InfoPlist.strings */,
 				9C36411F14F28E33005DE008 /* main.m */,
-				9C36412114F28E33005DE008 /* GOODMaskedIconView Demo-Prefix.pch */,
+				9C36412114F28E33005DE008 /* MOOMaskedIconView Demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -115,18 +115,18 @@
 		9C36413014F28E78005DE008 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				9C36413114F28E7F005DE008 /* GOODMaskedIconView */,
+				9C36413114F28E7F005DE008 /* MOOMaskedIconView */,
 			);
 			name = External;
 			sourceTree = "<group>";
 		};
-		9C36413114F28E7F005DE008 /* GOODMaskedIconView */ = {
+		9C36413114F28E7F005DE008 /* MOOMaskedIconView */ = {
 			isa = PBXGroup;
 			children = (
-				9C36413614F28EB1005DE008 /* GOODMaskedIconView.h */,
-				9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */,
+				9C36413614F28EB1005DE008 /* MOOMaskedIconView.h */,
+				9C36413714F28EB1005DE008 /* MOOMaskedIconView.m */,
 			);
-			name = GOODMaskedIconView;
+			name = MOOMaskedIconView;
 			sourceTree = "<group>";
 		};
 		9C36414014F2A2BF005DE008 /* Icons */ = {
@@ -146,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9C36410E14F28E33005DE008 /* GOODMaskedIconView Demo */ = {
+		9C36410E14F28E33005DE008 /* MOOMaskedIconView Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "GOODMaskedIconView Demo" */;
+			buildConfigurationList = 9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "MOOMaskedIconView Demo" */;
 			buildPhases = (
 				9C36410B14F28E33005DE008 /* Sources */,
 				9C36410C14F28E33005DE008 /* Frameworks */,
@@ -158,9 +158,9 @@
 			);
 			dependencies = (
 			);
-			name = "GOODMaskedIconView Demo";
-			productName = "GOODMaskedIconView Demo";
-			productReference = 9C36410F14F28E33005DE008 /* GOODMaskedIconView Demo.app */;
+			name = "MOOMaskedIconView Demo";
+			productName = "MOOMaskedIconView Demo";
+			productReference = 9C36410F14F28E33005DE008 /* MOOMaskedIconView Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +172,7 @@
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = pandolph;
 			};
-			buildConfigurationList = 9C36410914F28E33005DE008 /* Build configuration list for PBXProject "GOODMaskedIconView Demo" */;
+			buildConfigurationList = 9C36410914F28E33005DE008 /* Build configuration list for PBXProject "MOOMaskedIconView Demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -184,7 +184,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C36410E14F28E33005DE008 /* GOODMaskedIconView Demo */,
+				9C36410E14F28E33005DE008 /* MOOMaskedIconView Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -211,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */,
+				9C36413914F28ED6005DE008 /* MOOMaskedIconView.m in Sources */,
 				9C36412014F28E33005DE008 /* main.m in Sources */,
 				9C36412414F28E33005DE008 /* AppDelegate.m in Sources */,
 				9C36412714F28E33005DE008 /* ViewController.m in Sources */,
@@ -282,8 +282,8 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
-				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				GCC_PREFIX_HEADER = "MOOMaskedIconView Demo/MOOMaskedIconView Demo-Prefix.pch";
+				INFOPLIST_FILE = "MOOMaskedIconView Demo/MOOMaskedIconView Demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -294,8 +294,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
-				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				GCC_PREFIX_HEADER = "MOOMaskedIconView Demo/MOOMaskedIconView Demo-Prefix.pch";
+				INFOPLIST_FILE = "MOOMaskedIconView Demo/MOOMaskedIconView Demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -305,7 +305,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9C36410914F28E33005DE008 /* Build configuration list for PBXProject "GOODMaskedIconView Demo" */ = {
+		9C36410914F28E33005DE008 /* Build configuration list for PBXProject "MOOMaskedIconView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C36412B14F28E33005DE008 /* Debug */,
@@ -314,7 +314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "GOODMaskedIconView Demo" */ = {
+		9C36412D14F28E33005DE008 /* Build configuration list for PBXNativeTarget "MOOMaskedIconView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C36412E14F28E33005DE008 /* Debug */,

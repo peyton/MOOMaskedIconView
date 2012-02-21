@@ -1,18 +1,17 @@
 //
 //  ViewController.h
-//  GOODMaskedIconView Demo
+//  MOOMaskedIconView Demo
 //
 //  Created by Peyton Randolph on 2/20/12.
-//  Copyright (c) 2012 pandolph. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@class GOODMaskedIconView;
+@class MOOMaskedIconView;
 
 @interface ViewController : UIViewController
 {
-    GOODMaskedIconView *_icon4;
+    MOOMaskedIconView *_icon4;
 }
 
 @end

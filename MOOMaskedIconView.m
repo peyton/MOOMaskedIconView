@@ -1,20 +1,21 @@
 //
-//  GOODMaskedIconView.m
+//  MOOMaskedIconView.m
+//  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/6/12.
 //
 
-#import "GOODMaskedIconView.h"
+#import "MOOMaskedIconView.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-static NSString * const GOODMaskedIconViewGradientStartColorKey = @"gradientStartColor";
-static NSString * const GOODMaskedIconViewGradientEndColorKey = @"gradientEndColor";
-static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
-static NSString * const GOODMaskedIconViewMaskKey = @"mask";
-static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
+static NSString * const MOOMaskedIconViewGradientStartColorKey = @"gradientStartColor";
+static NSString * const MOOMaskedIconViewGradientEndColorKey = @"gradientEndColor";
+static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
+static NSString * const MOOMaskedIconViewMaskKey = @"mask";
+static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 
-@interface GOODMaskedIconView ()
+@interface MOOMaskedIconView ()
 
 @property (nonatomic, assign) CGImageRef mask;
 @property (nonatomic, assign) CGGradientRef gradient;
@@ -25,7 +26,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 @end
 
-@implementation GOODMaskedIconView
+@implementation MOOMaskedIconView
 @synthesize highlighted = _highlighted;
 
 @synthesize color = _color;
@@ -50,11 +51,11 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     self.overlayBlendMode = kCGBlendModeNormal;
     
     // Set up observing
-    [self addObserver:self forKeyPath:GOODMaskedIconViewGradientStartColorKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:GOODMaskedIconViewMaskKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:GOODMaskedIconViewOverlayKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewMaskKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewOverlayKey options:0 context:NULL];
     
     return self;
 }
@@ -122,11 +123,11 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 - (void)dealloc;
 {
-    [self removeObserver:self forKeyPath:GOODMaskedIconViewGradientStartColorKey];
-    [self removeObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey];
-    [self removeObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey];
-    [self removeObserver:self forKeyPath:GOODMaskedIconViewMaskKey];
-    [self removeObserver:self forKeyPath:GOODMaskedIconViewOverlayKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewMaskKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewOverlayKey];
 
     self.color = nil;
     self.highlightedColor = nil;
@@ -263,7 +264,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 - (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
 {
-    NSURL *imageURL = [GOODMaskedIconView _resourceURL:imageName];
+    NSURL *imageURL = [MOOMaskedIconView _resourceURL:imageName];
     UIImage *image = [UIImage imageWithContentsOfFile:[imageURL relativePath]];
 
     [self configureWithImage:image size:size];
@@ -280,7 +281,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
         return;
     
     // Grab pdf
-    NSURL *pdfURL = [GOODMaskedIconView _resourceURL:pdfName];
+    NSURL *pdfURL = [MOOMaskedIconView _resourceURL:pdfName];
     CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((__bridge CFURLRef)pdfURL);
     CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
     
@@ -365,13 +366,13 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:GOODMaskedIconViewHighlightedKey] || [keyPath isEqualToString:GOODMaskedIconViewMaskKey] || [keyPath isEqualToString:GOODMaskedIconViewOverlayKey])
+    if ([keyPath isEqualToString:MOOMaskedIconViewHighlightedKey] || [keyPath isEqualToString:MOOMaskedIconViewMaskKey] || [keyPath isEqualToString:MOOMaskedIconViewOverlayKey])
     {
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:GOODMaskedIconViewGradientStartColorKey] || [keyPath isEqualToString:GOODMaskedIconViewGradientEndColorKey])
+    if ([keyPath isEqualToString:MOOMaskedIconViewGradientStartColorKey] || [keyPath isEqualToString:MOOMaskedIconViewGradientEndColorKey])
     {
         [self _updateGradientWithStartColor:self.gradientStartColor endColor:self.gradientEndColor];
         return;
@@ -382,7 +383,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 - (id)copyWithZone:(NSZone *)zone;
 {
-    GOODMaskedIconView *iconView = [[GOODMaskedIconView alloc] initWithFrame:self.frame];
+    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithFrame:self.frame];
     
     iconView.color = self.color;
     iconView.drawingBlock = self.drawingBlock;

@@ -1,14 +1,13 @@
 //
 //  ViewController.m
-//  GOODMaskedIconView Demo
+//  MOOMaskedIconView Demo
 //
 //  Created by Peyton Randolph on 2/20/12.
-//  Copyright (c) 2012 pandolph. All rights reserved.
 //
 
 #import "ViewController.h"
 
-#import "GOODMaskedIconView.h"
+#import "MOOMaskedIconView.h"
 
 @interface ViewController ()
 
@@ -27,11 +26,11 @@
     self.view.backgroundColor = [UIColor darkGrayColor];
     
     // Unstyled PNG
-    GOODMaskedIconView *icon1 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.png"];
+    MOOMaskedIconView *icon1 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.png"];
     [self.view addSubview:icon1];
     
     // Yellow-red gradient squished PNG
-    GOODMaskedIconView *icon2 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.png" size:CGSizeMake(80.0f, 70.0f)];
+    MOOMaskedIconView *icon2 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.png" size:CGSizeMake(80.0f, 70.0f)];
     icon2.backgroundColor = self.view.backgroundColor;
     icon2.gradientStartColor = [UIColor yellowColor];
     icon2.gradientEndColor = [UIColor redColor];
@@ -42,7 +41,7 @@
     [self.view addSubview:icon2];
     
     // Green squished PDF
-    GOODMaskedIconView *icon3 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(52.0f, 70.0f)];
+    MOOMaskedIconView *icon3 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(52.0f, 70.0f)];
     icon3.backgroundColor = [UIColor orangeColor];
     icon3.color = [UIColor greenColor];
     CGRect icon3Frame = icon3.frame;
@@ -51,7 +50,7 @@
     [self.view addSubview:icon3];
     
     // Squished highlighted blue PDF
-    GOODMaskedIconView *icon4 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(102.0f, 20.0f)];
+    MOOMaskedIconView *icon4 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(102.0f, 20.0f)];
     icon4.backgroundColor = [UIColor blackColor];
     icon4.color = [UIColor greenColor];
     icon4.highlightedColor = [UIColor blueColor];
@@ -67,12 +66,12 @@
     
     // Large gray gradient mirrored PDF with overlay
     CGSize icon5Size = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame));
-    GOODMaskedIconView *icon5OverlayView = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:icon5Size];
+    MOOMaskedIconView *icon5OverlayView = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:icon5Size];
     icon5OverlayView.color = [UIColor whiteColor];
     icon5OverlayView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     UIImage *icon5Overlay = [icon5OverlayView renderImage];
 
-    GOODMaskedIconView *icon5 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:icon5Size];
+    MOOMaskedIconView *icon5 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:icon5Size];
     icon5.backgroundColor = self.view.backgroundColor;
     icon5.gradientStartColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     icon5.gradientEndColor = [UIColor colorWithWhite:0.6f alpha:1.0f];

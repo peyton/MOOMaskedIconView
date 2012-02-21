@@ -1,5 +1,6 @@
 //
-//  GOODMaskedIconView.h
+//  MOOMaskedIconView.h
+//  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/6/12.
 //
@@ -9,7 +10,7 @@
 //
 //  ARC Helper
 //
-//  Version 1.2
+//  Version 1.2.1
 //
 //  Created by Nick Lockwood on 05/01/2012.
 //  Copyright 2012 Charcoal Design
@@ -27,7 +28,7 @@
 #define AH_AUTORELEASE(x) (x)
 #define AH_SUPER_DEALLOC
 #else
-#warning "GOODMaskedIconView without ARC is beta and may not work. Use at your own risk"
+#warning "Compiling MOOMaskedIconView without ARC is beta and may not work. Use at your own risk"
 #define __AH_WEAK
 #define AH_WEAK assign
 #define AH_RETAIN(x) [(x) retain]
@@ -63,7 +64,7 @@
 
 typedef void (^DrawingBlock)(CGContextRef context);
 
-@interface GOODMaskedIconView : UIView <NSCopying>
+@interface MOOMaskedIconView : UIView <NSCopying>
 {
     BOOL _highlighted;
 
