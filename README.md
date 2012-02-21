@@ -43,6 +43,8 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     [button setImage:[iconView renderHighlightedImage] forState:UIControlStateHighlighted];
     [self.view addSubview:button];
 
+For more examples, check the Demo Project.
+
 #How to use
 -----------
 
@@ -80,7 +82,7 @@ you should uncheck "Copy items into destination group's folder (if needed)."
 
 ![Image mask process](https://s3.amazonaws.com/peyton.github.com/GOODMaskedIconView/Mask.png)
 
-An image mask is a black-and-white image that clips when drawing. Here's how mask pixels correspond to the final image:
+An image mask is a black-and-white image that clips when drawing. Quartz translates masks to images using three simple rules:
 
 * Black pixels render opaquely.
 * White pixels render transparently.

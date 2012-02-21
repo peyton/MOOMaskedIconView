@@ -451,6 +451,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     // Create and set gradient
     CGGradientRef gradient = CGGradientCreateWithColors(colorspace, colors, NULL);
     CGColorSpaceRelease(colorspace);
+    CFRelease(colors);
     self.gradient = gradient;
     CGGradientRelease(gradient);
     

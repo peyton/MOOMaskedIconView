@@ -6,6 +6,10 @@
 
 #import <UIKit/UIKit.h>
 
+#if !__has_feature(objc_arc)
+# GOODMaskedIconView is supported only under ARC.
+#endif
+
 typedef void (^DrawingBlock)(CGContextRef context);
 
 @interface GOODMaskedIconView : UIView <NSCopying>
