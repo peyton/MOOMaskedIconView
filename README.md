@@ -46,7 +46,7 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     [button setImage:[iconView renderHighlightedImage] forState:UIControlStateHighlighted];
     [self.view addSubview:button];
 
-For more examples, check the Demo Project.
+For more examples, check the [Demo Project](https://github.com/peyton/GOODMaskedIconView/tree/master/Demo%20Project).
 
 #How to use
 -----------
