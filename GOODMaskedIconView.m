@@ -183,6 +183,9 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     if (self.overlay)
     {
         CGContextSaveGState(context);
+        CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+        NSLog(@"%f", self.overlay.scale);
+        NSLog(@"%@", NSStringFromCGSize(self.overlay.size));
         CGContextSetBlendMode(context, self.overlayBlendMode);
         CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
         CGContextRestoreGState(context);
@@ -230,7 +233,7 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
         CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), bytesPerRow, colorspace, kCGImageAlphaNone);
         CGColorSpaceRelease(colorspace);
 
-        CGContextSetInterpolationQuality(context, kCGInterpolationMedium);
+        CGContextSetInterpolationQuality(context, kCGInterpolationLow);
         CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, imageSize.width, imageSize.height), imageRef);
         CGImageRelease(imageRef);
         imageRef = CGBitmapContextCreateImage(context);
@@ -409,7 +412,6 @@ static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
     self.highlighted = shouldBeHighlighted;
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
     CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextConcatCTM(context, self.transform);
     [self.layer renderInContext:context];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
