@@ -14,11 +14,13 @@
 		9C36412014F28E33005DE008 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36411F14F28E33005DE008 /* main.m */; };
 		9C36412414F28E33005DE008 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412314F28E33005DE008 /* AppDelegate.m */; };
 		9C36412714F28E33005DE008 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36412614F28E33005DE008 /* ViewController.m */; };
-		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C36413914F28ED6005DE008 /* GOODMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C36413714F28EB1005DE008 /* GOODMaskedIconView.m */; };
 		9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413A14F2A2BA005DE008 /* Beer.pdf */; };
 		9C36413E14F2A2BA005DE008 /* Beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413B14F2A2BA005DE008 /* Beer.png */; };
 		9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413C14F2A2BA005DE008 /* Beer@2x.png */; };
 		9C36416314F3F8A9005DE008 /* Overlay.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36416214F3F8A9005DE008 /* Overlay.pdf */; };
+		9C3641B414F43879005DE008 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C3641B214F43879005DE008 /* Icon.png */; };
+		9C3641B514F43879005DE008 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C3641B314F43879005DE008 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "GOODMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
 		9C36413C14F2A2BA005DE008 /* Beer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Beer@2x.png"; path = "GOODMaskedIconView Demo/Beer@2x.png"; sourceTree = "<group>"; };
 		9C36416214F3F8A9005DE008 /* Overlay.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Overlay.pdf; path = "GOODMaskedIconView Demo/Overlay.pdf"; sourceTree = "<group>"; };
+		9C3641B214F43879005DE008 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "GOODMaskedIconView Demo/Icon.png"; sourceTree = "<group>"; };
+		9C3641B314F43879005DE008 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "GOODMaskedIconView Demo/Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,8 @@
 				9C36413A14F2A2BA005DE008 /* Beer.pdf */,
 				9C36413B14F2A2BA005DE008 /* Beer.png */,
 				9C36413C14F2A2BA005DE008 /* Beer@2x.png */,
+				9C3641B214F43879005DE008 /* Icon.png */,
+				9C3641B314F43879005DE008 /* Icon@2x.png */,
 				9C36416214F3F8A9005DE008 /* Overlay.pdf */,
 			);
 			name = Icons;
@@ -193,6 +199,8 @@
 				9C36413E14F2A2BA005DE008 /* Beer.png in Resources */,
 				9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */,
 				9C36416314F3F8A9005DE008 /* Overlay.pdf in Resources */,
+				9C3641B414F43879005DE008 /* Icon.png in Resources */,
+				9C3641B514F43879005DE008 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,9 +280,11 @@
 		9C36412E14F28E33005DE008 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
 				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -286,6 +296,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Prefix.pch";
 				INFOPLIST_FILE = "GOODMaskedIconView Demo/GOODMaskedIconView Demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
