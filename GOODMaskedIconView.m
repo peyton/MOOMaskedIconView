@@ -12,6 +12,7 @@ static NSString * const GOODMaskedIconViewGradientStartColorKey = @"gradientStar
 static NSString * const GOODMaskedIconViewGradientEndColorKey = @"gradientEndColor";
 static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
 static NSString * const GOODMaskedIconViewMaskKey = @"mask";
+static NSString * const GOODMaskedIconViewOverlayKey = @"overlay";
 
 @interface GOODMaskedIconView ()
 
@@ -31,6 +32,8 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 @synthesize highlightedColor = _highlightedColor;
 @synthesize gradientStartColor = _gradientStartColor;
 @synthesize gradientEndColor = _gradientEndColor;
+@synthesize overlay = _overlay;
+@synthesize overlayBlendMode = _overlayBlendMode;
 
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
@@ -44,12 +47,14 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
     self.color = [UIColor blackColor];
+    self.overlayBlendMode = kCGBlendModeNormal;
     
     // Set up observing
     [self addObserver:self forKeyPath:GOODMaskedIconViewGradientStartColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewMaskKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:GOODMaskedIconViewOverlayKey options:0 context:NULL];
     
     return self;
 }
@@ -121,6 +126,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     [self removeObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey];
     [self removeObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey];
     [self removeObserver:self forKeyPath:GOODMaskedIconViewMaskKey];
+    [self removeObserver:self forKeyPath:GOODMaskedIconViewOverlayKey];
 
     self.color = nil;
     self.drawingBlock = NULL;
@@ -170,6 +176,15 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     {
         CGContextSaveGState(context);
         self.drawingBlock(context);
+        CGContextRestoreGState(context);
+    }
+    
+    // Draw overlay
+    if (self.overlay)
+    {
+        CGContextSaveGState(context);
+        CGContextSetBlendMode(context, self.overlayBlendMode);
+        CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
         CGContextRestoreGState(context);
     }
 }
@@ -344,7 +359,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:GOODMaskedIconViewHighlightedKey] || [keyPath isEqualToString:GOODMaskedIconViewMaskKey])
+    if ([keyPath isEqualToString:GOODMaskedIconViewHighlightedKey] || [keyPath isEqualToString:GOODMaskedIconViewMaskKey] || [keyPath isEqualToString:GOODMaskedIconViewOverlayKey])
     {
         [self setNeedsDisplay];
         return;
@@ -393,7 +408,9 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     // Render image
     self.highlighted = shouldBeHighlighted;
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextConcatCTM(context, self.transform);
+    [self.layer renderInContext:context];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

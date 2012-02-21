@@ -16,6 +16,8 @@ typedef void (^DrawingBlock)(CGContextRef context);
     UIColor *_highlightedColor;
     UIColor *_gradientStartColor;
     UIColor *_gradientEndColor;
+    UIImage *_overlay;
+    CGBlendMode _overlayBlendMode;
     
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
@@ -68,6 +70,20 @@ typedef void (^DrawingBlock)(CGContextRef context);
  * @see gradientStartColor
  */
 @property (nonatomic, strong) UIColor *gradientEndColor;
+
+/*
+ * An image composited over the icon after drawing's done.
+ * 
+ * @see overlayBlendMode
+ */
+@property (nonatomic, strong) UIImage *overlay;
+
+/*
+ * The blend mode under which the overlay is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode"
+ *
+ * @see overlay
+ */
+@property (nonatomic, assign) CGBlendMode overlayBlendMode;
 
 /*
  * A block called with the current context at the end of every drawing. Has signature `void (^DrawingBlock)(CGContextRef context)`.

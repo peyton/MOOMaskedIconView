@@ -37,6 +37,7 @@
     CGRect icon2Frame = icon2.frame;
     icon2Frame.origin.x = CGRectGetMaxX(icon1.frame);
     icon2.frame = icon2Frame;
+    icon2.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     [self.view addSubview:icon2];
     
     // Green squished PDF
@@ -63,15 +64,21 @@
     _icon4 = icon4;
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(toggleIcon4Highlighted:) userInfo:nil repeats:YES];
     
-    // Large white flipped PDF
-    GOODMaskedIconView *icon5 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame))];
+    // Large gray gradient PDF with overlay
+    CGSize icon5Size = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame));
+    GOODMaskedIconView *icon5OverlayView = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf"];
+    icon5OverlayView.color = [UIColor whiteColor];
+    icon5OverlayView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
+    UIImage *icon5Overlay = [icon5OverlayView renderImage];
+    
+    GOODMaskedIconView *icon5 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:icon5Size];
     icon5.backgroundColor = self.view.backgroundColor;
-    icon5.gradientStartColor = [UIColor whiteColor];
-    icon5.gradientEndColor = [UIColor purpleColor];
+    icon5.gradientStartColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+    icon5.gradientEndColor = [UIColor colorWithWhite:0.6f alpha:1.0f];
+    icon5.overlay = icon5Overlay;
     CGRect icon5Frame = icon5.frame;
     icon5Frame.origin.y = CGRectGetMaxY(icon1.frame);
     icon5.frame = icon5Frame;
-    icon5.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     [self.view addSubview:icon5];
 }
 

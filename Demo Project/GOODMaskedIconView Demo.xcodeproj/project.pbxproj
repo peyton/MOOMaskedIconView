@@ -18,6 +18,7 @@
 		9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413A14F2A2BA005DE008 /* Beer.pdf */; };
 		9C36413E14F2A2BA005DE008 /* Beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413B14F2A2BA005DE008 /* Beer.png */; };
 		9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C36413C14F2A2BA005DE008 /* Beer@2x.png */; };
+		9C36416314F3F8A9005DE008 /* Overlay.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C36416214F3F8A9005DE008 /* Overlay.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9C36413A14F2A2BA005DE008 /* Beer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Beer.pdf; path = "GOODMaskedIconView Demo/Beer.pdf"; sourceTree = "<group>"; };
 		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "GOODMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
 		9C36413C14F2A2BA005DE008 /* Beer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Beer@2x.png"; path = "GOODMaskedIconView Demo/Beer@2x.png"; sourceTree = "<group>"; };
+		9C36416214F3F8A9005DE008 /* Overlay.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Overlay.pdf; path = "GOODMaskedIconView Demo/Overlay.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				9C36413A14F2A2BA005DE008 /* Beer.pdf */,
 				9C36413B14F2A2BA005DE008 /* Beer.png */,
 				9C36413C14F2A2BA005DE008 /* Beer@2x.png */,
+				9C36416214F3F8A9005DE008 /* Overlay.pdf */,
 			);
 			name = Icons;
 			path = ..;
@@ -189,6 +192,7 @@
 				9C36413D14F2A2BA005DE008 /* Beer.pdf in Resources */,
 				9C36413E14F2A2BA005DE008 /* Beer.png in Resources */,
 				9C36413F14F2A2BA005DE008 /* Beer@2x.png in Resources */,
+				9C36416314F3F8A9005DE008 /* Overlay.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
