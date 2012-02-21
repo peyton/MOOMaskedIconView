@@ -21,16 +21,19 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     iconView.color = [UIColor greenColor];
     [self.view addSubview:iconView];
 
-###Create a red icon from a UIImage
-
-    UIImage *image = [UIImage imageNamed:@"icon.png"];
-    GOODMaskedIconView *iconView = [[GOODMaskedIconView alloc] initWithImage:image];
-    iconView.color = [UIColor redColor];
-    [self.view addSubview:iconView];
-
-###Resize a PDF icon
+###Resize a PDF icon and add a subtle gray gradient
 
     GOODMaskedIconView *iconView = [[GOODMaskedIconView alloc] initWithPDFNamed:@"icon.pdf" size:CGSizeMake(32.0f, 26.0f)];
+    iconView.gradientStartColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
+    iconView.gradientEndColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
+    [self.view addSubview:iconView];
+    
+###Add an overlay to a red icon
+
+    UIImage *overlay = [UIImage imageNamed:@"overlay.png"];
+    GOODMaskedIconView *iconView = [[GOODMaskedIconView alloc] initWithImageNamed:@"icon.png"];
+    iconView.color = [UIColor redColor];
+    iconView.overlay = overlay;
     [self.view addSubview:iconView];
 
 ###Render a PDF icon into a UIButton

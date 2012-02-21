@@ -27,7 +27,7 @@
 #define AH_AUTORELEASE(x) (x)
 #define AH_SUPER_DEALLOC
 #else
-#warning "non-ARC support beta and may not work"
+#warning "GOODMaskedIconView without ARC is beta and may not work. Use at your own risk"
 #define __AH_WEAK
 #define AH_WEAK assign
 #define AH_RETAIN(x) [(x) retain]
@@ -66,14 +66,14 @@ typedef void (^DrawingBlock)(CGContextRef context);
 @interface GOODMaskedIconView : UIView <NSCopying>
 {
     BOOL _highlighted;
-    
+
     UIColor *_color;
     UIColor *_highlightedColor;
     UIColor *_gradientStartColor;
     UIColor *_gradientEndColor;
     UIImage *_overlay;
     CGBlendMode _overlayBlendMode;
-    
+
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
     CGGradientRef _gradient;
@@ -88,17 +88,17 @@ typedef void (^DrawingBlock)(CGContextRef context);
 
 /*
  * Fill color painted when the icon view is unhighlighted.
- * 
+ *
  * When gradientStartColor and gradientEndColor are both non-nil,
  * the view ignores fill color and draws a gradient.
- * 
+ *
  * @see highlightedColor
  */
 @property (nonatomic, strong) UIColor *color;
 
 /*
  * Fill color painted when the icon view is highlighted.
- * 
+ *
  * When gradientStartColor and gradientEndColor are both non-nil,
  * the view ignores fill color and draws a gradient.
  *
@@ -111,7 +111,7 @@ typedef void (^DrawingBlock)(CGContextRef context);
  *
  * When gradientStartColor and gradientEndColor are both non-nil,
  * the view ignores fill color and draws a gradient.
- * 
+ *
  * @see gradientEndColor
  */
 @property (nonatomic, strong) UIColor *gradientStartColor;
@@ -121,14 +121,14 @@ typedef void (^DrawingBlock)(CGContextRef context);
  *
  * When gradientStartColor and gradientEndColor are both non-nil,
  * the view ignores fill color and draws a gradient.
- * 
+ *
  * @see gradientStartColor
  */
 @property (nonatomic, strong) UIColor *gradientEndColor;
 
 /*
  * An image composited over the icon after drawing's done.
- * 
+ *
  * @see overlayBlendMode
  */
 @property (nonatomic, strong) UIImage *overlay;
@@ -176,20 +176,20 @@ typedef void (^DrawingBlock)(CGContextRef context);
 
 /* @name Rendering */
 
-/* 
+/*
  * Render the icon unhighlighted to a UIImage.
- * 
+ *
  * Useful for passing the icon to other views, e.g. UIButton.
- * 
+ *
  * @see renderHighlightedImage
  */
 - (UIImage *)renderImage;
 
 /*
  * Render the icon highlighted to a UIImage.
- * 
+ *
  * Useful for passing the icon to other views, e.g. UIButton.
- * 
+ *
  * @see renderImage
  */
 - (UIImage *)renderHighlightedImage;
