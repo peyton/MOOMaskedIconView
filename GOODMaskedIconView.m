@@ -8,15 +8,19 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+static NSString * const GOODMaskedIconViewGradientStartColorKey = @"gradientStartColor";
+static NSString * const GOODMaskedIconViewGradientEndColorKey = @"gradientEndColor";
 static NSString * const GOODMaskedIconViewHighlightedKey = @"highlighted";
 static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 @interface GOODMaskedIconView ()
 
 @property (nonatomic, assign) CGImageRef mask;
+@property (nonatomic, assign) CGGradientRef gradient;
 
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 + (NSURL *)_resourceURL:(NSString *)resourceName;
+- (void)_updateGradientWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor;
 
 @end
 
@@ -25,9 +29,12 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 @synthesize color = _color;
 @synthesize highlightedColor = _highlightedColor;
+@synthesize gradientStartColor = _gradientStartColor;
+@synthesize gradientEndColor = _gradientEndColor;
 
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
+@synthesize gradient = _gradient;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,6 +46,8 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     self.color = [UIColor blackColor];
     
     // Set up observing
+    [self addObserver:self forKeyPath:GOODMaskedIconViewGradientStartColorKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey options:0 context:NULL];
     [self addObserver:self forKeyPath:GOODMaskedIconViewMaskKey options:0 context:NULL];
     
@@ -108,6 +117,8 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 
 - (void)dealloc;
 {
+    [self removeObserver:self forKeyPath:GOODMaskedIconViewGradientStartColorKey];
+    [self removeObserver:self forKeyPath:GOODMaskedIconViewGradientEndColorKey];
     [self removeObserver:self forKeyPath:GOODMaskedIconViewHighlightedKey];
     [self removeObserver:self forKeyPath:GOODMaskedIconViewMaskKey];
 
@@ -115,6 +126,7 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     self.drawingBlock = NULL;
     self.highlightedColor = nil;
     self.mask = NULL;
+    self.gradient = NULL;
 }
 
 #pragma mark - Drawing and layout methods
@@ -130,13 +142,27 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     // Clip drawing to icon image
     CGContextClipToMask(context, rect, self.mask);
     
-    // Fill icon with color
+    // Fill icon
     CGContextSaveGState(context);
-    if (self.highlighted && self.highlightedColor)
-        [self.highlightedColor set];
-    else
-        [self.color set];
-    CGContextFillRect(context, rect);
+        
+    if (self.gradient)
+    {
+        // Draw gradient
+        
+        // Because the context is flipped, the start and end points must be swapped
+        CGPoint startPoint = CGPointMake(CGRectGetMinX(self.bounds), CGRectGetMinY(self.bounds) + CGRectGetHeight(self.bounds));
+        CGPoint endPoint = CGPointMake(CGRectGetMinX(self.bounds), CGRectGetMinY(self.bounds));
+        CGContextDrawLinearGradient(context, self.gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+    } else {
+        // Draw solid color
+        if (self.highlighted && self.highlightedColor)
+            [self.highlightedColor set];
+        else
+            [self.color set];
+        
+        CGContextFillRect(context, rect);
+    }
+
     CGContextRestoreGState(context);
     
     // Perform additional drawing if specified
@@ -152,21 +178,6 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
 {
     const CGFloat scale = [UIScreen mainScreen].scale;
     return CGSizeMake(CGImageGetWidth(self.mask) / scale, CGImageGetHeight(self.mask) / scale);
-}
-
-#pragma mark - Getters and setters
-
-- (void)setMask:(CGImageRef)mask;
-{
-    if (mask == self.mask)
-        return;
-    
-    CGImageRelease(_mask);
-    _mask = CGImageRetain(mask);
-    
-    // Resize view when mask changes
-    [self sizeToFit];
-    [self setNeedsDisplay];
 }
 
 #pragma mark - Configuration methods
@@ -303,12 +314,47 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
         [self configureWithImageNamed:resourceName size:size];
 }
 
+#pragma mark - Getters and setters
+
+- (void)setMask:(CGImageRef)mask;
+{
+    if (mask == self.mask)
+        return;
+    
+    CGImageRelease(_mask);
+    _mask = CGImageRetain(mask);
+    
+    // Resize view when mask changes
+    [self sizeToFit];
+    [self setNeedsDisplay];
+}
+
+- (void)setGradient:(CGGradientRef)gradient;
+{
+    if (gradient == self.gradient)
+        return;
+    
+    CGGradientRelease(_gradient);
+    _gradient = CGGradientRetain(gradient);
+    
+    [self setNeedsDisplay];
+}
+
 #pragma mark - KVO methods
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:GOODMaskedIconViewHighlightedKey])
+    if ([keyPath isEqualToString:GOODMaskedIconViewHighlightedKey] || [keyPath isEqualToString:GOODMaskedIconViewMaskKey])
+    {
         [self setNeedsDisplay];
+        return;
+    }
+    
+    if ([keyPath isEqualToString:GOODMaskedIconViewGradientStartColorKey] || [keyPath isEqualToString:GOODMaskedIconViewGradientEndColorKey])
+    {
+        [self _updateGradientWithStartColor:self.gradientStartColor endColor:self.gradientEndColor];
+        return;
+    }
 }
 
 #pragma mark - NSCopying methods
@@ -370,6 +416,29 @@ static NSString * const GOODMaskedIconViewMaskKey = @"mask";
     }
     
     return [NSURL fileURLWithPath:path];
+}
+
+- (void)_updateGradientWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor;
+{
+    if (!(startColor && endColor))
+    {
+        self.gradient = NULL;
+        return;
+    }
+    
+    // Create colors and colorspace
+    const CGColorRef cColors[] = {startColor.CGColor, endColor.CGColor};
+    CFArrayRef colors = CFArrayCreate(NULL, (const void **)&cColors, 2, &kCFTypeArrayCallBacks);
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    
+    // Create and set gradient
+    CGGradientRef gradient = CGGradientCreateWithColors(colorspace, colors, NULL);
+    CGColorSpaceRelease(colorspace);
+    self.gradient = gradient;
+    CGGradientRelease(gradient);
+    
+    // Refresh view
+    [self setNeedsDisplay];
 }
 
 @end

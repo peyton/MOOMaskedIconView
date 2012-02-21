@@ -66,7 +66,8 @@
     // Large white flipped PDF
     GOODMaskedIconView *icon5 = [[GOODMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame))];
     icon5.backgroundColor = self.view.backgroundColor;
-    icon5.color = [UIColor whiteColor];
+    icon5.gradientStartColor = [UIColor whiteColor];
+    icon5.gradientEndColor = [UIColor purpleColor];
     CGRect icon5Frame = icon5.frame;
     icon5Frame.origin.y = CGRectGetMaxY(icon1.frame);
     icon5.frame = icon5Frame;

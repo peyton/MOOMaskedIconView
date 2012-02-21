@@ -14,9 +14,12 @@ typedef void (^DrawingBlock)(CGContextRef context);
     
     UIColor *_color;
     UIColor *_highlightedColor;
+    UIColor *_gradientStartColor;
+    UIColor *_gradientEndColor;
     
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
+    CGGradientRef _gradient;
 }
 
 /* @name Properties */
@@ -27,14 +30,44 @@ typedef void (^DrawingBlock)(CGContextRef context);
 @property (nonatomic, assign, getter = isHighlighted) BOOL highlighted;
 
 /*
- * The color painted when the icon view is unhighlighted.
+ * Fill color painted when the icon view is unhighlighted.
+ * 
+ * When gradientStartColor and gradientEndColor are both non-nil,
+ * the view ignores fill color and draws a gradient.
+ * 
+ * @see highlightedColor
  */
 @property (nonatomic, strong) UIColor *color;
 
 /*
- * The color painted when the icon view is highlighted.
+ * Fill color painted when the icon view is highlighted.
+ * 
+ * When gradientStartColor and gradientEndColor are both non-nil,
+ * the view ignores fill color and draws a gradient.
+ *
+ * @see color
  */
 @property (nonatomic, strong) UIColor *highlightedColor;
+
+/*
+ * The color filled at the gradient's start location
+ *
+ * When gradientStartColor and gradientEndColor are both non-nil,
+ * the view ignores fill color and draws a gradient.
+ * 
+ * @see gradientEndColor
+ */
+@property (nonatomic, strong) UIColor *gradientStartColor;
+
+/*
+ * The color filled at the gradient's end location
+ *
+ * When gradientStartColor and gradientEndColor are both non-nil,
+ * the view ignores fill color and draws a gradient.
+ * 
+ * @see gradientStartColor
+ */
+@property (nonatomic, strong) UIColor *gradientEndColor;
 
 /*
  * A block called with the current context at the end of every drawing. Has signature `void (^DrawingBlock)(CGContextRef context)`.
