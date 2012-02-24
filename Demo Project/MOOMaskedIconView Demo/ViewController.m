@@ -73,8 +73,8 @@
 
     MOOMaskedIconView *icon5 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:icon5Size];
     icon5.backgroundColor = self.view.backgroundColor;
-    icon5.gradientStartColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
-    icon5.gradientEndColor = [UIColor colorWithWhite:0.6f alpha:1.0f];
+    icon5.gradientColors = [NSArray arrayWithObjects:[UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor colorWithWhite:0.6f alpha:1.0f], nil];
+    icon5.gradientLocations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.9f], [NSNumber numberWithFloat:1.0], nil];
     icon5.overlay = icon5Overlay;
     icon5.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     CGRect icon5Frame = icon5.frame;

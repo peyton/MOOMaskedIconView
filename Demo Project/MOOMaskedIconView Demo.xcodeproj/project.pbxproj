@@ -28,15 +28,15 @@
 		9C36411314F28E33005DE008 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9C36411514F28E33005DE008 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C36411714F28E33005DE008 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9C36411B14F28E33005DE008 /* MOOMaskedIconView Demo-Info.plist */ = {isa = PBXFileReference; path = "MOOMaskedIconView Demo-Info.plist"; sourceTree = "<group>"; };
+		9C36411B14F28E33005DE008 /* MOOMaskedIconView Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MOOMaskedIconView Demo-Info.plist"; sourceTree = "<group>"; };
 		9C36411D14F28E33005DE008 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9C36411F14F28E33005DE008 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9C36412114F28E33005DE008 /* MOOMaskedIconView Demo-Prefix.pch */ = {isa = PBXFileReference; path = "MOOMaskedIconView Demo-Prefix.pch"; sourceTree = "<group>"; };
+		9C36412114F28E33005DE008 /* MOOMaskedIconView Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MOOMaskedIconView Demo-Prefix.pch"; sourceTree = "<group>"; };
 		9C36412214F28E33005DE008 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C36412314F28E33005DE008 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9C36412514F28E33005DE008 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9C36412614F28E33005DE008 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9C36413614F28EB1005DE008 /* MOOMaskedIconView.h */ = {isa = PBXFileReference; name = MOOMaskedIconView.h; path = ../MOOMaskedIconView.h; sourceTree = "<group>"; };
+		9C36413614F28EB1005DE008 /* MOOMaskedIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MOOMaskedIconView.h; path = ../MOOMaskedIconView.h; sourceTree = "<group>"; };
 		9C36413714F28EB1005DE008 /* MOOMaskedIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MOOMaskedIconView.m; path = ../MOOMaskedIconView.m; sourceTree = "<group>"; };
 		9C36413A14F2A2BA005DE008 /* Beer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Beer.pdf; path = "MOOMaskedIconView Demo/Beer.pdf"; sourceTree = "<group>"; };
 		9C36413B14F2A2BA005DE008 /* Beer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Beer.png; path = "MOOMaskedIconView Demo/Beer.png"; sourceTree = "<group>"; };
