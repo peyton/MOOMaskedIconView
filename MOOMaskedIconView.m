@@ -177,7 +177,7 @@ static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
     CGContextTranslateCTM(context, 0.0f, CGRectGetHeight(rect));
     CGContextScaleCTM(context, 1.0f, -1.0f);
     
-    CGRect imageRect = CGRectMake((self.shadowOffset.width > 0.0f) ? self.shadowOffset.width : 0.0f, (self.shadowOffset.height > 0.0f) ? self.shadowOffset.height : 0.0f, CGImageGetWidth(self.mask), CGImageGetHeight(self.mask));
+    CGRect imageRect = CGRectMake((self.shadowOffset.width > 0.0f) ? self.shadowOffset.width : 0.0f, (self.shadowOffset.height > 0.0f) ? self.shadowOffset.height : 0.0f, CGImageGetWidth(self.mask) / [UIScreen mainScreen].scale, CGImageGetHeight(self.mask) / [UIScreen mainScreen].scale);
     
     if (!CGSizeEqualToSize(self.shadowOffset, CGSizeZero))
     {
