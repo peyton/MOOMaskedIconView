@@ -80,6 +80,9 @@ typedef enum {
     NSArray *_gradientColors;
     NSArray *_gradientLocations;
     MOOGradientType _gradientType;
+    
+    UIColor *_shadowColor;
+    CGSize _shadowOffset;
 
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
@@ -176,8 +179,6 @@ typedef enum {
  * An optional array of UIColors defining the color of the gradient at each stop. Setting gradientColors clears gradientStartColor and gradientEndColor.
  *
  * @see gradientLocations
- * @see gradientStartColor
- * @see gradientEndColor
  */
 @property (nonatomic, strong) NSArray *gradientColors;
 
@@ -187,8 +188,6 @@ typedef enum {
  * Must have the same number of components as gradientColors. The gradient stops are specified as values between 0 and 1. The values must be monotonically increasing. If nil, the stops are spread uniformly across the range. Defaults to nil.
  *
  * @see gradientColors
- * @see gradientStartColor
- * @see gradientEndColor
  */
 @property (nonatomic, strong) NSArray *gradientLocations;
 
@@ -196,6 +195,18 @@ typedef enum {
  * Style of gradient drawn. MOOGradientTypeLinear is the sole option right now.
  */
 @property (nonatomic, assign) MOOGradientType gradientType;
+
+/* @name Shadow properties */
+
+/*
+ * Specifies shadow color.
+ */
+@property (nonatomic, strong) UIColor *shadowColor;
+
+/*
+ * Specifies shadow offset.
+ */
+@property (nonatomic, assign) CGSize shadowOffset;
 
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;

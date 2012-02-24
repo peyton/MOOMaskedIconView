@@ -9,14 +9,19 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+// Keys for KVO
+static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
+static NSString * const MOOMaskedIconViewMaskKey = @"mask";
+static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
+
 static NSString * const MOOMaskedIconViewGradientStartColorKey = @"gradientStartColor";
 static NSString * const MOOMaskedIconViewGradientEndColorKey = @"gradientEndColor";
 static NSString * const MOOMaskedIconViewGradientColorsKey = @"gradientColors";
 static NSString * const MOOMaskedIconViewGradientLocationsKey = @"gradientLocations";
 static NSString * const MOOMaskedIconViewGradientTypeKey = @"gradientType";
-static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
-static NSString * const MOOMaskedIconViewMaskKey = @"mask";
-static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
+
+static NSString * const MOOMaskedIconViewShadowColor = @"shadowColor";
+static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
 
 @interface MOOMaskedIconView ()
 
@@ -43,6 +48,9 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 @synthesize gradientLocations = _gradientLocations;
 @synthesize gradientType = _gradientType;
 
+@synthesize shadowColor = _shadowColor;
+@synthesize shadowOffset = _shadowOffset;
+
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
 @synthesize gradient = _gradient;
@@ -58,14 +66,16 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
     self.overlayBlendMode = kCGBlendModeNormal;
     
     // Set up observing
+    [self addObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewMaskKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewOverlayKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewMaskKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewOverlayKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewShadowColor options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewShadowOffset options:0 context:NULL];
     
     return self;
 }
@@ -133,17 +143,20 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 
 - (void)dealloc;
 {
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewMaskKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewOverlayKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewMaskKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewOverlayKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowColor];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowOffset];
 
     self.color = nil;
     self.highlightedColor = nil;
+    self.shadowColor = nil;
     self.gradientColors = nil;
     self.gradientLocations = nil;
     self.overlay = nil;
@@ -164,13 +177,26 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
     CGContextTranslateCTM(context, 0.0f, CGRectGetHeight(rect));
     CGContextScaleCTM(context, 1.0f, -1.0f);
     
+    CGRect imageRect = CGRectMake((self.shadowOffset.width > 0.0f) ? self.shadowOffset.width : 0.0f, (self.shadowOffset.height > 0.0f) ? self.shadowOffset.height : 0.0f, CGImageGetWidth(self.mask), CGImageGetHeight(self.mask));
+    
+    if (!CGSizeEqualToSize(self.shadowOffset, CGSizeZero))
+    {
+        CGContextSaveGState(context);
+        [((self.shadowColor) ? self.shadowColor : [UIColor blackColor]) set];
+        CGRect shadowRect = imageRect;
+        shadowRect.origin = CGPointMake((self.shadowOffset.width < 0.0f) ? -self.shadowOffset.width : 0.0f, (self.shadowOffset.height < 0.0f) ? -self.shadowOffset.height : 0.0f);
+        CGContextClipToMask(context, shadowRect, self.mask);
+        CGContextFillRect(context, shadowRect);
+        CGContextRestoreGState(context);
+    }
+    
     // Clip drawing to icon image
-    CGContextClipToMask(context, rect, self.mask);
+    CGContextClipToMask(context, imageRect, self.mask);
     
     // Fill icon
     CGContextSaveGState(context);
-        
-    if (self.gradient)
+    
+    if (self.gradient && !(self.highlighted && self.highlightedColor))
     {
         // Draw gradient
         
@@ -185,7 +211,7 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
         else
             [self.color set];
         
-        CGContextFillRect(context, rect);
+        CGContextFillRect(context, imageRect);
     }
 
     CGContextRestoreGState(context);
@@ -212,7 +238,7 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 - (CGSize)sizeThatFits:(CGSize)size;
 {
     const CGFloat scale = [UIScreen mainScreen].scale;
-    return CGSizeMake(CGImageGetWidth(self.mask) / scale, CGImageGetHeight(self.mask) / scale);
+    return CGSizeMake(CGImageGetWidth(self.mask) / scale + fabsf(self.shadowOffset.width), CGImageGetHeight(self.mask) / scale + fabsf(self.shadowOffset.height));
 }
 
 #pragma mark - Configuration methods
@@ -459,6 +485,14 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
         [keyPath isEqualToString:MOOMaskedIconViewMaskKey] ||
         [keyPath isEqualToString:MOOMaskedIconViewOverlayKey])
     {
+        [self setNeedsDisplay];
+        return;
+    }
+    
+    if ([keyPath isEqualToString:MOOMaskedIconViewShadowColor] ||
+        [keyPath isEqualToString:MOOMaskedIconViewShadowOffset])
+    {
+        [self sizeToFit];
         [self setNeedsDisplay];
         return;
     }
