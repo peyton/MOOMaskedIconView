@@ -64,28 +64,42 @@
 
 typedef void (^DrawingBlock)(CGContextRef context);
 
+typedef enum {
+    MOOGradientTypeLinear = 0,
+} MOOGradientType;
+
 @interface MOOMaskedIconView : UIView <NSCopying>
 {
     BOOL _highlighted;
 
     UIColor *_color;
     UIColor *_highlightedColor;
-    UIColor *_gradientStartColor;
-    UIColor *_gradientEndColor;
     UIImage *_overlay;
     CGBlendMode _overlayBlendMode;
+    
+    NSArray *_gradientColors;
+    NSArray *_gradientLocations;
+    MOOGradientType _gradientType;
 
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
     CGGradientRef _gradient;
+    
+    struct {
+        BOOL hasGradientStartColor: 1;
+        BOOL hasGradientEndColor: 1;
+    } _iconViewFlags;
 }
 
-/* @name Properties */
+/* @name State Properties */
 
 /*
  * Whether the icon view is in its highlighted state.
  */
 @property (nonatomic, assign, getter = isHighlighted) BOOL highlighted;
+
+
+/* @name Style Properties */
 
 /*
  * Fill color painted when the icon view is unhighlighted.
@@ -106,26 +120,6 @@ typedef void (^DrawingBlock)(CGContextRef context);
  * @see color
  */
 @property (nonatomic, strong) UIColor *highlightedColor;
-
-/*
- * The color filled at the gradient's start location
- *
- * When gradientStartColor and gradientEndColor are both non-nil,
- * the view ignores fill color and draws a gradient.
- *
- * @see gradientEndColor
- */
-@property (nonatomic, strong) UIColor *gradientStartColor;
-
-/*
- * The color filled at the gradient's end location
- *
- * When gradientStartColor and gradientEndColor are both non-nil,
- * the view ignores fill color and draws a gradient.
- *
- * @see gradientStartColor
- */
-@property (nonatomic, strong) UIColor *gradientEndColor;
 
 /*
  * An image composited over the icon after drawing's done.
@@ -154,6 +148,54 @@ typedef void (^DrawingBlock)(CGContextRef context);
  * @see Configuration methods
  */
 @property (nonatomic, assign, readonly) CGImageRef mask;
+
+
+/* @name Gradient Properties */
+
+/*
+ * The color filled at the gradient's start location. Cleared by gradientColors if that's set.
+ *
+ * @deprecated Use gradientColors instead
+ *
+ * @see gradientEndColor
+ * @see gradientColors
+ */
+@property (nonatomic, strong) UIColor *gradientStartColor;
+
+/*
+ * The color filled at the gradient's end location. Cleared by gradientColors if that's set.
+ *
+ * @deprecated Use gradientColors instead
+ *
+ * @see gradientStartColor
+ * @see gradientColors
+ */
+@property (nonatomic, strong) UIColor *gradientEndColor;
+
+/*
+ * An optional array of UIColors defining the color of the gradient at each stop. Setting gradientColors clears gradientStartColor and gradientEndColor.
+ *
+ * @see gradientLocations
+ * @see gradientStartColor
+ * @see gradientEndColor
+ */
+@property (nonatomic, strong) NSArray *gradientColors;
+
+/*
+ * An optional array of NSNumber objects defining the location of each gradient stop. 
+ *
+ * Must have the same number of components as gradientColors. The gradient stops are specified as values between 0 and 1. The values must be monotonically increasing. If nil, the stops are spread uniformly across the range. Defaults to nil.
+ *
+ * @see gradientColors
+ * @see gradientStartColor
+ * @see gradientEndColor
+ */
+@property (nonatomic, strong) NSArray *gradientLocations;
+
+/*
+ * Style of gradient drawn. MOOGradientTypeLinear is the sole option right now.
+ */
+@property (nonatomic, assign) MOOGradientType gradientType;
 
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;

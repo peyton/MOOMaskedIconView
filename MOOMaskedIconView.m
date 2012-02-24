@@ -11,6 +11,9 @@
 
 static NSString * const MOOMaskedIconViewGradientStartColorKey = @"gradientStartColor";
 static NSString * const MOOMaskedIconViewGradientEndColorKey = @"gradientEndColor";
+static NSString * const MOOMaskedIconViewGradientColorsKey = @"gradientColors";
+static NSString * const MOOMaskedIconViewGradientLocationsKey = @"gradientLocations";
+static NSString * const MOOMaskedIconViewGradientTypeKey = @"gradientType";
 static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
 static NSString * const MOOMaskedIconViewMaskKey = @"mask";
 static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
@@ -22,7 +25,7 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 + (NSURL *)_resourceURL:(NSString *)resourceName;
-- (void)_updateGradientWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor;
+- (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
 
 @end
 
@@ -31,10 +34,14 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 
 @synthesize color = _color;
 @synthesize highlightedColor = _highlightedColor;
-@synthesize gradientStartColor = _gradientStartColor;
-@synthesize gradientEndColor = _gradientEndColor;
 @synthesize overlay = _overlay;
 @synthesize overlayBlendMode = _overlayBlendMode;
+
+@dynamic gradientStartColor;
+@dynamic gradientEndColor;
+@synthesize gradientColors = _gradientColors;
+@synthesize gradientLocations = _gradientLocations;
+@synthesize gradientType = _gradientType;
 
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
@@ -53,6 +60,9 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
     // Set up observing
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewMaskKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewOverlayKey options:0 context:NULL];
@@ -125,14 +135,17 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 {
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewMaskKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewOverlayKey];
 
     self.color = nil;
     self.highlightedColor = nil;
-    self.gradientStartColor = nil;
-    self.gradientEndColor = nil;
+    self.gradientColors = nil;
+    self.gradientLocations = nil;
     self.overlay = nil;
     self.drawingBlock = NULL;
     self.mask = NULL;
@@ -338,6 +351,93 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
 
 #pragma mark - Getters and setters
 
+- (void)setGradient:(CGGradientRef)gradient;
+{
+    if (gradient == self.gradient)
+        return;
+    
+    CGGradientRelease(_gradient);
+    _gradient = CGGradientRetain(gradient);
+    
+    [self setNeedsDisplay];
+}
+
+- (void)setGradientColors:(NSArray *)gradientColors;
+{
+    if ([gradientColors isEqualToArray:self.gradientColors])
+        return;
+    
+    _gradientColors = gradientColors;
+    
+    // Clear gradient start color and gradient end color
+    _iconViewFlags.hasGradientStartColor = NO;
+    _iconViewFlags.hasGradientEndColor = NO;
+}
+
+- (UIColor *)gradientStartColor;
+{
+    // Deprecated. Use gradientColors instead
+    if (!_iconViewFlags.hasGradientStartColor)
+        return nil;
+    
+    return [self.gradientColors objectAtIndex:0];
+}
+
+- (void)setGradientStartColor:(UIColor *)gradientStartColor;
+{
+    // Deprecated. Setting gradientStartColor is overly complicated. Use gradientColors instead
+    if (gradientStartColor == self.gradientStartColor)
+        return;
+    
+    if (gradientStartColor == nil)
+    {
+        [self willChangeValueForKey:@"gradientColors"];
+        _gradientColors = (_iconViewFlags.hasGradientEndColor) ? [NSArray arrayWithObject:self.gradientEndColor] : nil;
+        [self didChangeValueForKey:@"gradientColors"];
+        _iconViewFlags.hasGradientStartColor = NO;
+        return;
+    }
+    
+    
+    [self willChangeValueForKey:@"gradientColors"];
+    _gradientColors = (_iconViewFlags.hasGradientEndColor) ? [NSArray arrayWithObjects:gradientStartColor, self.gradientEndColor, nil] : [NSArray arrayWithObject:gradientStartColor];
+    [self didChangeValueForKey:@"gradientColors"];
+    
+    _iconViewFlags.hasGradientStartColor = YES;
+}
+
+- (UIColor *)gradientEndColor;
+{
+    // Deprecated. Use gradientColors instead
+    if (!_iconViewFlags.hasGradientEndColor)
+        return nil;
+    
+    return [self.gradientColors lastObject];
+}
+
+- (void)setGradientEndColor:(UIColor *)gradientEndColor;
+{
+    // Deprecated. Setting gradientEndColor is overly complicated. Use gradientColors instead
+    if (gradientEndColor == self.gradientEndColor)
+        return;
+    
+    if (gradientEndColor == nil)
+    {
+        [self willChangeValueForKey:@"gradientColors"];
+        _gradientColors = (_iconViewFlags.hasGradientStartColor) ? [NSArray arrayWithObject:self.gradientStartColor] : nil;
+        [self didChangeValueForKey:@"gradientColors"];
+        _iconViewFlags.hasGradientEndColor = NO;
+        return;
+    }
+    
+    
+    [self willChangeValueForKey:@"gradientColors"];
+    _gradientColors = (_iconViewFlags.hasGradientStartColor) ? [NSArray arrayWithObjects:self.gradientStartColor, gradientEndColor, nil] : [NSArray arrayWithObject:gradientEndColor];
+    [self didChangeValueForKey:@"gradientColors"];
+    
+    _iconViewFlags.hasGradientEndColor = YES;
+}
+
 - (void)setMask:(CGImageRef)mask;
 {
     if (mask == self.mask)
@@ -351,30 +451,25 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
     [self setNeedsDisplay];
 }
 
-- (void)setGradient:(CGGradientRef)gradient;
-{
-    if (gradient == self.gradient)
-        return;
-    
-    CGGradientRelease(_gradient);
-    _gradient = CGGradientRetain(gradient);
-    
-    [self setNeedsDisplay];
-}
-
 #pragma mark - KVO methods
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:MOOMaskedIconViewHighlightedKey] || [keyPath isEqualToString:MOOMaskedIconViewMaskKey] || [keyPath isEqualToString:MOOMaskedIconViewOverlayKey])
+    if ([keyPath isEqualToString:MOOMaskedIconViewHighlightedKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewMaskKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewOverlayKey])
     {
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:MOOMaskedIconViewGradientStartColorKey] || [keyPath isEqualToString:MOOMaskedIconViewGradientEndColorKey])
+    if ([keyPath isEqualToString:MOOMaskedIconViewGradientStartColorKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewGradientEndColorKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewGradientColorsKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewGradientLocationsKey] ||
+        [keyPath isEqualToString:MOOMaskedIconViewGradientTypeKey])
     {
-        [self _updateGradientWithStartColor:self.gradientStartColor endColor:self.gradientEndColor];
+        [self _updateGradientWithColors:self.gradientColors locations:self.gradientLocations forType:self.gradientType];
         return;
     }
 }
@@ -441,23 +536,46 @@ static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
     return [NSURL fileURLWithPath:path];
 }
 
-- (void)_updateGradientWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor;
+- (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
 {
-    if (!(startColor && endColor))
+    if (!colors)
     {
         self.gradient = NULL;
         return;
     }
     
-    // Create colors and colorspace
-    const CGColorRef cColors[] = {startColor.CGColor, endColor.CGColor};
-    CFArrayRef colors = CFArrayCreate(NULL, (const void **)&cColors, 2, &kCFTypeArrayCallBacks);
-    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    if (!locations || [locations count] != [colors count])
+    {
+        NSMutableArray *defaultLocations = [NSMutableArray arrayWithCapacity:[colors count]];
+        CGFloat step = 1.0f / ([colors count] - 1);
+        CGFloat location = 0.0f;
+        for (NSUInteger i = 0; i < [colors count]; i++)
+        {
+            [defaultLocations addObject:[NSNumber numberWithFloat:location]];
+            location += step;
+        }
+            
+        locations = defaultLocations;
+    }
     
+    // Create colors and colorspace
+    CGColorRef colorCArray[[colors count]];
+    
+    // Get gradient locations    
+    CGFloat locationsCArray[[locations count]];
+    for (NSUInteger i = 0; i < [colors count]; i++)
+    {
+        colorCArray[i] = ((UIColor *)[colors objectAtIndex:i]).CGColor;
+        locationsCArray[i] = [[locations objectAtIndex:i] floatValue];
+    }
+    
+    CFArrayRef colorsCFArray = CFArrayCreate(NULL, (const void **)&colorCArray, [colors count], &kCFTypeArrayCallBacks);
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+        
     // Create and set gradient
-    CGGradientRef gradient = CGGradientCreateWithColors(colorspace, colors, NULL);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorspace, colorsCFArray, locationsCArray);
     CGColorSpaceRelease(colorspace);
-    CFRelease(colors);
+    CFRelease(colorsCFArray);
     self.gradient = gradient;
     CGGradientRelease(gradient);
     

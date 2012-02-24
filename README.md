@@ -27,7 +27,7 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     iconView.gradientStartColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
     iconView.gradientEndColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
     [self.view addSubview:iconView];
-    
+
 ###Add an overlay to a red icon
 
     UIImage *overlay = [UIImage imageNamed:@"overlay.png"];
@@ -85,7 +85,7 @@ you should uncheck "Copy items into destination group's folder (if needed)."
 
 ![Image mask process](https://s3.amazonaws.com/peyton.github.com/MOOMaskedIconView/Mask.png)
 
-An image mask is a black-and-white image that clips when drawing. Quartz translates masks to images using three simple rules:
+An image mask is a black-and-white image that clips drawing. Quartz clipping follows three simple rules:
 
 * Black pixels render opaquely.
 * White pixels render transparently.
