@@ -7,7 +7,9 @@
 
 #import "MOOMaskedIconView.h"
 
+#import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
+
 
 // Keys for KVO
 static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
@@ -22,6 +24,9 @@ static NSString * const MOOMaskedIconViewGradientTypeKey = @"gradientType";
 
 static NSString * const MOOMaskedIconViewShadowColor = @"shadowColor";
 static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
+
+// Helper functions
+static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 @interface MOOMaskedIconView ()
 
@@ -50,6 +55,8 @@ static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
 
 @synthesize shadowColor = _shadowColor;
 @synthesize shadowOffset = _shadowOffset;
+@synthesize innerShadowColor = _innerShadowColor;
+@synthesize innerShadowOffset = _innerShadowOffset;
 
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
@@ -179,6 +186,7 @@ static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
     
     CGRect imageRect = CGRectMake((self.shadowOffset.width > 0.0f) ? self.shadowOffset.width : 0.0f, (self.shadowOffset.height > 0.0f) ? self.shadowOffset.height : 0.0f, CGImageGetWidth(self.mask) / [UIScreen mainScreen].scale, CGImageGetHeight(self.mask) / [UIScreen mainScreen].scale);
     
+    // Draw shadow
     if (!CGSizeEqualToSize(self.shadowOffset, CGSizeZero))
     {
         CGContextSaveGState(context);
@@ -224,11 +232,34 @@ static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
         CGContextRestoreGState(context);
     }
     
+    // Draw inner shadow
+    if (!CGSizeEqualToSize(self.innerShadowOffset, CGSizeZero))
+    {
+        if (cblas_sdsdot) // Check for Accelerate framework. See TN2064: https://developer.apple.com/library/mac/#technotes/tn2064/_index.html
+        {
+            CGContextSaveGState(context);
+            
+            // First invert the mask to be able to draw outside it after clipping
+            CGImageRef invertedImage = CGImageCreateInvertedMaskWithMask(self.mask);
+            
+            // Clip to inverted mask translated by innerShadowOffset
+            CGAffineTransform innerShadowOffsetTransform = CGAffineTransformMakeTranslation(self.innerShadowOffset.width, -self.innerShadowOffset.height);
+            CGContextClipToMask(context, CGRectApplyAffineTransform(imageRect, innerShadowOffsetTransform), invertedImage);
+            CGImageRelease(invertedImage);
+            
+            // Fill inner shadow color
+            [self.innerShadowColor set];
+            CGContextFillRect(context, imageRect);
+            CGContextRestoreGState(context);
+        } else {
+            NSLog(@"Inner shadows are unavailable. Include the Accelerate framework in your project.");
+        }
+    }
+    
     // Draw overlay
     if (self.overlay)
     {
         CGContextSaveGState(context);
-        CGContextSetInterpolationQuality(context, kCGInterpolationNone);
         CGContextSetBlendMode(context, self.overlayBlendMode);
         CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
         CGContextRestoreGState(context);
@@ -618,3 +649,71 @@ static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
 }
 
 @end
+
+// Helper functions
+
+/*
+ * CGImageCreateInvertedMaskWithMask.
+ *
+ * Adapted from Benjamin Godard's excellent NYXImagesKit: https://github.com/Nyx0uf/NYXImagesKit/blob/master/Categories/UIImage%2BFiltering.m
+ */
+/* Negative multiplier to invert a number */
+static float __negativeMultiplier = -1.0f;
+static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
+{
+    if (!sourceMask)
+        return NULL;
+        
+    /// Create an ARGB bitmap context
+	const size_t width = CGImageGetWidth(sourceMask);
+	const size_t height = CGImageGetHeight(sourceMask);
+    
+	/// Grab the image raw data
+    CFDataRef dataRef = CGDataProviderCopyData(CGImageGetDataProvider(sourceMask));
+	UInt8* data = (UInt8*)CFDataGetBytePtr(dataRef);
+	if (!data)
+	{
+		NSLog(@"Image to be inverted contains no data");
+        return NULL;
+	}
+    
+	const size_t pixelsCount = width * height;
+	float* dataAsFloat = (float*)malloc(sizeof(float) * pixelsCount);
+    CGFloat min = 0.0f, max = 255.0f;
+	UInt8* dataRed = data + 1;
+	UInt8* dataGreen = data + 2;
+	UInt8* dataBlue = data + 3;
+    
+	/// vDSP_vsmsa() = multiply then add
+	/// slightly faster than the couple vDSP_vneg() & vDSP_vsadd()
+	/// Probably because there are 3 function calls less
+    
+	/// Calculate red components
+	vDSP_vfltu8(dataRed, 4, dataAsFloat, 1, pixelsCount);
+	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vfixu8(dataAsFloat, 1, dataRed, 4, pixelsCount);
+    
+	/// Calculate green components
+	vDSP_vfltu8(dataGreen, 4, dataAsFloat, 1, pixelsCount);
+	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vfixu8(dataAsFloat, 1, dataGreen, 4, pixelsCount);
+    
+	/// Calculate blue components
+	vDSP_vfltu8(dataBlue, 4, dataAsFloat, 1, pixelsCount);
+	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
+	vDSP_vfixu8(dataAsFloat, 1, dataBlue, 4, pixelsCount);
+    
+    // Create new image in the gray color space, since RGB images aren't valid masks
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData(dataRef);
+	CGImageRef invertedImage = CGImageCreate(width, height, CGImageGetBitsPerComponent(sourceMask), CGImageGetBitsPerPixel(sourceMask), CGImageGetBytesPerRow(sourceMask), colorspace, CGImageGetBitmapInfo(sourceMask), dataProvider, NULL, NO, kCGRenderingIntentDefault);
+    CGColorSpaceRelease(colorspace);
+    CGDataProviderRelease(dataProvider);
+    free(dataAsFloat);
+    CFRelease(dataRef);
+    
+	return invertedImage;
+}

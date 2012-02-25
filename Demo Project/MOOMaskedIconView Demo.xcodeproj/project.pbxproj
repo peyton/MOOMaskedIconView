@@ -29,6 +29,7 @@
 		9C78D8D414F849240059D260 /* Gray-Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C78D8D214F849240059D260 /* Gray-Bar.png */; };
 		9C78D8D514F849240059D260 /* Gray-Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C78D8D314F849240059D260 /* Gray-Bar@2x.png */; };
 		9CFA4C5114F85C2F00956B67 /* Rounded Rect.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9CFA4C5014F85C2F00956B67 /* Rounded Rect.pdf */; };
+		9CFA4C5814F87B2C00956B67 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CFA4C5714F87B2C00956B67 /* Accelerate.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		9C78D8D214F849240059D260 /* Gray-Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Gray-Bar.png"; path = "Images/Gray-Bar.png"; sourceTree = "<group>"; };
 		9C78D8D314F849240059D260 /* Gray-Bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Gray-Bar@2x.png"; path = "Images/Gray-Bar@2x.png"; sourceTree = "<group>"; };
 		9CFA4C5014F85C2F00956B67 /* Rounded Rect.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Rounded Rect.pdf"; path = "MOOMaskedIconView Demo/Images/Icons/Rounded Rect.pdf"; sourceTree = "<group>"; };
+		9CFA4C5714F87B2C00956B67 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CFA4C5814F87B2C00956B67 /* Accelerate.framework in Frameworks */,
 				9C36411414F28E33005DE008 /* UIKit.framework in Frameworks */,
 				9C36411614F28E33005DE008 /* Foundation.framework in Frameworks */,
 				9C36411814F28E33005DE008 /* CoreGraphics.framework in Frameworks */,
@@ -79,6 +82,7 @@
 		9C36410414F28E33005DE008 = {
 			isa = PBXGroup;
 			children = (
+				9CFA4C5714F87B2C00956B67 /* Accelerate.framework */,
 				9C36411914F28E33005DE008 /* MOOMaskedIconView Demo */,
 				9C36413014F28E78005DE008 /* External */,
 				9C36411214F28E33005DE008 /* Frameworks */,

@@ -83,6 +83,8 @@ typedef enum {
     
     UIColor *_shadowColor;
     CGSize _shadowOffset;
+    UIColor *_innerShadowColor;
+    CGSize _innerShadowOffset;
 
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
@@ -207,6 +209,16 @@ typedef enum {
  * Specifies shadow offset.
  */
 @property (nonatomic, assign) CGSize shadowOffset;
+
+/*
+ * Specifies inner shadow color.
+ */
+@property (nonatomic, strong) UIColor *innerShadowColor;
+
+/*
+ * Specifies inner shadow offset.
+ */
+@property (nonatomic, assign) CGSize innerShadowOffset;
 
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;
