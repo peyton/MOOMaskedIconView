@@ -4,8 +4,8 @@
 ----------
 
 MOOMaskedIconView is a UIView subclass that uses black-and-white masks to draw icons of different
-styles at various sizes and resolutions. It uses the same technique as
-UITabBar to generate disparate effects from a single icon file.
+styles at any size or resolution. It's like Photoshop layer styles, using the same technique as
+UITabBar to generate various effects from a single icon mask.
 
 ![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/MOOMaskedIconView/Tab-bar.png)
 
