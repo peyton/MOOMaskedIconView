@@ -7,7 +7,11 @@
 
 #import "ViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "MOOMaskedIconView.h"
+
+#define kBarHeight 64.0f
 
 @interface ViewController ()
 
@@ -23,83 +27,90 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
-    // Unstyled PNG
-    MOOMaskedIconView *icon1 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.png"];
-    [self.view addSubview:icon1];
+    /*
+     * Create toolbar
+     */
     
-    // Yellow-red gradient squished PNG with black shadow
-    MOOMaskedIconView *icon2 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.png" size:CGSizeMake(80.0f, 70.0f)];
-    icon2.backgroundColor = self.view.backgroundColor;
-    icon2.gradientStartColor = [UIColor yellowColor];
-    icon2.gradientEndColor = [UIColor redColor];
-    icon2.shadowColor = [UIColor blackColor];
-    icon2.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    UIView *grayBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.frame) - kBarHeight, CGRectGetWidth(self.view.bounds), kBarHeight)];
+    grayBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Gray-Bar.png"]];
+    [self.view addSubview:grayBar];
     
-    CGRect icon2Frame = icon2.frame;
-    icon2Frame.origin.x = CGRectGetMaxX(icon1.frame);
-    icon2.frame = icon2Frame;
-    icon2.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
-    [self.view addSubview:icon2];
+    // Quick closure to configure icons
+    void (^configureIcon)(MOOMaskedIconView *icon) = ^(MOOMaskedIconView *icon) {
+        icon.gradientColors = [NSArray arrayWithObjects:
+                               [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.34f alpha:1.0f],
+                               [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.57f alpha:1.0f], nil];
+        icon.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
+        icon.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    };
     
-    // Green squished PDF
-    MOOMaskedIconView *icon3 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:CGSizeMake(52.0f, 70.0f)];
-    icon3.backgroundColor = [UIColor orangeColor];
-    icon3.color = [UIColor greenColor];
+    // Quick closure to position icons
+    void (^positionIconAtIndex)(MOOMaskedIconView *icon, NSUInteger index) = ^(MOOMaskedIconView *icon, NSUInteger index) {
+        CGFloat stepSize = CGRectGetWidth(self.view.bounds) / 5.0f;
+        
+        icon.layer.position = CGPointMake(ceilf(stepSize * (index + 0.5f)), ceilf(CGRectGetHeight(grayBar.bounds) / 2.0f));
+    };
     
-    CGRect icon3Frame = icon3.frame;
-    icon3Frame.origin.x = CGRectGetMaxX(icon2.frame);
-    icon3.frame = icon3Frame;
-    [self.view addSubview:icon3];
+    MOOMaskedIconView *eye = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Eye.pdf"];
+    configureIcon(eye);
+    positionIconAtIndex(eye, 0);
+    [grayBar addSubview:eye];
     
-    // Highlighted blue PDF with white shadow
-    MOOMaskedIconView *icon4 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf"];
-    icon4.color = [UIColor greenColor];
-    icon4.gradientColors = [NSArray arrayWithObjects:
-                            [UIColor colorWithRed:20.f/255.f green:30.f/255.f blue:40.f/255.f alpha:1.0f],
-                            [UIColor colorWithWhite:0.2f alpha:1.0f],
-                            nil];
-    icon4.highlightedColor = [UIColor colorWithRed:53.f/255.f green:94.f/255.f blue:193.f/255.f alpha:1.0f];
-    icon4.highlighted = YES;
-    icon4.shadowColor = [UIColor whiteColor];
-    icon4.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    MOOMaskedIconView *chatBubble = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Chat Bubble.pdf"];
+    configureIcon(chatBubble);
+    positionIconAtIndex(chatBubble, 1);
+    [grayBar addSubview:chatBubble];
     
-    CGRect icon4Frame = icon4.frame;
-    icon4Frame.origin.x = CGRectGetMaxX(icon3.frame);
-    icon4.frame = icon4Frame;
-    [self.view addSubview:icon4];
+    MOOMaskedIconView *roundedRect = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Rounded Rect.pdf"];
+    configureIcon(roundedRect);
+    positionIconAtIndex(roundedRect, 2);
+    [grayBar addSubview:roundedRect];
     
-    // Toggle highlighting icon4 every 1s
-    _icon4 = icon4;
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(toggleIcon4Highlighted:) userInfo:nil repeats:YES];
+    MOOMaskedIconView *location = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Location.pdf"];
+    configureIcon(location);
+    location.gradientColors = [NSArray arrayWithObjects:
+                               [UIColor colorWithWhite:0.85f alpha:1.0f],
+                               [UIColor colorWithWhite:0.65f alpha:1.0f], nil];
+    positionIconAtIndex(location, 2);
+    [grayBar addSubview:location];
+    
+    MOOMaskedIconView *search = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Search.pdf"];
+    configureIcon(search);
+    positionIconAtIndex(search, 3);
+    [grayBar addSubview:search];
+    
+    MOOMaskedIconView *arrow = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Arrow.pdf"];
+    configureIcon(arrow);
+    positionIconAtIndex(arrow, 4);
+    [grayBar addSubview:arrow];
     
     // Large gray gradient mirrored PDF with overlay
-    CGSize icon5Size = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(icon1.frame));
-    MOOMaskedIconView *icon5OverlayView = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:icon5Size];
+    CGSize beer5Size = CGSizeMake(CGRectGetWidth(self.view.bounds) - 20.0f, CGRectGetHeight(self.view.bounds) - kBarHeight - 20.0f);
+    MOOMaskedIconView *icon5OverlayView = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:beer5Size];
     icon5OverlayView.color = [UIColor whiteColor];
     icon5OverlayView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     UIImage *icon5Overlay = [icon5OverlayView renderImage];
-
-    MOOMaskedIconView *icon5 = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:icon5Size];
-    icon5.backgroundColor = self.view.backgroundColor;
-    icon5.gradientColors = [NSArray arrayWithObjects:
+    
+    MOOMaskedIconView *beer = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:beer5Size];
+    beer.backgroundColor = self.view.backgroundColor;
+    beer.gradientColors = [NSArray arrayWithObjects:
                             [UIColor colorWithWhite:0.8f alpha:1.0f],
                             [UIColor colorWithWhite:0.9f alpha:1.0f], 
                             [UIColor colorWithWhite:0.9f alpha:1.0f], 
                             [UIColor colorWithWhite:0.5f alpha:1.0f], nil];
-    icon5.gradientLocations = [NSArray arrayWithObjects:
+    beer.gradientLocations = [NSArray arrayWithObjects:
                                [NSNumber numberWithFloat:0.0f],
                                [NSNumber numberWithFloat:0.1f], 
                                [NSNumber numberWithFloat:0.9f], 
                                [NSNumber numberWithFloat:1.0f], nil];
-    icon5.overlay = icon5Overlay;
-    icon5.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
+    beer.overlay = icon5Overlay;
     
-    CGRect icon5Frame = icon5.frame;
-    icon5Frame.origin.y = CGRectGetMaxY(icon1.frame);
-    icon5.frame = icon5Frame;
-    [self.view addSubview:icon5];
+    CGRect beerFrame = beer.frame;
+    beerFrame.origin = CGPointMake(10.0f, 10.0f);
+    beer.frame = beerFrame;
+    [self.view addSubview:beer];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
