@@ -42,7 +42,7 @@
         icon.gradientColors = [NSArray arrayWithObjects:
                                [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.34f alpha:1.0f],
                                [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.57f alpha:1.0f], nil];
-        icon.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
+        icon.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
         icon.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
         icon.innerShadowColor = [UIColor colorWithWhite:1.0f alpha:0.6f];
