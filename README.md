@@ -24,16 +24,18 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
 ###Resize a PDF icon and add a subtle gray gradient
 
     MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithPDFNamed:@"icon.pdf" size:CGSizeMake(32.0f, 26.0f)];
-    iconView.gradientStartColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
-    iconView.gradientEndColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
+    iconView.gradientColors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.7f alpha:1.0f],
+                                                        [UIColor colorWithWhite:0.5f alpha:1.0f], nil];
     [self.view addSubview:iconView];
 
-###Add an overlay to a red icon
+###Add an overlay and a shadow to a red icon
 
     UIImage *overlay = [UIImage imageNamed:@"overlay.png"];
     MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithImageNamed:@"icon.png"];
     iconView.color = [UIColor redColor];
     iconView.overlay = overlay;
+    iconView.shadowColor = [UIColor darkGrayColor];
+    iconView.shadowOffset = CGSizeMake(3.0f, 3.0f);
     [self.view addSubview:iconView];
 
 ###Render a PDF icon into a UIButton
@@ -46,9 +48,9 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     [button setImage:[iconView renderHighlightedImage] forState:UIControlStateHighlighted];
     [self.view addSubview:button];
 
-For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project).
+For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project). For the full list of styleable properties, scroll through the [header](https://github.com/peyton/MOOMaskedIconView/blob/master/MOOMaskedIconView.h).
 
-#How to use
+#How to install
 -----------
 
 ###First: Clone into a submodule
@@ -70,7 +72,13 @@ project's file browser.
 *Note:* An options dialog will pop up. If you're using MOOMaskedIconView as a submodule,
 you should uncheck "Copy items into destination group's folder (if needed)."
 
-###Then: Import the header
+###Then: Add Accelerate.framework
+
+![Accelerate.framework process](https://s3.amazonaws.com/peyton.github.com/MOOMaskedIconView/AddAccelerateFramework.png)
+
+With your application's target selected in the navigator, click on the "Build Phases" tab. Under "Link Binary With Libraries," click the "+" button and add `Accelerate.framework`.
+
+###Finally: Import the header
 
     #import "MOOMaskedIconView.h"
 
