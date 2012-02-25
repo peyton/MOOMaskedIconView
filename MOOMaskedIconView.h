@@ -83,6 +83,7 @@ typedef enum {
     
     UIColor *_shadowColor;
     CGSize _shadowOffset;
+    BOOL _clipsShadow;
     UIColor *_innerShadowColor;
     CGSize _innerShadowOffset;
 
@@ -209,6 +210,11 @@ typedef enum {
  * Specifies shadow offset.
  */
 @property (nonatomic, assign) CGSize shadowOffset;
+
+/*
+ * Set to YES if your icon is translucent and you don't want the shadow showing through.
+ */
+@property (nonatomic, assign) BOOL clipsShadow;
 
 /*
  * Specifies inner shadow color.

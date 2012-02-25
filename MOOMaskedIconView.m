@@ -55,6 +55,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 @synthesize shadowColor = _shadowColor;
 @synthesize shadowOffset = _shadowOffset;
+@synthesize clipsShadow = _clipsShadow;
 @synthesize innerShadowColor = _innerShadowColor;
 @synthesize innerShadowOffset = _innerShadowOffset;
 
@@ -179,6 +180,10 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
+    CGImageRef invertedMask = NULL;
+    
+    if (!cblas_sdsdot) // Check for Accelerate framework. See TN2064: https://developer.apple.com/library/mac/#technotes/tn2064/_index.html
+        NSLog(@"Shadows are unavailable. No Accelerate framework.");
     
     // Flip coordinates so images don't draw upside down
     CGContextTranslateCTM(context, 0.0f, CGRectGetHeight(rect));
@@ -194,6 +199,15 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         CGRect shadowRect = imageRect;
         shadowRect.origin = CGPointMake((self.shadowOffset.width < 0.0f) ? -self.shadowOffset.width : 0.0f, (self.shadowOffset.height < 0.0f) ? -self.shadowOffset.height : 0.0f);
         CGContextClipToMask(context, shadowRect, self.mask);
+        
+        // Clip to inverted mask to prevent icon from being filled
+        if (self.clipsShadow)
+        {
+            if (!invertedMask)
+                invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+            CGContextClipToMask(context, imageRect, invertedMask);
+        }
+        
         CGContextFillRect(context, shadowRect);
         CGContextRestoreGState(context);
     }
@@ -202,7 +216,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     CGContextClipToMask(context, imageRect, self.mask);
     
     // Fill icon
-    CGContextSaveGState(context);
+    CGContextSaveGState(context); // Save state before filling
     
     if (self.gradient && !(self.highlighted && self.highlightedColor))
     {
@@ -221,41 +235,27 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         
         CGContextFillRect(context, imageRect);
     }
-
-    CGContextRestoreGState(context);
-    
-    // Perform additional drawing if specified
-    if (self.drawingBlock != NULL)
-    {
-        CGContextSaveGState(context);
-        self.drawingBlock(context);
-        CGContextRestoreGState(context);
-    }
+    CGContextRestoreGState(context); // Restore state after filling
     
     // Draw inner shadow
     if (!CGSizeEqualToSize(self.innerShadowOffset, CGSizeZero))
     {
-        if (cblas_sdsdot) // Check for Accelerate framework. See TN2064: https://developer.apple.com/library/mac/#technotes/tn2064/_index.html
-        {
-            CGContextSaveGState(context);
-            
-            // First invert the mask to be able to draw outside it after clipping
-            CGImageRef invertedImage = CGImageCreateInvertedMaskWithMask(self.mask);
-            
-            // Clip to inverted mask translated by innerShadowOffset
-            CGAffineTransform innerShadowOffsetTransform = CGAffineTransformMakeTranslation(self.innerShadowOffset.width, -self.innerShadowOffset.height);
-            CGContextClipToMask(context, CGRectApplyAffineTransform(imageRect, innerShadowOffsetTransform), invertedImage);
-            CGImageRelease(invertedImage);
-            
-            // Fill inner shadow color
-            [self.innerShadowColor set];
-            CGContextFillRect(context, imageRect);
-            CGContextRestoreGState(context);
-        } else {
-            NSLog(@"Inner shadows are unavailable. Include the Accelerate framework in your project.");
-        }
+        CGContextSaveGState(context);
+        
+        // Clip to inverted mask to prevent main area from being filled
+        if (!invertedMask)
+            invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+        
+        // Clip to inverted mask translated by innerShadowOffset
+        CGAffineTransform innerShadowOffsetTransform = CGAffineTransformMakeTranslation(self.innerShadowOffset.width, -self.innerShadowOffset.height);
+        CGContextClipToMask(context, CGRectApplyAffineTransform(imageRect, innerShadowOffsetTransform), invertedMask);            
+        // Fill inner shadow color
+        [self.innerShadowColor set];
+        CGContextFillRect(context, imageRect);
+        CGContextRestoreGState(context);
     }
-    
+    CGImageRelease(invertedMask); // Done with invertedMask
+        
     // Draw overlay
     if (self.overlay)
     {
@@ -454,7 +454,6 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         _iconViewFlags.hasGradientStartColor = NO;
         return;
     }
-    
     
     [self willChangeValueForKey:@"gradientColors"];
     _gradientColors = (_iconViewFlags.hasGradientEndColor) ? [NSArray arrayWithObjects:gradientStartColor, self.gradientEndColor, nil] : [NSArray arrayWithObject:gradientStartColor];
