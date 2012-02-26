@@ -68,50 +68,7 @@ typedef enum {
     MOOGradientTypeLinear = 0,
 } MOOGradientType;
 
-@interface MOOMaskedIconView : UIView <NSCopying>
-{
-    BOOL _highlighted;
-
-    UIColor *_color;
-    UIColor *_highlightedColor;
-    UIColor *_pattern;
-    CGBlendMode _patternBlendMode;
-    UIImage *_overlay;
-    CGBlendMode _overlayBlendMode;
-    
-    NSArray *_gradientColors;
-    NSArray *_gradientLocations;
-    MOOGradientType _gradientType;
-    
-    UIColor *_shadowColor;
-    CGSize _shadowOffset;
-    BOOL _clipsShadow;
-    UIColor *_innerShadowColor;
-    CGSize _innerShadowOffset;
-    
-    UIColor *_outerGlowColor;
-    CGFloat _outerGlowRadius;
-    UIColor *_innerGlowColor;
-    CGFloat _innerGlowRadius;
-
-    DrawingBlock _drawingBlock;
-    CGImageRef _mask;
-    CGGradientRef _gradient;
-    
-    struct {
-        BOOL hasGradientStartColor: 1;
-        BOOL hasGradientEndColor: 1;
-        BOOL needsGradient: 1;
-    } _iconViewFlags;
-}
-
-/* @name State Properties */
-
-/*
- * Whether the icon view is in its highlighted state.
- */
-@property (nonatomic, assign, getter = isHighlighted) BOOL highlighted;
-
+@protocol MOOMaskedIconViewStyles <NSObject>
 
 /* @name Style Properties */
 
@@ -275,6 +232,52 @@ typedef enum {
  * @see innerGlowColor
  */
 @property (nonatomic, assign) CGFloat innerGlowRadius;
+
+@end
+
+@interface MOOMaskedIconView : UIView <MOOMaskedIconViewStyles, NSCopying>
+{
+    BOOL _highlighted;
+
+    UIColor *_color;
+    UIColor *_highlightedColor;
+    UIColor *_pattern;
+    CGBlendMode _patternBlendMode;
+    UIImage *_overlay;
+    CGBlendMode _overlayBlendMode;
+    
+    NSArray *_gradientColors;
+    NSArray *_gradientLocations;
+    MOOGradientType _gradientType;
+    
+    UIColor *_shadowColor;
+    CGSize _shadowOffset;
+    BOOL _clipsShadow;
+    UIColor *_innerShadowColor;
+    CGSize _innerShadowOffset;
+    
+    UIColor *_outerGlowColor;
+    CGFloat _outerGlowRadius;
+    UIColor *_innerGlowColor;
+    CGFloat _innerGlowRadius;
+
+    DrawingBlock _drawingBlock;
+    CGImageRef _mask;
+    CGGradientRef _gradient;
+    
+    struct {
+        BOOL hasGradientStartColor: 1;
+        BOOL hasGradientEndColor: 1;
+        BOOL needsGradient: 1;
+    } _iconViewFlags;
+}
+
+/* @name State Properties */
+
+/*
+ * Whether the icon view is in its highlighted state.
+ */
+@property (nonatomic, assign, getter = isHighlighted) BOOL highlighted;
 
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;
