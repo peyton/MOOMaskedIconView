@@ -12,20 +12,20 @@
 
 
 // Keys for KVO
-static NSString * const MOOMaskedIconViewHighlightedKey = @"highlighted";
-static NSString * const MOOMaskedIconViewMaskKey = @"mask";
-static NSString * const MOOMaskedIconViewOverlayKey = @"overlay";
+static NSString * const MOOHighlightedKeyPath = @"highlighted";
+static NSString * const MOOMaskKeyPath = @"mask";
+static NSString * const MOOOverlayKeyPath = @"overlay";
 
-static NSString * const MOOMaskedIconViewGradientStartColorKey = @"gradientStartColor";
-static NSString * const MOOMaskedIconViewGradientEndColorKey = @"gradientEndColor";
-static NSString * const MOOMaskedIconViewGradientColorsKey = @"gradientColors";
-static NSString * const MOOMaskedIconViewGradientLocationsKey = @"gradientLocations";
-static NSString * const MOOMaskedIconViewGradientTypeKey = @"gradientType";
+static NSString * const MOOGradientStartColorKeyPath = @"gradientStartColor";
+static NSString * const MOOGradientEndColorKeyPath = @"gradientEndColor";
+static NSString * const MOOGradientColorsKeyPath = @"gradientColors";
+static NSString * const MOOGradientLocationsKeyPath = @"gradientLocations";
+static NSString * const MOOGradientTypeKeyPath = @"gradientType";
 
-static NSString * const MOOMaskedIconViewShadowColor = @"shadowColor";
-static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
+static NSString * const MOOShadowColorKeyPath = @"shadowColor";
+static NSString * const MOOShadowOffsetKeyPath = @"shadowOffset";
 
-static NSString * const MOOMaskedIconViewOuterGlowRadius = @"outerGlowRadius";
+static NSString * const MOOOuterGlowRadiusKeyPath = @"outerGlowRadius";
 
 // Helper functions
 static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
@@ -85,17 +85,17 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     self.overlayBlendMode = kCGBlendModeNormal;
     
     // Set up observing
-    [self addObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewMaskKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewOverlayKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewShadowColor options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewShadowOffset options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskedIconViewOuterGlowRadius options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOOverlayKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientStartColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientEndColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientColorsKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientLocationsKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientTypeKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOShadowColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:NULL];
     
     return self;
 }
@@ -163,17 +163,17 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)dealloc;
 {
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewHighlightedKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewMaskKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewOverlayKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientStartColorKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientEndColorKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientColorsKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientLocationsKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowColor];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowOffset];
-    [self removeObserver:self forKeyPath:MOOMaskedIconViewOuterGlowRadius];
+    [self removeObserver:self forKeyPath:MOOHighlightedKeyPath];
+    [self removeObserver:self forKeyPath:MOOMaskKeyPath];
+    [self removeObserver:self forKeyPath:MOOOverlayKeyPath];
+    [self removeObserver:self forKeyPath:MOOGradientStartColorKeyPath];
+    [self removeObserver:self forKeyPath:MOOGradientEndColorKeyPath];
+    [self removeObserver:self forKeyPath:MOOGradientColorsKeyPath];
+    [self removeObserver:self forKeyPath:MOOGradientLocationsKeyPath];
+    [self removeObserver:self forKeyPath:MOOGradientTypeKeyPath];
+    [self removeObserver:self forKeyPath:MOOShadowColorKeyPath];
+    [self removeObserver:self forKeyPath:MOOShadowOffsetKeyPath];
+    [self removeObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath];
 
     self.color = nil;
     self.highlightedColor = nil;
@@ -619,28 +619,28 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:MOOMaskedIconViewHighlightedKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewMaskKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewOverlayKey])
+    if ([keyPath isEqualToString:MOOHighlightedKeyPath] ||
+        [keyPath isEqualToString:MOOMaskKeyPath] ||
+        [keyPath isEqualToString:MOOOverlayKeyPath])
     {
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:MOOMaskedIconViewShadowColor] ||
-        [keyPath isEqualToString:MOOMaskedIconViewShadowOffset] ||
-        [keyPath isEqualToString:MOOMaskedIconViewOuterGlowRadius])
+    if ([keyPath isEqualToString:MOOShadowColorKeyPath] ||
+        [keyPath isEqualToString:MOOShadowOffsetKeyPath] ||
+        [keyPath isEqualToString:MOOOuterGlowRadiusKeyPath])
     {
         [self sizeToFit];
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:MOOMaskedIconViewGradientStartColorKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewGradientEndColorKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewGradientColorsKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewGradientLocationsKey] ||
-        [keyPath isEqualToString:MOOMaskedIconViewGradientTypeKey])
+    if ([keyPath isEqualToString:MOOGradientStartColorKeyPath] ||
+        [keyPath isEqualToString:MOOGradientEndColorKeyPath] ||
+        [keyPath isEqualToString:MOOGradientColorsKeyPath] ||
+        [keyPath isEqualToString:MOOGradientLocationsKeyPath] ||
+        [keyPath isEqualToString:MOOGradientTypeKeyPath])
     {
         [self _setNeedsGradient];
         [self setNeedsDisplay];
