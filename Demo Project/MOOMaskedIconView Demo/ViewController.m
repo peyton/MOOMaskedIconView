@@ -72,10 +72,18 @@
     [grayBar addSubview:roundedRect];
     
     MOOMaskedIconView *location = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Location.pdf"];
-    configureIcon(location);
+    location.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.31f brightness:1.0f alpha:0.50f];
+    location.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    location.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.37f brightness:1.0f alpha:0.33];
+    location.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
+    
     location.gradientColors = [NSArray arrayWithObjects:
-                               [UIColor colorWithWhite:0.85f alpha:1.0f],
-                               [UIColor colorWithWhite:0.65f alpha:1.0f], nil];
+                              [UIColor colorWithHue:237.0f/360.0f saturation:.83f brightness:.74f alpha:1.0f],
+                              [UIColor colorWithHue:205.0f/360.0f saturation:.71f brightness:.96f alpha:1.0f], nil];
+    location.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.93f alpha:0.9f];
+    location.outerGlowRadius = 15.0f;
+    location.innerGlowColor = [UIColor colorWithRed:0.8f green:0.9f blue:1.0f alpha:0.8f];
+    location.innerGlowRadius = 4.0f;
     positionIconAtIndex(location, 2);
     [grayBar addSubview:location];
     

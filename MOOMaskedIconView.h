@@ -86,6 +86,11 @@ typedef enum {
     BOOL _clipsShadow;
     UIColor *_innerShadowColor;
     CGSize _innerShadowOffset;
+    
+    UIColor *_outerGlowColor;
+    CGFloat _outerGlowRadius;
+    UIColor *_innerGlowColor;
+    CGFloat _innerGlowRadius;
 
     DrawingBlock _drawingBlock;
     CGImageRef _mask;
@@ -94,6 +99,7 @@ typedef enum {
     struct {
         BOOL hasGradientStartColor: 1;
         BOOL hasGradientEndColor: 1;
+        BOOL needsGradient: 1;
     } _iconViewFlags;
 }
 
@@ -199,7 +205,7 @@ typedef enum {
  */
 @property (nonatomic, assign) MOOGradientType gradientType;
 
-/* @name Shadow properties */
+/* @name Shadow Properties */
 
 /*
  * Specifies shadow color.
@@ -225,6 +231,23 @@ typedef enum {
  * Specifies inner shadow offset.
  */
 @property (nonatomic, assign) CGSize innerShadowOffset;
+
+/* @name Glow Properties */
+
+/*
+ * Specifies outer glow color.
+ *
+ * Usually requires a higher opacity or greater radius than its Photoshop counterpart to achieve the same effect.
+ * 
+ * @see outerGlowRadius.
+ */
+@property (nonatomic, strong) UIColor *outerGlowColor;
+
+@property (nonatomic, assign) CGFloat outerGlowRadius;
+
+@property (nonatomic, strong) UIColor *innerGlowColor;
+
+@property (nonatomic, assign) CGFloat innerGlowRadius;
 
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;

@@ -25,6 +25,8 @@ static NSString * const MOOMaskedIconViewGradientTypeKey = @"gradientType";
 static NSString * const MOOMaskedIconViewShadowColor = @"shadowColor";
 static NSString * const MOOMaskedIconViewShadowOffset = @"shadowOffset";
 
+static NSString * const MOOMaskedIconViewOuterGlowRadius = @"outerGlowRadius";
+
 // Helper functions
 static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
@@ -35,6 +37,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 + (NSURL *)_resourceURL:(NSString *)resourceName;
+- (void)_setNeedsGradient;
 - (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
 
 @end
@@ -58,6 +61,11 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 @synthesize clipsShadow = _clipsShadow;
 @synthesize innerShadowColor = _innerShadowColor;
 @synthesize innerShadowOffset = _innerShadowOffset;
+
+@synthesize outerGlowColor = _outerGlowColor;
+@synthesize outerGlowRadius = _outerGlowRadius;
+@synthesize innerGlowColor = _innerGlowColor;
+@synthesize innerGlowRadius = _innerGlowRadius;
 
 @synthesize drawingBlock = _drawingBlock;
 @synthesize mask = _mask;
@@ -84,6 +92,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     [self addObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewShadowColor options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOMaskedIconViewShadowOffset options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskedIconViewOuterGlowRadius options:0 context:NULL];
     
     return self;
 }
@@ -161,6 +170,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     [self removeObserver:self forKeyPath:MOOMaskedIconViewGradientTypeKey];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowColor];
     [self removeObserver:self forKeyPath:MOOMaskedIconViewShadowOffset];
+    [self removeObserver:self forKeyPath:MOOMaskedIconViewOuterGlowRadius];
 
     self.color = nil;
     self.highlightedColor = nil;
@@ -179,25 +189,64 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)drawRect:(CGRect)rect
 {
+    // Generate gradient if needed
+    if (_iconViewFlags.needsGradient)
+    {
+        [self _updateGradientWithColors:self.gradientColors locations:self.gradientLocations forType:self.gradientType];
+        _iconViewFlags.needsGradient = NO;
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGImageRef invertedMask = NULL;
-    
-    if (!cblas_sdsdot) // Check for Accelerate framework. See TN2064: https://developer.apple.com/library/mac/#technotes/tn2064/_index.html
-        NSLog(@"Shadows are unavailable. No Accelerate framework.");
     
     // Flip coordinates so images don't draw upside down
     CGContextTranslateCTM(context, 0.0f, CGRectGetHeight(rect));
     CGContextScaleCTM(context, 1.0f, -1.0f);
+
+    CGRect imageRect = CGRectMake(0.0f, 0.0f, CGImageGetWidth(self.mask) / [UIScreen mainScreen].scale, CGImageGetHeight(self.mask) / [UIScreen mainScreen].scale);
+    CGRect shadowRect = imageRect;
+    shadowRect.origin = CGPointMake(self.shadowOffset.width, -self.shadowOffset.height);
+        
+    CGFloat dOuterGlow = (self.outerGlowRadius > 0.0f) ? -self.outerGlowRadius : 0.0f;
     
-    CGRect imageRect = CGRectMake((self.shadowOffset.width > 0.0f) ? self.shadowOffset.width : 0.0f, (self.shadowOffset.height > 0.0f) ? self.shadowOffset.height : 0.0f, CGImageGetWidth(self.mask) / [UIScreen mainScreen].scale, CGImageGetHeight(self.mask) / [UIScreen mainScreen].scale);
+    CGRect unionRect = CGRectUnion(CGRectInset(imageRect, dOuterGlow, dOuterGlow), shadowRect);
+    CGAffineTransform zeroOriginTransform = CGAffineTransformMakeTranslation(-CGRectGetMinX(unionRect), -CGRectGetMinY(unionRect));
+    
+    imageRect = CGRectApplyAffineTransform(imageRect, zeroOriginTransform);
+    shadowRect = CGRectApplyAffineTransform(shadowRect, zeroOriginTransform);
+    
+    // Draw outer glow
+    if (self.outerGlowRadius > 0.0f)
+    {
+        CGContextSaveGState(context);
+        
+        CGContextSetShadowWithColor(context, CGSizeZero, self.outerGlowRadius, (self.outerGlowColor) ? self.outerGlowColor.CGColor : [UIColor blackColor].CGColor);
+        
+        CGContextBeginTransparencyLayer(context, NULL);
+        CGContextClipToMask(context, imageRect, self.mask);
+
+        UIColor *fillColor = [UIColor blackColor];
+        if (self.outerGlowColor)
+        {
+            CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.outerGlowColor.CGColor, 1.0f);
+            fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
+            CGColorRelease(outerGlowColorFullOpacity);
+        }
+        
+        [fillColor set];
+        
+        CGContextFillRect(context, imageRect);
+        CGContextEndTransparencyLayer(context);
+        
+        CGContextRestoreGState(context);
+    }
     
     // Draw shadow
     if (!CGSizeEqualToSize(self.shadowOffset, CGSizeZero))
     {
         CGContextSaveGState(context);
         [((self.shadowColor) ? self.shadowColor : [UIColor blackColor]) set];
-        CGRect shadowRect = imageRect;
-        shadowRect.origin = CGPointMake((self.shadowOffset.width < 0.0f) ? -self.shadowOffset.width : 0.0f, (self.shadowOffset.height < 0.0f) ? -self.shadowOffset.height : 0.0f);
+
         CGContextClipToMask(context, shadowRect, self.mask);
         
         // Clip to inverted mask to prevent icon from being filled
@@ -212,6 +261,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         CGContextRestoreGState(context);
     }
     
+    CGContextSaveGState(context); // Push state before clipping to icon
     // Clip drawing to icon image
     CGContextClipToMask(context, imageRect, self.mask);
     
@@ -223,8 +273,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         // Draw gradient
         
         // Because the context is flipped, the start and end points must be swapped
-        CGPoint startPoint = CGPointMake(CGRectGetMinX(self.bounds), CGRectGetMinY(self.bounds) + CGRectGetHeight(self.bounds));
-        CGPoint endPoint = CGPointMake(CGRectGetMinX(self.bounds), CGRectGetMinY(self.bounds));
+        CGPoint startPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect) + CGRectGetHeight(imageRect));
+        CGPoint endPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect));
         CGContextDrawLinearGradient(context, self.gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
     } else {
         // Draw solid color
@@ -237,6 +287,47 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     }
     CGContextRestoreGState(context); // Restore state after filling
     
+    CGContextRestoreGState(context); // Pop state clipping to icon
+    
+    // Draw inner glow
+    if (self.innerGlowRadius > 0.0f)
+    {
+        CGContextSaveGState(context);
+        
+        // Clip to inverted mask
+        if (!invertedMask)
+            invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+        
+        CGContextClipToRect(context, imageRect);
+        // Transparency layers create a drawing-context-within-a-drawing-context, allowing clearing without affecting what's been previously drawn.
+        CGContextBeginTransparencyLayer(context, NULL);
+        CGContextSetShadowWithColor(context, CGSizeZero, self.innerGlowRadius, (self.innerGlowColor) ? self.innerGlowColor.CGColor : [UIColor blackColor].CGColor);
+        
+        // Begin another transparency layer for the actual glow.
+        CGContextBeginTransparencyLayer(context, NULL);
+        CGContextClipToMask(context, imageRect, invertedMask);
+
+        UIColor *fillColor = [UIColor blackColor];
+        if (self.innerGlowColor)
+        {
+            CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.innerGlowColor.CGColor, 1.0f);
+            fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
+            CGColorRelease(outerGlowColorFullOpacity);
+        }
+        
+        [fillColor set];
+
+        CGContextFillRect(context, self.bounds);
+        CGContextEndTransparencyLayer(context); // End glow layer
+        
+        CGContextClipToMask(context, imageRect, invertedMask); // Reclip before clearing
+        CGContextClearRect(context, imageRect); // Clear color drawn
+        CGContextEndTransparencyLayer(context); // End makeshift context-within-a-context.
+        
+        CGContextRestoreGState(context);
+    }
+
+    CGContextClipToMask(context, imageRect, self.mask);
     // Draw inner shadow
     if (!CGSizeEqualToSize(self.innerShadowOffset, CGSizeZero))
     {
@@ -269,7 +360,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 - (CGSize)sizeThatFits:(CGSize)size;
 {
     const CGFloat scale = [UIScreen mainScreen].scale;
-    return CGSizeMake(CGImageGetWidth(self.mask) / scale + fabsf(self.shadowOffset.width), CGImageGetHeight(self.mask) / scale + fabsf(self.shadowOffset.height));
+    CGSize newSize = CGSizeMake(CGImageGetWidth(self.mask) / scale + MAX(fabsf(self.shadowOffset.width), 2.0f * self.outerGlowRadius), CGImageGetHeight(self.mask) / scale + MAX(fabsf(self.shadowOffset.height), 2.0f * self.outerGlowRadius));
+    return newSize;
 }
 
 #pragma mark - Configuration methods
@@ -520,7 +612,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     }
     
     if ([keyPath isEqualToString:MOOMaskedIconViewShadowColor] ||
-        [keyPath isEqualToString:MOOMaskedIconViewShadowOffset])
+        [keyPath isEqualToString:MOOMaskedIconViewShadowOffset] ||
+        [keyPath isEqualToString:MOOMaskedIconViewOuterGlowRadius])
     {
         [self sizeToFit];
         [self setNeedsDisplay];
@@ -533,7 +626,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         [keyPath isEqualToString:MOOMaskedIconViewGradientLocationsKey] ||
         [keyPath isEqualToString:MOOMaskedIconViewGradientTypeKey])
     {
-        [self _updateGradientWithColors:self.gradientColors locations:self.gradientLocations forType:self.gradientType];
+        [self _setNeedsGradient];
+        [self setNeedsDisplay];
         return;
     }
 }
@@ -600,6 +694,11 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     return [NSURL fileURLWithPath:path];
 }
 
+- (void)_setNeedsGradient;
+{
+    _iconViewFlags.needsGradient = YES;
+}
+
 - (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
 {
     if (!colors)
@@ -642,9 +741,6 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     CFRelease(colorsCFArray);
     self.gradient = gradient;
     CGGradientRelease(gradient);
-    
-    // Refresh view
-    [self setNeedsDisplay];
 }
 
 @end
@@ -662,7 +758,12 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
 {
     if (!sourceMask)
         return NULL;
-        
+    
+    if (!CGImageIsMask(sourceMask))
+    {
+        NSLog(@"Attempting to invert non-mask: %@", sourceMask);
+    }
+    
     /// Create an ARGB bitmap context
 	const size_t width = CGImageGetWidth(sourceMask);
 	const size_t height = CGImageGetHeight(sourceMask);
@@ -679,31 +780,17 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
 	const size_t pixelsCount = width * height;
 	float* dataAsFloat = (float*)malloc(sizeof(float) * pixelsCount);
     CGFloat min = 0.0f, max = 255.0f;
-	UInt8* dataRed = data + 1;
-	UInt8* dataGreen = data + 2;
-	UInt8* dataBlue = data + 3;
+	UInt8* dataGray = data + 1;
     
 	/// vDSP_vsmsa() = multiply then add
 	/// slightly faster than the couple vDSP_vneg() & vDSP_vsadd()
 	/// Probably because there are 3 function calls less
     
-	/// Calculate red components
-	vDSP_vfltu8(dataRed, 4, dataAsFloat, 1, pixelsCount);
+	/// Calculate gray components
+	vDSP_vfltu8(dataGray, 2, dataAsFloat, 1, pixelsCount);
 	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
 	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vfixu8(dataAsFloat, 1, dataRed, 4, pixelsCount);
-    
-	/// Calculate green components
-	vDSP_vfltu8(dataGreen, 4, dataAsFloat, 1, pixelsCount);
-	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vfixu8(dataAsFloat, 1, dataGreen, 4, pixelsCount);
-    
-	/// Calculate blue components
-	vDSP_vfltu8(dataBlue, 4, dataAsFloat, 1, pixelsCount);
-	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vfixu8(dataAsFloat, 1, dataBlue, 4, pixelsCount);
+	vDSP_vfixu8(dataAsFloat, 1, dataGray, 2, pixelsCount);
     
     // Create new image in the gray color space, since RGB images aren't valid masks
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
