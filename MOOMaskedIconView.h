@@ -74,6 +74,8 @@ typedef enum {
 
     UIColor *_color;
     UIColor *_highlightedColor;
+    UIColor *_pattern;
+    CGBlendMode _patternBlendMode;
     UIImage *_overlay;
     CGBlendMode _overlayBlendMode;
     
@@ -134,6 +136,16 @@ typedef enum {
 @property (nonatomic, strong) UIColor *highlightedColor;
 
 /*
+ * A pattern composited over the icon. Created with UIColor's colorWithPatternImage:.
+ */
+@property (nonatomic, strong) UIColor *pattern;
+
+/*
+ * The blend mode under which the pattern is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".
+ */
+@property (nonatomic, assign) CGBlendMode patternBlendMode;
+
+/*
  * An image composited over the icon after drawing's done.
  *
  * @see overlayBlendMode
@@ -141,7 +153,7 @@ typedef enum {
 @property (nonatomic, strong) UIImage *overlay;
 
 /*
- * The blend mode under which the overlay is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode"
+ * The blend mode under which the overlay is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".
  *
  * @see overlay
  */

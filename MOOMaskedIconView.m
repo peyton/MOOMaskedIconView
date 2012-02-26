@@ -47,6 +47,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 @synthesize color = _color;
 @synthesize highlightedColor = _highlightedColor;
+@synthesize pattern = _pattern;
+@synthesize patternBlendMode = _patternBlendMode;
 @synthesize overlay = _overlay;
 @synthesize overlayBlendMode = _overlayBlendMode;
 
@@ -79,6 +81,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
     self.color = [UIColor blackColor];
+    self.patternBlendMode = kCGBlendModeNormal;
     self.overlayBlendMode = kCGBlendModeNormal;
     
     // Set up observing
@@ -174,13 +177,17 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
     self.color = nil;
     self.highlightedColor = nil;
-    self.shadowColor = nil;
-    self.gradientColors = nil;
-    self.gradientLocations = nil;
+    self.pattern = nil;
     self.overlay = nil;
     self.drawingBlock = NULL;
     self.mask = NULL;
     self.gradient = NULL;
+    self.gradientColors = nil;
+    self.gradientLocations = nil;
+    self.shadowColor = nil;
+    self.innerShadowColor = nil;
+    self.outerGlowColor = nil;
+    self.innerGlowColor = nil;
     
     AH_SUPER_DEALLOC;
 }
@@ -286,6 +293,15 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         CGContextFillRect(context, imageRect);
     }
     CGContextRestoreGState(context); // Restore state after filling
+    
+    if (self.pattern)
+    {
+        CGContextSaveGState(context);
+        CGContextSetBlendMode(context, self.patternBlendMode);
+        [self.pattern set];
+        CGContextFillRect(context, imageRect);
+        CGContextRestoreGState(context);
+    }
     
     CGContextRestoreGState(context); // Pop state clipping to icon
     
