@@ -237,16 +237,31 @@ typedef enum {
 /*
  * Specifies outer glow color.
  *
- * Usually requires a higher opacity or greater radius than its Photoshop counterpart to achieve the same effect.
+ * Note: Generally requires a higher opacity or greater radius than its Photoshop counterpart to achieve the same effect.
  * 
  * @see outerGlowRadius.
  */
 @property (nonatomic, strong) UIColor *outerGlowColor;
 
+/*
+ * Specifies the total displacement of the outer glow in points.
+ * 
+ * @see outerGlowColor
+ */
 @property (nonatomic, assign) CGFloat outerGlowRadius;
 
+/*
+ * Specifies inner glow color.
+ * 
+ * @see innerGlowRadius
+ */
 @property (nonatomic, strong) UIColor *innerGlowColor;
 
+/*
+ * Specifies the total displacement of the inner glow in points.
+ * 
+ * @see innerGlowColor
+ */
 @property (nonatomic, assign) CGFloat innerGlowRadius;
 
 /* @name Initialization methods */
