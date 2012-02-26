@@ -71,10 +71,12 @@
     positionIconAtIndex(roundedRect, 2);
     [grayBar addSubview:roundedRect];
     
+    
+    
     MOOMaskedIconView *location = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Location.pdf"];
-    location.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.31f brightness:1.0f alpha:0.50f];
+    location.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.91f brightness:1.0f alpha:0.70f];
     location.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    location.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.37f brightness:1.0f alpha:0.33];
+    location.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.87f brightness:1.0f alpha:0.93];
     location.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
     
     location.gradientColors = [NSArray arrayWithObjects:
@@ -83,8 +85,13 @@
     location.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.93f alpha:0.9f];
     location.outerGlowRadius = 15.0f;
     location.innerGlowColor = [UIColor colorWithRed:0.8f green:0.9f blue:1.0f alpha:0.8f];
-    location.innerGlowRadius = 4.0f;
+    location.innerGlowRadius = 1.0f;
     positionIconAtIndex(location, 2);
+    
+    MOOMaskedIconView *locationOverlay = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:location.frame.size];
+    locationOverlay.color = [UIColor colorWithWhite:1.0f alpha:0.7f];
+    location.overlay = [locationOverlay renderImage];
+    
     [grayBar addSubview:location];
     
     MOOMaskedIconView *search = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Search.pdf"];
