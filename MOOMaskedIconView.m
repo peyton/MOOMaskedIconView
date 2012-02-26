@@ -786,12 +786,12 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
     
 	/// Grab the image raw data
     CFDataRef dataRef = CGDataProviderCopyData(CGImageGetDataProvider(sourceMask));
-	UInt8* data = (UInt8*)CFDataGetBytePtr(dataRef);
-	if (!data)
+    if (!dataRef)
 	{
 		NSLog(@"Image to be inverted contains no data");
         return NULL;
 	}
+	UInt8* data = (UInt8*)CFDataGetBytePtr(dataRef);
     
 	const size_t pixelsCount = width * height;
 	float* dataAsFloat = (float*)malloc(sizeof(float) * pixelsCount);

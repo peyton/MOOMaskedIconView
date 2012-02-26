@@ -82,7 +82,7 @@
     location.gradientColors = [NSArray arrayWithObjects:
                               [UIColor colorWithHue:237.0f/360.0f saturation:.83f brightness:.74f alpha:1.0f],
                               [UIColor colorWithHue:205.0f/360.0f saturation:.71f brightness:.96f alpha:1.0f], nil];
-    location.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.93f alpha:0.9f];
+    location.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.43f alpha:0.9f];
     location.outerGlowRadius = 15.0f;
     location.innerGlowColor = [UIColor colorWithRed:0.8f green:0.9f blue:1.0f alpha:0.8f];
     location.innerGlowRadius = 1.0f;
