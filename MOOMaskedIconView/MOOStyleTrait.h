@@ -51,8 +51,6 @@
 
 @end
 
-MOOStyleTrait *MOOStyleTraitDefault;
-
 /* @name Helper functions */
 
 /*

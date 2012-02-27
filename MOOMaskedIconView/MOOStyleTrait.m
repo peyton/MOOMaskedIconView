@@ -106,16 +106,6 @@
     return newTrait;
 }
 
-#pragma mark - Class methods
-
-+ (void)initialize;
-{
-    MOOStyleTraitDefault = [[MOOStyleTrait alloc] init];
-    MOOStyleTraitDefault.color = [UIColor blackColor];
-    MOOStyleTraitDefault.patternBlendMode = kCGBlendModeNormal;
-    MOOStyleTraitDefault.overlayBlendMode = kCGBlendModeNormal;
-}
-
 @end
 
 #pragma mark - Helper functions

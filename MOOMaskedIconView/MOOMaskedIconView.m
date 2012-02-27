@@ -87,7 +87,6 @@ NSCache *_defaultMaskCache;
     
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
-    [self mixInTrait:MOOStyleTraitDefault];
     
     // Set up observing
     [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
