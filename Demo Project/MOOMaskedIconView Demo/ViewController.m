@@ -70,6 +70,7 @@
         CGFloat stepSize = CGRectGetWidth(self.view.bounds) / 5.0f;
         
         icon.layer.position = CGPointMake(stepSize * (index + 0.5f), CGRectGetHeight(grayBar.bounds) / 2.0f);
+        icon.frame = CGRectIntegral(icon.frame);
     };
     
     MOOMaskedIconView *eye = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Eye.pdf"];
