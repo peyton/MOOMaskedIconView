@@ -10,6 +10,7 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "MOOCGImageWrapper.h"
 #import "MOOStyleTrait.h"
 
 // Keys for KVO
@@ -29,15 +30,20 @@ static NSString * const MOOShadowOffsetKeyPath = @"shadowOffset";
 static NSString * const MOOOuterGlowRadiusKeyPath = @"outerGlowRadius";
 
 // Helper functions
+static NSURL *NSURLWithResourceNamed(NSString *resourceName, NSBundle *bundle);
 static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
+
+// Caches
+NSCache *_defaultMaskCache;
 
 @interface MOOMaskedIconView ()
 
 @property (nonatomic, assign) CGImageRef mask;
 @property (nonatomic, assign) CGGradientRef gradient;
 
+- (id)_initWithMask:(CGImageRef)mask;
+
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
-+ (NSURL *)_resourceURL:(NSString *)resourceName;
 - (void)_setNeedsGradient;
 - (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
 
@@ -160,6 +166,16 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     return self;
 }
 
+- (id)_initWithMask:(CGImageRef)mask;
+{
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    self.mask = mask;
+    
+    return self;
+}
+
 - (void)dealloc;
 {
     [self removeObserver:self forKeyPath:MOOHighlightedKeyPath];
@@ -195,42 +211,42 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 + (MOOMaskedIconView *)iconWithImage:(UIImage *)image;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImage:image]);
+    return AH_AUTORELEASE([[self alloc] initWithImage:image]);
 }
 
 + (MOOMaskedIconView *)iconWithImage:(UIImage *)image size:(CGSize)size;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImage:image size:size]);
+    return AH_AUTORELEASE([[self alloc] initWithImage:image size:size]);
 }
 
 + (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImageNamed:imageName]);
+    return AH_AUTORELEASE([[self alloc] initWithImageNamed:imageName]);
 }
 
 + (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName size:(CGSize)size;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImageNamed:imageName size:size]);
+    return AH_AUTORELEASE([[self alloc] initWithImageNamed:imageName size:size]);
 }
 
 + (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithPDFNamed:pdfName]);
+    return AH_AUTORELEASE([[self alloc] initWithPDFNamed:pdfName]);
 }
 
 + (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithPDFNamed:pdfName size:size]);
+    return AH_AUTORELEASE([[self alloc] initWithPDFNamed:pdfName size:size]);
 }
 
 + (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithResourceNamed:resourceName]);
+    return AH_AUTORELEASE([[self alloc] initWithResourceNamed:resourceName]);
 }
 
 + (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 {
-    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithResourceNamed:resourceName size:size]);
+    return AH_AUTORELEASE([[self alloc] initWithResourceNamed:resourceName size:size]);
 }
 
 #pragma mark - Drawing and layout methods
@@ -430,63 +446,29 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)configureWithImage:(UIImage *)image size:(CGSize)size;
 {
-    // If no image is passed, clear mask
-    if (image == nil)
-    {
-        self.mask = NULL;
-        return;
-    }
-    
-    // Variables for image creation
-    CGImageRef imageRef = CGImageRetain(image.CGImage);
-    CGSize imageSize = CGSizeZero;
-    size_t bytesPerRow = 0;
-    const CGFloat scale = [UIScreen mainScreen].scale;
-    
-    if (size.width > 0.0f && size.height > 0.0f) 
-    {
-        // Custom size
-        imageSize = size;
-        imageSize.width *= scale;
-        imageSize.height *= scale;
-        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
-        bytesPerRow = imageSize.width * CGColorSpaceGetNumberOfComponents(colorspace);
-        
-        // Create bitmap context
-        CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), bytesPerRow, colorspace, kCGImageAlphaNone);
-        CGColorSpaceRelease(colorspace);
-
-        CGContextSetInterpolationQuality(context, kCGInterpolationLow);
-        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, imageSize.width, imageSize.height), imageRef);
-        CGImageRelease(imageRef);
-        imageRef = CGBitmapContextCreateImage(context);
-        CGContextRelease(context);
-    }
-    else 
-    {
-        // Default size
-        imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
-        bytesPerRow = CGImageGetBytesPerRow(imageRef);
-    }
-    
-    // Create mask
-    CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(imageRef), CGImageGetBitsPerPixel(imageRef), bytesPerRow, CGImageGetDataProvider(imageRef), NULL, NO);
-    CGImageRelease(imageRef);
-    self.mask = maskRef;
-    CGImageRelease(maskRef);
+    CGImageRef mask = CGImageCreateMaskFromCGImage(image.CGImage, size);
+    self.mask = mask;
+    CGImageRelease(mask);
 }
 
 - (void)configureWithImageNamed:(NSString *)imageName;
 {
-    return [self configureWithImageNamed:imageName size:CGSizeZero];
+    [self configureWithImageNamed:imageName size:CGSizeZero];
 }
 
 - (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
 {
-    NSURL *imageURL = [MOOMaskedIconView _resourceURL:imageName];
-    UIImage *image = [UIImage imageWithContentsOfFile:[imageURL relativePath]];
-
-    [self configureWithImage:image size:size];
+    // Fetch mask if it exists
+    NSString *key = [imageName stringByAppendingString:NSStringFromCGSize(size)];
+    CGImageRef mask = CGImageRetain(((MOOCGImageWrapper *)[[[self class] defaultMaskCache] objectForKey:key]).CGImage);
+    if (!mask)
+        CGImageCreateMaskFromImageNamed(imageName, size);
+    self.mask = mask;
+    
+    // Cache mask
+    if ([[self class] shouldCacheMaskForKey:key])
+        [[[self class] defaultMaskCache] setObject:[MOOCGImageWrapper wrapperWithCGImage:mask] forKey:key];
+    CGImageRelease(mask);
 }
 
 - (void)configureWithPDFNamed:(NSString *)pdfName;
@@ -496,49 +478,18 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
 {
-    if (!pdfName)
-        return;
+    // Fetch mask if it exists
+    NSString *key = [pdfName stringByAppendingString:NSStringFromCGSize(size)];
+    CGImageRef mask = CGImageRetain(((MOOCGImageWrapper *)[[[self class] defaultMaskCache] objectForKey:key]).CGImage);
+    if (!mask)
+        mask = CGImageCreateMaskFromPDFNamed(pdfName, size);
     
-    // Grab pdf
-    NSURL *pdfURL = [MOOMaskedIconView _resourceURL:pdfName];
-    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((__bridge CFURLRef)pdfURL);
-    CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
+    self.mask = mask;
     
-    if (firstPage == NULL)
-    {
-        CGPDFDocumentRelease(pdf);
-        return;
-    }
-    
-    // Calculate metrics
-    const CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
-    const CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
-    
-    // Set up context
-    UIGraphicsBeginImageContextWithOptions(pdfSize, YES, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Draw background
-    [[UIColor whiteColor] set];
-    CGContextFillRect(context, CGRectMake(0.0f, 0.0f, pdfSize.width, pdfSize.height));
-    
-    // Scale and flip context right-side-up
-    CGContextScaleCTM(context, pdfSize.width / mediaRect.size.width, -pdfSize.height / mediaRect.size.height);
-    CGContextTranslateCTM(context, 0.0f, -mediaRect.size.height);
-    
-    // Draw pdf
-    CGContextDrawPDFPage(context, firstPage);
-    CGPDFDocumentRelease(pdf);
-
-    // Create image to mask
-    CGImageRef imageToMask = CGBitmapContextCreateImage(context);
-    UIGraphicsEndImageContext();
-    
-    // Create image mask
-    CGImageRef maskRef = CGImageMaskCreate(CGImageGetWidth(imageToMask), CGImageGetHeight(imageToMask), CGImageGetBitsPerComponent(imageToMask), CGImageGetBitsPerPixel(imageToMask), CGImageGetBytesPerRow(imageToMask), CGImageGetDataProvider(imageToMask), NULL, NO);
-    CGImageRelease(imageToMask);
-    self.mask = maskRef;
-    CGImageRelease(maskRef);
+    // Cache mask
+    if ([[self class] shouldCacheMaskForKey:key])
+        [[[self class] defaultMaskCache] setObject:[MOOCGImageWrapper wrapperWithCGImage:mask] forKey:key];
+    CGImageRelease(mask);
 }
 
 - (void)configureWithResourceNamed:(NSString *)resourceName;
@@ -548,11 +499,16 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 {
-    NSString *extension = [resourceName pathExtension];
-    if ([extension isEqualToString:@"pdf"])
-        [self configureWithPDFNamed:resourceName size:size];
-    else 
-        [self configureWithImageNamed:resourceName size:size];
+    NSString *key = [resourceName stringByAppendingString:NSStringFromCGSize(size)];
+    CGImageRef mask = CGImageRetain(((MOOCGImageWrapper *)[[[self class] defaultMaskCache] objectForKey:key]).CGImage);
+    if (!mask)
+        mask = CGImageCreateMaskFromResourceNamed(resourceName, size);
+    self.mask = mask;
+    
+    // Cache mask
+    if ([[self class] shouldCacheMaskForKey:key])
+        [[[self class] defaultMaskCache] setObject:[MOOCGImageWrapper wrapperWithCGImage:mask] forKey:key];
+    CGImageRelease(mask);
 }
 
 #pragma mark - Trait methods
@@ -602,7 +558,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     // Deprecated. Use gradientColors instead
     if (!_iconViewFlags.hasGradientStartColor)
         return nil;
-    
+
     return [self.gradientColors objectAtIndex:0];
 }
 
@@ -678,6 +634,27 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     return @protocol(MOOMaskedIconViewStyles);
 }
 
+#pragma mark - Caching methods
+
++ (NSCache *)defaultMaskCache;
+{
+    @synchronized(self)
+    {
+        if (!_defaultMaskCache)
+        {
+            _defaultMaskCache = [[NSCache alloc] init];
+            _defaultMaskCache.totalCostLimit = 1024 * 1024 * 2; // Default mask cache size of 2mb;
+        }
+    
+        return _defaultMaskCache;
+    }
+}
+
++ (BOOL)shouldCacheMaskForKey:(NSString *)key;
+{
+    return NO;
+}
+
 #pragma mark - KVO methods
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
@@ -715,14 +692,8 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 
 - (id)copyWithZone:(NSZone *)zone;
 {
-    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithFrame:self.frame];
-    
-    iconView.color = self.color;
-    iconView.drawingBlock = self.drawingBlock;
-    iconView.highlightedColor = self.highlightedColor;
-    iconView.mask = self.mask;
-    
-    return iconView;
+    // Todo: implement NSCopying
+    return nil;
 }
 
 #pragma mark - Image rendering
@@ -756,21 +727,6 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     self.highlighted = wasHighlighted;
     
     return image;
-}
-
-+ (NSURL *)_resourceURL:(NSString *)resourceName
-{
-    if (!resourceName)
-        return nil;
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:resourceName ofType:nil];
-    if (!path)
-    {
-        NSLog(@"File named %@ not found by %@. Check capitalization?", resourceName, self);
-        return nil;
-    }
-    
-    return [NSURL fileURLWithPath:path];
 }
 
 - (void)_setNeedsGradient;
@@ -825,6 +781,130 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
 @end
 
 // Helper functions
+
+static NSURL *NSURLWithResourceNamed(NSString *resourceName, NSBundle *bundle)
+{
+    if (!resourceName)
+        return nil;
+
+    if (!bundle)
+        bundle = [NSBundle mainBundle];
+    
+    NSString *path = [bundle pathForResource:resourceName ofType:nil];
+    if (!path)
+    {
+        NSLog(@"File named %@ not found. Check spelling or capitalization?", resourceName);
+        return nil;
+    }
+
+    return [NSURL fileURLWithPath:path];
+}
+
+CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
+{
+    // If no image is passed, return nothing
+    if (source == nil)
+        return NULL;
+
+    // Variables for image creation
+    CGSize imageSize = CGSizeZero;
+    size_t bytesPerRow = 0;
+    const CGFloat scale = [UIScreen mainScreen].scale;
+
+    if (size.width > 0.0f && size.height > 0.0f) 
+    {
+        // Custom size
+        imageSize = size;
+        imageSize.width *= scale;
+        imageSize.height *= scale;
+        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
+        bytesPerRow = imageSize.width * CGColorSpaceGetNumberOfComponents(colorspace);
+        
+        // Create bitmap context
+        CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), bytesPerRow, colorspace, kCGImageAlphaNone);
+        CGColorSpaceRelease(colorspace);
+        
+        CGContextSetInterpolationQuality(context, kCGInterpolationLow);
+        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, imageSize.width, imageSize.height), source);
+        CGImageRelease(source);
+        source = CGBitmapContextCreateImage(context);
+        CGContextRelease(context);
+    }
+    else 
+    {
+        // Default size
+        imageSize = CGSizeMake(CGImageGetWidth(source), CGImageGetHeight(source));
+        bytesPerRow = CGImageGetBytesPerRow(source);
+    }
+
+    // Create mask
+    CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), CGImageGetBitsPerPixel(source), bytesPerRow, CGImageGetDataProvider(source), NULL, NO);
+
+    return maskRef;
+}
+
+CGImageRef CGImageCreateMaskFromImageNamed(NSString *imageName, CGSize size)
+{
+    NSURL *imageURL = NSURLWithResourceNamed(imageName, nil);
+    UIImage *image = [UIImage imageWithContentsOfFile:[imageURL relativePath]];
+    return CGImageCreateMaskFromCGImage(image.CGImage, size);
+}
+
+CGImageRef CGImageCreateMaskFromPDFNamed(NSString *pdfName, CGSize size)
+{
+    if (!pdfName)
+        return NULL;
+    
+    // Grab pdf
+    NSURL *pdfURL = NSURLWithResourceNamed(pdfName, nil);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((__bridge CFURLRef)pdfURL);
+    CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
+    
+    if (firstPage == NULL)
+    {
+        CGPDFDocumentRelease(pdf);
+        return NULL;
+    }
+    
+    // Calculate metrics
+    const CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
+    const CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
+    
+    // Set up context
+    UIGraphicsBeginImageContextWithOptions(pdfSize, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Draw background
+    [[UIColor whiteColor] set];
+    CGContextFillRect(context, CGRectMake(0.0f, 0.0f, pdfSize.width, pdfSize.height));
+    
+    // Scale and flip context right-side-up
+    CGContextScaleCTM(context, pdfSize.width / mediaRect.size.width, -pdfSize.height / mediaRect.size.height);
+    CGContextTranslateCTM(context, 0.0f, -mediaRect.size.height);
+    
+    // Draw pdf
+    CGContextDrawPDFPage(context, firstPage);
+    CGPDFDocumentRelease(pdf);
+    
+    // Create image to mask
+    CGImageRef imageToMask = CGBitmapContextCreateImage(context);
+    UIGraphicsEndImageContext();
+    
+    // Create image mask
+    CGImageRef maskRef = CGImageMaskCreate(CGImageGetWidth(imageToMask), CGImageGetHeight(imageToMask), CGImageGetBitsPerComponent(imageToMask), CGImageGetBitsPerPixel(imageToMask), CGImageGetBytesPerRow(imageToMask), CGImageGetDataProvider(imageToMask), NULL, NO);
+    CGImageRelease(imageToMask);
+    
+    return maskRef;
+}
+
+CGImageRef CGImageCreateMaskFromResourceNamed(NSString *resourceName, CGSize size)
+{
+    NSString *extension = [resourceName pathExtension];
+    if ([extension isEqualToString:@"pdf"])
+        return CGImageCreateMaskFromPDFNamed(resourceName, size);
+
+    return CGImageCreateMaskFromImageNamed(resourceName, size);
+};
 
 /*
  * CGImageCreateInvertedMaskWithMask.

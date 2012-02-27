@@ -31,6 +31,9 @@
 		9C7BC2EC14F9385E0052D1E4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7BC2E814F9385E0052D1E4 /* Icon.png */; };
 		9C7BC2ED14F9385E0052D1E4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7BC2E914F9385E0052D1E4 /* Icon@2x.png */; };
 		9C941C7614FBD253002DA298 /* MOOMaskedIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C941C7514FBD0CA002DA298 /* MOOMaskedIconView.m */; };
+		9C941C8014FBEAFC002DA298 /* Icons to Cache.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C941C7F14FBEAFC002DA298 /* Icons to Cache.plist */; };
+		9C941C8414FBF56C002DA298 /* MOOResourceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C941C8314FBF56C002DA298 /* MOOResourceList.m */; };
+		9C941C8714FC0CB1002DA298 /* MOOCGImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C941C8614FC0CB1002DA298 /* MOOCGImageWrapper.m */; };
 		9CFA4C5114F85C2F00956B67 /* Rounded Rect.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9CFA4C5014F85C2F00956B67 /* Rounded Rect.pdf */; };
 		9CFA4C5814F87B2C00956B67 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CFA4C5714F87B2C00956B67 /* Accelerate.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -67,6 +70,11 @@
 		9C7BC2E914F9385E0052D1E4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Images/Icon@2x.png"; sourceTree = "<group>"; };
 		9C941C7414FBD0CA002DA298 /* MOOMaskedIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MOOMaskedIconView.h; path = ../MOOMaskedIconView/MOOMaskedIconView.h; sourceTree = "<group>"; };
 		9C941C7514FBD0CA002DA298 /* MOOMaskedIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MOOMaskedIconView.m; path = ../MOOMaskedIconView/MOOMaskedIconView.m; sourceTree = "<group>"; };
+		9C941C7F14FBEAFC002DA298 /* Icons to Cache.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Icons to Cache.plist"; path = "MOOMaskedIconView Demo/Images/Icons/Icons to Cache.plist"; sourceTree = "<group>"; };
+		9C941C8214FBF56C002DA298 /* MOOResourceList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOOResourceList.h; path = ../MOOMaskedIconView/MOOResourceList.h; sourceTree = "<group>"; };
+		9C941C8314FBF56C002DA298 /* MOOResourceList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MOOResourceList.m; path = ../MOOMaskedIconView/MOOResourceList.m; sourceTree = "<group>"; };
+		9C941C8514FC0CB1002DA298 /* MOOCGImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; name = MOOCGImageWrapper.h; path = ../MOOMaskedIconView/MOOCGImageWrapper.h; sourceTree = "<group>"; };
+		9C941C8614FC0CB1002DA298 /* MOOCGImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MOOCGImageWrapper.m; path = ../MOOMaskedIconView/MOOCGImageWrapper.m; sourceTree = "<group>"; };
 		9CFA4C5014F85C2F00956B67 /* Rounded Rect.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Rounded Rect.pdf"; path = "MOOMaskedIconView Demo/Images/Icons/Rounded Rect.pdf"; sourceTree = "<group>"; };
 		9CFA4C5714F87B2C00956B67 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -150,6 +158,10 @@
 		9C36413114F28E7F005DE008 /* MOOMaskedIconView */ = {
 			isa = PBXGroup;
 			children = (
+				9C941C8514FC0CB1002DA298 /* MOOCGImageWrapper.h */,
+				9C941C8614FC0CB1002DA298 /* MOOCGImageWrapper.m */,
+				9C941C8214FBF56C002DA298 /* MOOResourceList.h */,
+				9C941C8314FBF56C002DA298 /* MOOResourceList.m */,
 				9C941C7414FBD0CA002DA298 /* MOOMaskedIconView.h */,
 				9C941C7514FBD0CA002DA298 /* MOOMaskedIconView.m */,
 				9C777F3914FB095700C1565A /* MOOStyleTrait.h */,
@@ -161,6 +173,7 @@
 		9C36414014F2A2BF005DE008 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9C941C7F14FBEAFC002DA298 /* Icons to Cache.plist */,
 				9C78D8C014F8490D0059D260 /* Arrow.pdf */,
 				9C78D8C114F8490D0059D260 /* Beer.pdf */,
 				9C78D8C214F8490D0059D260 /* Beer.png */,
@@ -258,6 +271,7 @@
 				9C7BC2EB14F9385E0052D1E4 /* Default@2x.png in Resources */,
 				9C7BC2EC14F9385E0052D1E4 /* Icon.png in Resources */,
 				9C7BC2ED14F9385E0052D1E4 /* Icon@2x.png in Resources */,
+				9C941C8014FBEAFC002DA298 /* Icons to Cache.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +287,8 @@
 				9C36412414F28E33005DE008 /* AppDelegate.m in Sources */,
 				9C36412714F28E33005DE008 /* ViewController.m in Sources */,
 				9C777F3B14FB095700C1565A /* MOOStyleTrait.m in Sources */,
+				9C941C8414FBF56C002DA298 /* MOOResourceList.m in Sources */,
+				9C941C8714FC0CB1002DA298 /* MOOCGImageWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

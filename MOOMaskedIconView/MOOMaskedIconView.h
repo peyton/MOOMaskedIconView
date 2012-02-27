@@ -244,7 +244,7 @@ typedef enum {
 @protocol MOOStyleTrait;
 @class MOOStyleTrait;
 
-@interface MOOMaskedIconView : UIView <MOOMaskedIconViewStyles, NSCopying>
+@interface MOOMaskedIconView : UIView <MOOMaskedIconViewStyles>
 {
     BOOL _highlighted;
 
@@ -356,4 +356,32 @@ typedef enum {
  */
 - (UIImage *)renderHighlightedImage;
 
+/* @name Caching */
+
++ (NSCache *)defaultMaskCache;
+
++ (BOOL)shouldCacheMaskForKey:(NSString *)key;
+
 @end
+
+/* @name Helper functions */
+
+/*
+ * Create a mask CGImage from a given image for a given size.
+ */
+CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size);
+
+/*
+ * Create a mask CGImage from a given image name for a given size.
+ */
+CGImageRef CGImageCreateMaskFromImageNamed(NSString *imageName, CGSize size);
+
+/*
+ * Create a mask CGImage from a given pdf name for a given size.
+ */
+CGImageRef CGImageCreateMaskFromPDFNamed(NSString *pdfName, CGSize size);
+
+/*
+ * Create a mask CGImage from a given resource name for a given size
+ */
+CGImageRef CGImageCreateMaskFromResourceNamed(NSString *resourceName, CGSize size);

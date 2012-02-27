@@ -1,6 +1,6 @@
 //
 //  MOOStyleTrait.m
-//  MOOMaskedIconView Demo
+//  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/26/12.
 //
