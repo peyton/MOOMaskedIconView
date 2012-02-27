@@ -7,7 +7,7 @@ MOOMaskedIconView is a UIView subclass that uses black-and-white masks to draw i
 styles at any size or resolution. It's like Photoshop layer styles, using the same technique as
 UITabBar to generate various effects from a single icon mask.
 
-![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/MOOMaskedIconView/Tab-bar.png)
+![Tab bar icons](https://s3.amazonaws.com/peyton.github.com/MOOMaskedIconView/Sample-Bar-Cutaway.png)
 
 MOOMaskedIconView displays common image formats and PDFs, the native vector file format of iOS and
 OS X. PDFs are best—they're easy to maintain and resolution independent.
@@ -21,11 +21,14 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     iconView.color = [UIColor greenColor];
     [self.view addSubview:iconView];
 
-###Resize a PDF icon and add a subtle gray gradient
+###Resize a PDF icon and add a reusable gradient trait
+
+    MOOStyleTrait *grayGradientTrait = [MOOStyleTrait trait];
+    grayGradientTrait.gradientColors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.7f alpha:1.0f],
+                                                                 [UIColor colorWithWhite:0.5f alpha:1.0f], nil];
 
     MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithPDFNamed:@"icon.pdf" size:CGSizeMake(32.0f, 26.0f)];
-    iconView.gradientColors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.7f alpha:1.0f],
-                                                        [UIColor colorWithWhite:0.5f alpha:1.0f], nil];
+    [iconView mixInTrait:grayGradientTrait];
     [self.view addSubview:iconView];
 
 ###Add an overlay and a shadow to a red icon

@@ -39,7 +39,7 @@
     [self.view addSubview:grayBar];
     
     // Appearance trait for small, gray icons
-    MOOStyleTrait *grayIconTrait = [[MOOStyleTrait alloc] init];
+    MOOStyleTrait *grayIconTrait = [MOOStyleTrait trait];
     
     grayIconTrait.gradientColors = [NSArray arrayWithObjects:
                            [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.34f alpha:1.0f],
@@ -51,7 +51,7 @@
     grayIconTrait.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
     
     // Appearance trait for small, blue icons
-    MOOStyleTrait *blueIconTrait = [[MOOStyleTrait alloc] init];
+    MOOStyleTrait *blueIconTrait = [MOOStyleTrait trait];
     blueIconTrait.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.91f brightness:1.0f alpha:0.70f];
     blueIconTrait.shadowOffset = CGSizeMake(0.0f, -1.0f);
     blueIconTrait.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.87f brightness:1.0f alpha:0.93];

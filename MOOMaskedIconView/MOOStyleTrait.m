@@ -34,6 +34,11 @@
 @synthesize innerGlowColor;
 @synthesize innerGlowRadius;
 
++ (MOOStyleTrait *)trait;
+{
+    return AH_AUTORELEASE([[MOOStyleTrait alloc] init]);
+}
+
 - (void)dealloc;
 {
     self.color = nil;

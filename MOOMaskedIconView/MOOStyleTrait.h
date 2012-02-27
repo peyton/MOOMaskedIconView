@@ -14,6 +14,11 @@
 @property (nonatomic, strong, readonly) Protocol *styleProtocol;
 
 /*
+ * Creates and returns a new, autoreleased trait
+ */
++ (MOOStyleTrait *)trait;
+
+/*
  * Overwrites properties of the current trait with values from another trait as long as those values are set on the other trait.
  */
 - (void)mixInTrait:(id<MOOStyleTrait>)otherTrait;
