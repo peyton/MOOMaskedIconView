@@ -51,7 +51,7 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     [button setImage:[iconView renderHighlightedImage] forState:UIControlStateHighlighted];
     [self.view addSubview:button];
 
-For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project). For the full list of styleable properties, scroll through the [header](https://github.com/peyton/MOOMaskedIconView/blob/master/MOOMaskedIconView.h).
+For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project). For the full list of styleable properties, scroll through the [header](https://github.com/peyton/MOOMaskedIconView/blob/master/MOOMaskedIconView/MOOMaskedIconView.h).
 
 #How to install
 -----------
