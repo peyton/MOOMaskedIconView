@@ -73,37 +73,37 @@
         icon.frame = CGRectIntegral(icon.frame);
     };
     
-    MOOMaskedIconView *eye = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Eye.pdf"];
+    MOOMaskedIconView *eye = [MOOMaskedIconView iconWithResourceNamed:@"Eye.pdf"];
     [eye mixInTrait:grayIconTrait];
     positionIconAtIndex(eye, 0);
     [grayBar addSubview:eye];
     
-    MOOMaskedIconView *chatBubble = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Chat Bubble.pdf"];
+    MOOMaskedIconView *chatBubble = [MOOMaskedIconView iconWithResourceNamed:@"Chat Bubble.pdf"];
     [chatBubble mixInTrait:grayIconTrait];
     positionIconAtIndex(chatBubble, 1);
     [grayBar addSubview:chatBubble];
     
-    MOOMaskedIconView *roundedRect = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Rounded Rect.pdf"];
+    MOOMaskedIconView *roundedRect = [MOOMaskedIconView iconWithResourceNamed:@"Rounded Rect.pdf"];
     [roundedRect mixInTrait:grayIconTrait];
     positionIconAtIndex(roundedRect, 2);
     [grayBar addSubview:roundedRect];
     
-    MOOMaskedIconView *location = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Location.pdf"];
+    MOOMaskedIconView *location = [MOOMaskedIconView iconWithResourceNamed:@"Location.pdf"];
     [location mixInTrait:blueIconTrait];
     positionIconAtIndex(location, 2);
     
-    MOOMaskedIconView *locationOverlay = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:location.frame.size];
+    MOOMaskedIconView *locationOverlay = [MOOMaskedIconView iconWithResourceNamed:@"Overlay.pdf" size:location.frame.size];
     locationOverlay.color = [UIColor colorWithWhite:1.0f alpha:0.7f];
     location.overlay = [locationOverlay renderImage];
     
     [grayBar addSubview:location];
     
-    MOOMaskedIconView *search = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Search.pdf"];
+    MOOMaskedIconView *search = [MOOMaskedIconView iconWithResourceNamed:@"Search.pdf"];
     [search mixInTrait:grayIconTrait];
     positionIconAtIndex(search, 3);
     [grayBar addSubview:search];
     
-    MOOMaskedIconView *arrow = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Arrow.pdf"];
+    MOOMaskedIconView *arrow = [MOOMaskedIconView iconWithResourceNamed:@"Arrow.pdf"];
     [arrow mixInTrait:grayIconTrait];
     positionIconAtIndex(arrow, 4);
     [grayBar addSubview:arrow];
@@ -115,7 +115,7 @@
     icon5OverlayView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
     UIImage *icon5Overlay = [icon5OverlayView renderImage];
     
-    MOOMaskedIconView *beer = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Beer.pdf" size:beer5Size];
+    MOOMaskedIconView *beer = [MOOMaskedIconView iconWithResourceNamed:@"Beer.pdf" size:beer5Size];
     beer.backgroundColor = self.view.backgroundColor;
     beer.gradientColors = [NSArray arrayWithObjects:
                             [UIColor colorWithWhite:0.8f alpha:1.0f],

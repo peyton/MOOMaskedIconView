@@ -310,6 +310,16 @@ typedef enum {
 - (id)initWithResourceNamed:(NSString *)resourceName;
 - (id)initWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
+/* @name Creation methods */
++ (MOOMaskedIconView *)iconWithImage:(UIImage *)image;
++ (MOOMaskedIconView *)iconWithImage:(UIImage *)image size:(CGSize)size;
++ (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName;
++ (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName size:(CGSize)size;
++ (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName;
++ (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
++ (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName;
++ (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
+
 /* @name Configuration methods */
 - (void)configureWithImage:(UIImage *)image;
 - (void)configureWithImage:(UIImage *)image size:(CGSize)size;
@@ -320,9 +330,11 @@ typedef enum {
 - (void)configureWithResourceNamed:(NSString *)resourceName;
 - (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
+
 /* @name Traits */
 
 - (void)mixInTrait:(id<MOOStyleTrait>)trait;
+
 
 /* @name Rendering */
 

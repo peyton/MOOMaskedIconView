@@ -17,7 +17,7 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
 
 ###Create a green icon from a PNG
 
-    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithResourceNamed:@"icon.png"]
+    MOOMaskedIconView *iconView = [MOOMaskedIconView iconWithResourceNamed:@"icon.png"]
     iconView.color = [UIColor greenColor];
     [self.view addSubview:iconView];
 
@@ -27,14 +27,14 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     grayGradientTrait.gradientColors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.7f alpha:1.0f],
                                                                  [UIColor colorWithWhite:0.5f alpha:1.0f], nil];
 
-    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithPDFNamed:@"icon.pdf" size:CGSizeMake(32.0f, 26.0f)];
+    MOOMaskedIconView *iconView = [MOOMaskedIconView iconWithPDFNamed:@"icon.pdf" size:CGSizeMake(32.0f, 26.0f)];
     [iconView mixInTrait:grayGradientTrait];
     [self.view addSubview:iconView];
 
 ###Add an overlay and a shadow to a red icon
 
     UIImage *overlay = [UIImage imageNamed:@"overlay.png"];
-    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithImageNamed:@"icon.png"];
+    MOOMaskedIconView *iconView = [MOOMaskedIconView iconWithImageNamed:@"icon.png"];
     iconView.color = [UIColor redColor];
     iconView.overlay = overlay;
     iconView.shadowColor = [UIColor darkGrayColor];
@@ -43,7 +43,7 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
 
 ###Render a PDF icon into a UIButton
 
-    MOOMaskedIconView *iconView = [[MOOMaskedIconView alloc] initWithResourceNamed:@"icon.pdf"];
+    MOOMaskedIconView *iconView = [MOOMaskedIconView iconWithResourceNamed:@"icon.pdf"];
     iconView.color = [UIColor magentaColor];
     iconView.highlightedColor = [UIColor orangeColor];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

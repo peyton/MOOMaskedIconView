@@ -191,6 +191,48 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     AH_SUPER_DEALLOC;
 }
 
+#pragma mark - Creation methods
+
++ (MOOMaskedIconView *)iconWithImage:(UIImage *)image;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImage:image]);
+}
+
++ (MOOMaskedIconView *)iconWithImage:(UIImage *)image size:(CGSize)size;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImage:image size:size]);
+}
+
++ (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImageNamed:imageName]);
+}
+
++ (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName size:(CGSize)size;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithImageNamed:imageName size:size]);
+}
+
++ (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithPDFNamed:pdfName]);
+}
+
++ (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithPDFNamed:pdfName size:size]);
+}
+
++ (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithResourceNamed:resourceName]);
+}
+
++ (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
+{
+    return AH_AUTORELEASE([[MOOMaskedIconView alloc] initWithResourceNamed:resourceName size:size]);
+}
+
 #pragma mark - Drawing and layout methods
 
 - (void)drawRect:(CGRect)rect
