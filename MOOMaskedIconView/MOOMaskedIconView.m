@@ -10,6 +10,7 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "MOOStyleTrait.h"
 
 // Keys for KVO
 static NSString * const MOOHighlightedKeyPath = @"highlighted";
@@ -80,9 +81,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
-    self.color = [UIColor blackColor];
-    self.patternBlendMode = kCGBlendModeNormal;
-    self.overlayBlendMode = kCGBlendModeNormal;
+    [self mixInTrait:MOOStyleTraitDefault];
     
     // Set up observing
     [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
@@ -514,6 +513,23 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
         [self configureWithImageNamed:resourceName size:size];
 }
 
+#pragma mark - Trait methods
+
+- (void)mixInTrait:(id<MOOStyleTrait>)trait;
+{
+    // Duplicated from MOOStyleTrait.m. TODO: share implementations
+    if (![[self class] conformsToProtocol:trait.styleProtocol])
+    {
+        NSLog(@"Attempting to mix object %@ of incompatible protocol %@ into object %@ of protocol %@.", trait, NSStringFromProtocol(trait.styleProtocol), self, NSStringFromProtocol(self.styleProtocol));
+        return;
+    }
+    
+    id propertyValue;
+    for (NSString *propertyName in propertyNamesForStyleProtocol(trait.styleProtocol))
+        if ((propertyValue = [(NSObject *)trait valueForKey:propertyName]))
+            [self setValue:propertyValue forKey:propertyName];
+}
+
 #pragma mark - Getters and setters
 
 - (void)setGradient:(CGGradientRef)gradient;
@@ -613,6 +629,11 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceImage);
     // Resize view when mask changes
     [self sizeToFit];
     [self setNeedsDisplay];
+}
+
+- (Protocol *)styleProtocol;
+{
+    return @protocol(MOOMaskedIconViewStyles);
 }
 
 #pragma mark - KVO methods
@@ -819,3 +840,4 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
     
 	return invertedImage;
 }
+

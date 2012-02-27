@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "MOOMaskedIconView.h"
+#import "MOOStyleTrait.h"
 
 #define kBarHeight 64.0f
 
@@ -37,55 +38,57 @@
     grayBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Gray-Bar.png"]];
     [self.view addSubview:grayBar];
     
-    // Quick closure to configure icons
-    void (^configureIcon)(MOOMaskedIconView *icon) = ^(MOOMaskedIconView *icon) {
-        icon.gradientColors = [NSArray arrayWithObjects:
-                               [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.34f alpha:1.0f],
-                               [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.57f alpha:1.0f], nil];
-        icon.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
-        icon.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
-        icon.innerShadowColor = [UIColor colorWithWhite:1.0f alpha:0.6f];
-        icon.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
-    };
+    // Appearance trait for small, gray icons
+    MOOStyleTrait *grayIconTrait = [[MOOStyleTrait alloc] init];
+    
+    grayIconTrait.gradientColors = [NSArray arrayWithObjects:
+                           [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.34f alpha:1.0f],
+                           [UIColor colorWithHue:0.0f saturation:0.05f brightness:0.57f alpha:1.0f], nil];
+    grayIconTrait.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    grayIconTrait.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    
+    grayIconTrait.innerShadowColor = [UIColor colorWithWhite:1.0f alpha:0.6f];
+    grayIconTrait.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
+    
+    // Appearance trait for small, blue icons
+    MOOStyleTrait *blueIconTrait = [[MOOStyleTrait alloc] init];
+    blueIconTrait.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.91f brightness:1.0f alpha:0.70f];
+    blueIconTrait.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    blueIconTrait.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.87f brightness:1.0f alpha:0.93];
+    blueIconTrait.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
+    
+    blueIconTrait.gradientColors = [NSArray arrayWithObjects:
+                               [UIColor colorWithHue:237.0f/360.0f saturation:.83f brightness:.74f alpha:1.0f],
+                               [UIColor colorWithHue:205.0f/360.0f saturation:.71f brightness:.96f alpha:1.0f], nil];
+    blueIconTrait.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.43f alpha:0.9f];
+    blueIconTrait.outerGlowRadius = 15.0f;
+    blueIconTrait.innerGlowColor = [UIColor colorWithRed:0.8f green:0.9f blue:1.0f alpha:0.8f];
+    blueIconTrait.innerGlowRadius = 1.0f;
     
     // Quick closure to position icons
     void (^positionIconAtIndex)(MOOMaskedIconView *icon, NSUInteger index) = ^(MOOMaskedIconView *icon, NSUInteger index) {
         CGFloat stepSize = CGRectGetWidth(self.view.bounds) / 5.0f;
         
-        icon.layer.position = CGPointMake(ceilf(stepSize * (index + 0.5f)), ceilf(CGRectGetHeight(grayBar.bounds) / 2.0f));
+        icon.layer.position = CGPointMake(stepSize * (index + 0.5f), CGRectGetHeight(grayBar.bounds) / 2.0f);
     };
     
     MOOMaskedIconView *eye = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Eye.pdf"];
-    configureIcon(eye);
+    [eye mixInTrait:grayIconTrait];
     positionIconAtIndex(eye, 0);
     [grayBar addSubview:eye];
     
     MOOMaskedIconView *chatBubble = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Chat Bubble.pdf"];
-    configureIcon(chatBubble);
+    [chatBubble mixInTrait:grayIconTrait];
     positionIconAtIndex(chatBubble, 1);
     [grayBar addSubview:chatBubble];
     
     MOOMaskedIconView *roundedRect = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Rounded Rect.pdf"];
-    configureIcon(roundedRect);
+    [roundedRect mixInTrait:grayIconTrait];
     positionIconAtIndex(roundedRect, 2);
     [grayBar addSubview:roundedRect];
     
-    
-    
     MOOMaskedIconView *location = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Location.pdf"];
-    location.shadowColor = [UIColor colorWithHue:234.f/360.f saturation:0.91f brightness:1.0f alpha:0.70f];
-    location.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    location.innerShadowColor = [UIColor colorWithHue:212.f/360.f saturation:0.87f brightness:1.0f alpha:0.93];
-    location.innerShadowOffset = CGSizeMake(0.0f, -1.0f);
-    
-    location.gradientColors = [NSArray arrayWithObjects:
-                              [UIColor colorWithHue:237.0f/360.0f saturation:.83f brightness:.74f alpha:1.0f],
-                              [UIColor colorWithHue:205.0f/360.0f saturation:.71f brightness:.96f alpha:1.0f], nil];
-    location.outerGlowColor = [UIColor colorWithHue:210.0f/360.0f saturation:.95f brightness:.43f alpha:0.9f];
-    location.outerGlowRadius = 15.0f;
-    location.innerGlowColor = [UIColor colorWithRed:0.8f green:0.9f blue:1.0f alpha:0.8f];
-    location.innerGlowRadius = 1.0f;
+    [location mixInTrait:blueIconTrait];
     positionIconAtIndex(location, 2);
     
     MOOMaskedIconView *locationOverlay = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Overlay.pdf" size:location.frame.size];
@@ -95,12 +98,12 @@
     [grayBar addSubview:location];
     
     MOOMaskedIconView *search = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Search.pdf"];
-    configureIcon(search);
+    [search mixInTrait:grayIconTrait];
     positionIconAtIndex(search, 3);
     [grayBar addSubview:search];
     
     MOOMaskedIconView *arrow = [[MOOMaskedIconView alloc] initWithResourceNamed:@"Arrow.pdf"];
-    configureIcon(arrow);
+    [arrow mixInTrait:grayIconTrait];
     positionIconAtIndex(arrow, 4);
     [grayBar addSubview:arrow];
     

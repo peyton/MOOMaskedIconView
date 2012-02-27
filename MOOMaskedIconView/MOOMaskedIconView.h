@@ -70,6 +70,7 @@ typedef enum {
 
 @protocol MOOMaskedIconViewStyles <NSObject>
 
+
 /* @name Style Properties */
 
 /*
@@ -123,13 +124,6 @@ typedef enum {
  */
 @property (nonatomic, strong) DrawingBlock drawingBlock;
 
-/*
- * The current CGImage mask held by the view. Read-only.
- *
- * @see Configuration methods
- */
-@property (nonatomic, assign, readonly) CGImageRef mask;
-
 
 /* @name Gradient Properties */
 
@@ -174,30 +168,42 @@ typedef enum {
  */
 @property (nonatomic, assign) MOOGradientType gradientType;
 
+
 /* @name Shadow Properties */
 
 /*
  * Specifies shadow color.
+ * 
+ * @see shadowOffet
  */
 @property (nonatomic, strong) UIColor *shadowColor;
 
 /*
  * Specifies shadow offset.
+ *
+ * @see shadowColor
  */
 @property (nonatomic, assign) CGSize shadowOffset;
 
 /*
  * Set to YES if your icon is translucent and you don't want the shadow showing through.
+ * 
+ * @see shadowColor
+ * @see shadowOffset
  */
 @property (nonatomic, assign) BOOL clipsShadow;
 
 /*
  * Specifies inner shadow color.
+ * 
+ * @see innerShadowOffset
  */
 @property (nonatomic, strong) UIColor *innerShadowColor;
 
 /*
  * Specifies inner shadow offset.
+ *
+ * @see innerShadowColor
  */
 @property (nonatomic, assign) CGSize innerShadowOffset;
 
@@ -234,6 +240,9 @@ typedef enum {
 @property (nonatomic, assign) CGFloat innerGlowRadius;
 
 @end
+
+@protocol MOOStyleTrait;
+@class MOOStyleTrait;
 
 @interface MOOMaskedIconView : UIView <MOOMaskedIconViewStyles, NSCopying>
 {
@@ -279,6 +288,18 @@ typedef enum {
  */
 @property (nonatomic, assign, getter = isHighlighted) BOOL highlighted;
 
+/*
+ * The current CGImage mask held by the view. Read-only.
+ *
+ * @see Configuration methods
+ */
+@property (nonatomic, assign, readonly) CGImageRef mask;
+
+
+/* @name Other Properties */
+
+@property (nonatomic, strong, readonly) Protocol *styleProtocol;
+
 /* @name Initialization methods */
 - (id)initWithImage:(UIImage *)image;
 - (id)initWithImage:(UIImage *)image size:(CGSize)size;
@@ -298,6 +319,10 @@ typedef enum {
 - (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
 - (void)configureWithResourceNamed:(NSString *)resourceName;
 - (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
+
+/* @name Traits */
+
+- (void)mixInTrait:(id<MOOStyleTrait>)trait;
 
 /* @name Rendering */
 

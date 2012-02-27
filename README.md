@@ -66,8 +66,7 @@ project. If you don't want a submodule, use:
 
 ###Next: Add classes
 
-Drag `MOOMaskedIconView.h` and `MOOMaskedIconView.m` into your Xcode
-project's file browser.
+Drag `MOOMaskedIconView/` into your Xcode project's file browser.
 
 *Note:* An options dialog will pop up. If you're using MOOMaskedIconView as a submodule,
 you should uncheck "Copy items into destination group's folder (if needed)."
