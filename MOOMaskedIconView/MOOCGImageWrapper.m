@@ -1,5 +1,5 @@
 //
-//  MOODiscardableCGImage.m
+//  MOOCGImageWrapper.m
 //  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/27/12.
