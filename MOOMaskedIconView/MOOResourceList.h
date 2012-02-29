@@ -14,6 +14,7 @@
 }
 
 @property (strong, readonly) NSArray *names;
+@property (strong, readonly) NSArray *keys;
 
 - (id)initWithResourceNames:(NSArray *)resourceNames;
 - (id)initWithPlistNamed:(NSString *)propertyListName;
@@ -27,3 +28,18 @@
 
 @end
 
+@interface MOOResourceRegistry : NSObject
+{
+    NSArray *_resourceLists;
+}
+
+@property (nonatomic, strong, readonly) NSArray *resourceLists;
+
+- (void)registerList:(MOOResourceList *)resourceList;
+- (void)deregisterList:(MOOResourceList *)resourceList;
+
+- (BOOL)shouldCacheResourceWithKey:(NSString *)key;
+
++ (MOOResourceRegistry *)sharedRegistry;
+
+@end

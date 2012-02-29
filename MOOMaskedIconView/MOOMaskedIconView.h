@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 
-
 typedef void (^DrawingBlock)(CGContextRef context);
 
 typedef enum {
@@ -280,6 +279,20 @@ typedef enum {
 
 /* @name Traits */
 
+/*
+ * Returns a trait composed of the icon's current style properties.
+ *
+ * Setting overwrites all properties of the icon with those of the passed-in trait.
+ *
+ * @see mixInTrait
+ */
+@property (nonatomic, strong) id<MOOStyleTrait> trait;
+
+/*
+ * Apply the properties of the passed-in trait in addition to the icon's current properties.
+ *
+ * @see setTrait
+ */
 - (void)mixInTrait:(id<MOOStyleTrait>)trait;
 
 

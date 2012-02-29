@@ -18,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Cache masks listed in "Icons to Cache.plist" in the background
+    MOOResourceList *iconsToCache = [MOOResourceList resourceListWithPlistNamed:@"Icons to Cache.plist"];
+    [[MOOResourceRegistry sharedRegistry] registerList:iconsToCache];    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
@@ -25,8 +29,7 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    // Cache masks listed in "Icons.plist" in the background
-    [[MOOResourceList resourceListWithPlistNamed:@"Icons to Cache.plist"] renderMasksInBackground];
+    [iconsToCache renderMasksInBackground];
     
     return YES;
 }
