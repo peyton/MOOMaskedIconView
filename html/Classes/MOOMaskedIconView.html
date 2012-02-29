@@ -1,0 +1,991 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>MOOMaskedIconView Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 775)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MOOMaskedIconView </a></h1>
+				<a id="developerHome" href="../index.html">Peyton Randolph</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MOOMaskedIconView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/highlighted">&nbsp;&nbsp;&nbsp;&nbsp;highlighted</option>
+	
+	<option value="//api/name/mask">&nbsp;&nbsp;&nbsp;&nbsp;mask</option>
+	
+	<option value="//api/name/trait">&nbsp;&nbsp;&nbsp;&nbsp;trait</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/gradientEndColor">&nbsp;&nbsp;&nbsp;&nbsp;- gradientEndColor</option>
+	
+	<option value="//api/name/gradientStartColor">&nbsp;&nbsp;&nbsp;&nbsp;- gradientStartColor</option>
+	
+	<option value="//api/name/mixInTrait:">&nbsp;&nbsp;&nbsp;&nbsp;- mixInTrait:</option>
+	
+	<option value="//api/name/renderHighlightedImage">&nbsp;&nbsp;&nbsp;&nbsp;- renderHighlightedImage</option>
+	
+	<option value="//api/name/renderImage">&nbsp;&nbsp;&nbsp;&nbsp;- renderImage</option>
+	
+	<option value="//api/name/setGradientColors:">&nbsp;&nbsp;&nbsp;&nbsp;- setGradientColors:</option>
+	
+	<option value="//api/name/setGradientEndColor:">&nbsp;&nbsp;&nbsp;&nbsp;- setGradientEndColor:</option>
+	
+	<option value="//api/name/setGradientStartColor:">&nbsp;&nbsp;&nbsp;&nbsp;- setGradientStartColor:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_State Properties">State Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Traits">Traits</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Rendering">Rendering</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/highlighted">highlighted</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mask">mask</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/trait">trait</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/gradientEndColor">gradientEndColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/gradientStartColor">gradientStartColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/mixInTrait:">mixInTrait:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/renderHighlightedImage">renderHighlightedImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/renderImage">renderImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setGradientColors:">setGradientColors:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setGradientEndColor:">setGradientEndColor:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setGradientStartColor:">setGradientStartColor:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="MOOMaskedIconView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MOOMaskedIconView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UIView</td>
+</tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value"><a href="../Protocols/MOOMaskedIconViewStyles.html">MOOMaskedIconViewStyles</a></td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MOOMaskedIconView.h<br />MOOMaskedIconView.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>MOOMaskedIconView is a UIView subclass that uses black-and-white masks to draw icons of different styles at any size or resolution. It&rsquo;s like Photoshop layer styles, using the same technique as UITabBar to generate various effects from a single icon <a href="#//api/name/mask">mask</a>.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="State Properties" name="task_State Properties"></a>
+						<h3 class="subsubtitle task-title">State Properties</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/highlighted">&nbsp;&nbsp;highlighted</a></code>
+		<span class="tooltip"><p>Whether the icon view is in its highlighted state.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mask">&nbsp;&nbsp;mask</a></code>
+		<span class="tooltip"><p>The current CGImage mask held by the view. Read-only.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Traits" name="task_Traits"></a>
+						<h3 class="subsubtitle task-title">Traits</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/trait">&nbsp;&nbsp;trait</a></code>
+		<span class="tooltip"><p>Returns a trait composed of the icon&rsquo;s current style properties.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mixInTrait:">&ndash;&nbsp;mixInTrait:</a></code>
+		<span class="tooltip"><p>Apply the properties of the passed-in <a href="#//api/name/trait">trait</a> in addition to the icon&rsquo;s current properties.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Rendering" name="task_Rendering"></a>
+						<h3 class="subsubtitle task-title">Rendering</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/renderImage">&ndash;&nbsp;renderImage</a></code>
+		<span class="tooltip"><p>Render the icon un<a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/renderHighlightedImage">&ndash;&nbsp;renderHighlightedImage</a></code>
+		<span class="tooltip"><p>Render the icon <a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setGradientColors:">&ndash;&nbsp;setGradientColors:</a></code>
+		<span class="tooltip"><p>An optional array of UIColors defining the <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> of the gradient at each stop. Setting gradientColors clears <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">gradientStartColor</a> and <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">gradientEndColor</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/gradientStartColor">&ndash;&nbsp;gradientStartColor</a></code>
+		<span class="tooltip"><p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setGradientStartColor:">&ndash;&nbsp;setGradientStartColor:</a></code>
+		<span class="tooltip"><p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/gradientEndColor">&ndash;&nbsp;gradientEndColor</a></code>
+		<span class="tooltip"><p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setGradientEndColor:">&ndash;&nbsp;setGradientEndColor:</a></code>
+		<span class="tooltip"><p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/highlighted" title="highlighted"></a>
+	<h3 class="subsubtitle method-title">highlighted</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the icon view is in its highlighted state.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, getter=isHighlighted) BOOL highlighted</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the icon view is in its highlighted state.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mask" title="mask"></a>
+	<h3 class="subsubtitle method-title">mask</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The current CGImage mask held by the view. Read-only.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) CGImageRef mask</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The current CGImage mask held by the view. Read-only.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/trait" title="trait"></a>
+	<h3 class="subsubtitle method-title">trait</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a trait composed of the icon&rsquo;s current style properties.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id&lt;&gt; trait</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a trait composed of the icon&rsquo;s current style properties.</p>
+
+<p>Setting overwrites all properties of the icon with those of the passed-in trait.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/mixInTrait:">&ndash; mixInTrait:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/gradientEndColor" title="gradientEndColor"></a>
+	<h3 class="subsubtitle method-title">gradientEndColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIColor *)gradientEndColor</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+
+<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">@property gradientStartColor</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">@property gradientColors</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/gradientStartColor" title="gradientStartColor"></a>
+	<h3 class="subsubtitle method-title">gradientStartColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIColor *)gradientStartColor</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+
+<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">@property gradientEndColor</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">@property gradientColors</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/mixInTrait:" title="mixInTrait:"></a>
+	<h3 class="subsubtitle method-title">mixInTrait:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Apply the properties of the passed-in <a href="#//api/name/trait">trait</a> in addition to the icon&rsquo;s current properties.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)mixInTrait:(id&lt;MOOStyleTrait&gt;)<em>trait</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>trait</em></dt>
+			<dd><p>The <a href="#//api/name/trait">trait</a> to mix in.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Apply the properties of the passed-in <a href="#//api/name/trait">trait</a> in addition to the icon&rsquo;s current properties.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/trait">@property trait</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/renderHighlightedImage" title="renderHighlightedImage"></a>
+	<h3 class="subsubtitle method-title">renderHighlightedImage</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Render the icon <a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIImage *)renderHighlightedImage</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Render the icon <a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p>
+
+<p>Useful for passing the icon to other views, e.g. UIButton.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/renderImage">&ndash; renderImage</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/renderImage" title="renderImage"></a>
+	<h3 class="subsubtitle method-title">renderImage</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Render the icon un<a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UIImage *)renderImage</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Render the icon un<a href="#//api/name/highlighted">highlighted</a> to a UIImage.</p>
+
+<p>Useful for passing the icon to other views, e.g. UIButton.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/renderHighlightedImage">&ndash; renderHighlightedImage</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setGradientColors:" title="setGradientColors:"></a>
+	<h3 class="subsubtitle method-title">setGradientColors:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An optional array of UIColors defining the <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> of the gradient at each stop. Setting gradientColors clears <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">gradientStartColor</a> and <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">gradientEndColor</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setGradientColors:(NSArray *)<em>gradientColors</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>An optional array of UIColors defining the <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> of the gradient at each stop. Setting gradientColors clears <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">gradientStartColor</a> and <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">gradientEndColor</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientLocations">@property gradientLocations</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setGradientEndColor:" title="setGradientEndColor:"></a>
+	<h3 class="subsubtitle method-title">setGradientEndColor:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setGradientEndColor:(UIColor *)<em>gradientEndColor</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+
+<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">@property gradientStartColor</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">@property gradientColors</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setGradientStartColor:" title="setGradientStartColor:"></a>
+	<h3 class="subsubtitle method-title">setGradientStartColor:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setGradientStartColor:(UIColor *)<em>gradientStartColor</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
+
+<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">@property gradientEndColor</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">@property gradientColors</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MOOMaskedIconView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Peyton Randolph. All rights reserved. (Last updated: 2012-02-29)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 775)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
