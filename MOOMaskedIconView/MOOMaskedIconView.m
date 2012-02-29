@@ -53,6 +53,7 @@ NSCache *_defaultMaskCache;
 
 @implementation MOOMaskedIconView
 @synthesize highlighted = _highlighted;
+@dynamic trait;
 
 @synthesize color = _color;
 @synthesize highlightedColor = _highlightedColor;

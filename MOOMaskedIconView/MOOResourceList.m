@@ -37,9 +37,9 @@ static MOOResourceRegistry *_sharedRegistry;
     return self;
 }
 
-- (id)initWithPlistNamed:(NSString *)propertyListName;
+- (id)initWithPlistNamed:(NSString *)plistName;
 {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:propertyListName ofType:nil];
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:plistName ofType:nil];
     // Try loading as array
     NSArray *resourceNames = [NSArray arrayWithContentsOfFile:plistPath];
     
@@ -56,14 +56,14 @@ static MOOResourceRegistry *_sharedRegistry;
     return self;
 }
 
-+ (MOOResourceList *)resourceListWithResourceNames:(NSArray *)resourceNames;
++ (MOOResourceList *)listWithResourceNames:(NSArray *)resourceNames;
 {
     return AH_AUTORELEASE([[self alloc] initWithResourceNames:resourceNames]);
 }
 
-+ (MOOResourceList *)resourceListWithPlistNamed:(NSString *)propertyListName;
++ (MOOResourceList *)listWithPlistNamed:(NSString *)plistName;
 {
-    return AH_AUTORELEASE([[self alloc] initWithPlistNamed:propertyListName]);
+    return AH_AUTORELEASE([[self alloc] initWithPlistNamed:plistName]);
 }
 
 - (void)dealloc;

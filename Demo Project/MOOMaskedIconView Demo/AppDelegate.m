@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Cache masks listed in "Icons to Cache.plist" in the background
-    MOOResourceList *iconsToCache = [MOOResourceList resourceListWithPlistNamed:@"Icons to Cache.plist"];
+    MOOResourceList *iconsToCache = [MOOResourceList listWithPlistNamed:@"Icons to Cache.plist"];
     [[MOOResourceRegistry sharedRegistry] registerList:iconsToCache];    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

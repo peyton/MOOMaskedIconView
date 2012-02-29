@@ -51,7 +51,11 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
     [button setImage:[iconView renderHighlightedImage] forState:UIControlStateHighlighted];
     [self.view addSubview:button];
 
-For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project). For the full list of styleable properties, scroll through the [header](https://github.com/peyton/MOOMaskedIconView/blob/master/MOOMaskedIconView/MOOMaskedIconView.h).
+For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project).
+
+For the full list of styleable properties, see [MOOMaskedIconViewStyles](http://peytn.com/MOOMaskedIconView/html/Protocols/MOOMaskedIconViewStyles.html).
+
+For information on reusable styles, caching, and other advanced topics, see [*Advanced Use*](https://github.com/peyton/MOOMaskedIconView/wiki/Advanced-Use).
 
 #How to install
 -----------
@@ -119,4 +123,4 @@ iOS icons. How-to instructions are [here](https://github.com/peyton/MOOMaskedIco
 #Contributing
 --------
 
-Forks, patches, and other suggestions are always welcome. Here's a [quick guide](https://github.com/peyton/MOOMaskedIconView/wiki/Contributing) to the process.
+Forks, patches, and other suggestions are always welcome and addressed as quickly as possible. Here's a [quick guide](https://github.com/peyton/MOOMaskedIconView/wiki/Contributing) to the process.
