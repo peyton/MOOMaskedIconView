@@ -421,11 +421,6 @@
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Set to YES if your icon is translucent and you don&rsquo;t want the shadow showing through.</p>
-	</div>
-	
 	
 	
 	
@@ -473,9 +468,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Fill color painted when the icon view is unhighlighted.</p>
-
-<p>When <a href="#//api/name/gradientStartColor">gradientStartColor</a> and <a href="#//api/name/gradientEndColor">gradientEndColor</a> are both non-nil,
+		<p>When <a href="#//api/name/gradientStartColor">gradientStartColor</a> and <a href="#//api/name/gradientEndColor">gradientEndColor</a> are both non-nil,
 the view ignores fill color and draws a gradient.</p>
 	</div>
 	
@@ -524,9 +517,7 @@ the view ignores fill color and draws a gradient.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A block called with the current context at the end of every drawing. Has signature <code>void (^DrawingBlock)(CGContextRef context)</code>.</p>
-
-<p>Useful for custom drawing.</p>
+		<p>Useful for custom drawing.</p>
 	</div>
 	
 	
@@ -562,11 +553,6 @@ the view ignores fill color and draws a gradient.</p>
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>An optional array of UIColors defining the <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> of the gradient at each stop. Setting gradientColors clears <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientStartColor">gradientStartColor</a> and <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientEndColor">gradientEndColor</a>.</p>
-	</div>
 	
 	
 	
@@ -613,9 +599,7 @@ the view ignores fill color and draws a gradient.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s end location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
-
-<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+		<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
 	</div>
 	
 	
@@ -665,9 +649,7 @@ the view ignores fill color and draws a gradient.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>An optional array of NSNumber objects defining the location of each gradient stop.</p>
-
-<p>Must have the same number of components as <a href="#//api/name/gradientColors">gradientColors</a>. The gradient stops are specified as values between 0 and 1. The values must be monotonically increasing. If nil, the stops are spread uniformly across the range. Defaults to nil.</p>
+		<p>Must have the same number of components as <a href="#//api/name/gradientColors">gradientColors</a>. The gradient stops are specified as values between 0 and 1. The values must be monotonically increasing. If nil, the stops are spread uniformly across the range. Defaults to nil.</p>
 	</div>
 	
 	
@@ -715,9 +697,7 @@ the view ignores fill color and draws a gradient.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/color">color</a> filled at the gradient&rsquo;s start location. Cleared by <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> if that&rsquo;s set.</p>
-
-<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
+		<p>@deprecated Use <a href="../Protocols/MOOMaskedIconViewStyles.html#//api/name/gradientColors">gradientColors</a> instead</p>
 	</div>
 	
 	
@@ -765,11 +745,6 @@ the view ignores fill color and draws a gradient.</p>
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Style of gradient drawn. MOOGradientTypeLinear is the sole option right now.</p>
-	</div>
-	
 	
 	
 	
@@ -806,9 +781,7 @@ the view ignores fill color and draws a gradient.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Fill <a href="#//api/name/color">color</a> painted when the icon view is highlighted.</p>
-
-<p>When <a href="#//api/name/gradientStartColor">gradientStartColor</a> and <a href="#//api/name/gradientEndColor">gradientEndColor</a> are both non-nil,
+		<p>When <a href="#//api/name/gradientStartColor">gradientStartColor</a> and <a href="#//api/name/gradientEndColor">gradientEndColor</a> are both non-nil,
 the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient.</p>
 	</div>
 	
@@ -855,11 +828,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies inner glow <a href="#//api/name/color">color</a>.</p>
-	</div>
-	
 	
 	
 	
@@ -902,11 +870,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies the total displacement of the inner glow in points.</p>
-	</div>
 	
 	
 	
@@ -951,11 +914,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies inner shadow <a href="#//api/name/color">color</a>.</p>
-	</div>
-	
 	
 	
 	
@@ -998,11 +956,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies inner shadow offset.</p>
-	</div>
 	
 	
 	
@@ -1049,9 +1002,7 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies outer glow <a href="#//api/name/color">color</a>.</p>
-
-<p>Note: Generally requires a higher opacity or greater radius than its Photoshop counterpart to achieve the same effect.</p>
+		<p>Note: Generally requires a higher opacity or greater radius than its Photoshop counterpart to achieve the same effect.</p>
 	</div>
 	
 	
@@ -1097,11 +1048,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies the total displacement of the outer glow in points.</p>
-	</div>
-	
 	
 	
 	
@@ -1144,11 +1090,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>An image composited over the icon after drawing&rsquo;s done.</p>
-	</div>
 	
 	
 	
@@ -1193,11 +1134,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The blend mode under which the <a href="#//api/name/overlay">overlay</a> is drawn. Defaults to kCGBlendModeNormal. For a list of options see &ldquo;CGBlendMode&rdquo;.</p>
-	</div>
-	
 	
 	
 	
@@ -1241,11 +1177,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>A pattern composited over the icon. Created with UIColor&rsquo;s colorWithPatternImage:.</p>
-	</div>
-	
 	
 	
 	
@@ -1280,11 +1211,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The blend mode under which the <a href="#//api/name/pattern">pattern</a> is drawn. Defaults to kCGBlendModeNormal. For a list of options see &ldquo;CGBlendMode&rdquo;.</p>
-	</div>
-	
 	
 	
 	
@@ -1318,11 +1244,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies shadow <a href="#//api/name/color">color</a>.</p>
-	</div>
 	
 	
 	
@@ -1366,11 +1287,6 @@ the view ignores fill <a href="#//api/name/color">color</a> and draws a gradient
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Specifies shadow offset.</p>
-	</div>
 	
 	
 	
