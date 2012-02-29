@@ -7,6 +7,7 @@
 
 #import "MOOStyleTrait.h"
 
+#import "AHHelper.h"
 #import <objc/runtime.h>
 
 @implementation MOOStyleTrait

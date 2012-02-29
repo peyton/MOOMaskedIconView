@@ -7,6 +7,7 @@
 
 #import "MOOResourceList.h"
 
+#import "AHHelper.h"
 #import "MOOCGImageWrapper.h"
 #import "MOOMaskedIconView.h"
 

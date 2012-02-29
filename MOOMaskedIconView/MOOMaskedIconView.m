@@ -10,6 +10,7 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "AHHelper.h"
 #import "MOOCGImageWrapper.h"
 #import "MOOStyleTrait.h"
 

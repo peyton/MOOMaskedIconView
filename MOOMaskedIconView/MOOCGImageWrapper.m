@@ -7,7 +7,7 @@
 
 #import "MOOCGImageWrapper.h"
 
-#import "MOOMaskedIconView.h"
+#import "AHHelper.h"
 
 @implementation MOOCGImageWrapper
 @dynamic CGImage;
