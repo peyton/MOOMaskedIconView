@@ -45,6 +45,9 @@ NSCache *_defaultMaskCache;
 
 - (id)_initWithMask:(CGImageRef)mask;
 
+
+- (void)_addKVO;
+- (void)_configureViewWithDefaults;
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 - (void)_setNeedsGradient;
 - (void)_updateGradientWithColors:(NSArray *)colors locations:(NSArray *)locations forType:(MOOGradientType)type;
@@ -83,27 +86,31 @@ NSCache *_defaultMaskCache;
 @synthesize mask = _mask;
 @synthesize gradient = _gradient;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame;
 {
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
-    // Set view defaults
-    self.backgroundColor = [UIColor clearColor];
+    // Configure view with defaults
+    [self _configureViewWithDefaults];
     
     // Set up observing
-    [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOOverlayKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientStartColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientEndColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientColorsKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientLocationsKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientTypeKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOShadowColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:NULL];
+    [self _addKVO];
     
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder;
+{
+    if (!(self = [super initWithCoder:aDecoder]))
+        return nil;
+
+    // Configure view with defaults
+    [self _configureViewWithDefaults];
+    
+    // Set up observing
+    [self _addKVO];
+
     return self;
 }
 
@@ -736,6 +743,28 @@ NSCache *_defaultMaskCache;
 }
 
 #pragma mark - FOR PRIVATE EYES ONLY
+
+- (void)_addKVO;
+{
+    
+    // Set up observing
+    [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOMaskKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOOverlayKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientStartColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientEndColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientColorsKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientLocationsKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOGradientTypeKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOShadowColorKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:NULL];
+}
+
+- (void)_configureViewWithDefaults;
+{
+    self.backgroundColor = [UIColor clearColor];
+}
 
 - (UIImage *)_renderImageHighlighted:(BOOL)shouldBeHighlighted;
 {
