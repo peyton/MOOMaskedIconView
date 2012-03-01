@@ -10,8 +10,5 @@
 @class MOOMaskedIconView;
 
 @interface ViewController : UIViewController
-{
-    MOOMaskedIconView *_icon4;
-}
 
 @end

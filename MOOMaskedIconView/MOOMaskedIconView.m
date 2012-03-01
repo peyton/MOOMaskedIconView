@@ -10,7 +10,9 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "AHHelper.h"
 #import "MOOCGImageWrapper.h"
+#import "MOOResourceList.h"
 #import "MOOStyleTrait.h"
 
 // Keys for KVO
@@ -51,6 +53,7 @@ NSCache *_defaultMaskCache;
 
 @implementation MOOMaskedIconView
 @synthesize highlighted = _highlighted;
+@dynamic trait;
 
 @synthesize color = _color;
 @synthesize highlightedColor = _highlightedColor;
@@ -636,6 +639,28 @@ NSCache *_defaultMaskCache;
     return @protocol(MOOMaskedIconViewStyles);
 }
 
+- (id<MOOStyleTrait>)trait;
+{
+    MOOStyleTrait *trait = [MOOStyleTrait trait];
+    
+    for (NSString *propertyName in propertyNamesForStyleProtocol(self.styleProtocol))
+        [trait setValue:[(NSObject *)self valueForKey:propertyName] forKey:propertyName];
+        
+    return trait;
+}
+
+- (void)setTrait:(id<MOOStyleTrait>)trait;
+{
+    if (![[self class] conformsToProtocol:trait.styleProtocol])
+    {
+        NSLog(@"Attempting to mix object %@ of incompatible protocol %@ into object %@ of protocol %@.", trait, NSStringFromProtocol(trait.styleProtocol), self, NSStringFromProtocol(self.styleProtocol));
+        return;
+    }
+    
+    for (NSString *propertyName in propertyNamesForStyleProtocol(self.styleProtocol))
+        [self setValue:[(NSObject *)trait valueForKey:propertyName] forKey:propertyName];
+}
+
 #pragma mark - Caching methods
 
 + (NSCache *)defaultMaskCache;
@@ -654,7 +679,7 @@ NSCache *_defaultMaskCache;
 
 + (BOOL)shouldCacheMaskForKey:(NSString *)key;
 {
-    return NO;
+    return [[MOOResourceRegistry sharedRegistry] shouldCacheResourceWithKey:key];
 }
 
 #pragma mark - KVO methods

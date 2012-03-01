@@ -1,5 +1,5 @@
 //
-//  MOODiscardableCGImage.m
+//  MOOCGImageWrapper.m
 //  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/27/12.
@@ -7,7 +7,7 @@
 
 #import "MOOCGImageWrapper.h"
 
-#import "MOOMaskedIconView.h"
+#import "AHHelper.h"
 
 @implementation MOOCGImageWrapper
 @dynamic CGImage;

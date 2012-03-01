@@ -14,12 +14,6 @@
 
 #define kBarHeight 64.0f
 
-@interface ViewController ()
-
-- (void)toggleIcon4Highlighted:(id)sender;
-
-@end
-
 @implementation ViewController
 
 #pragma mark - View lifecycle
@@ -138,13 +132,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return interfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
-#pragma mark -
-
-- (void)toggleIcon4Highlighted:(id)sender;
-{
-    _icon4.highlighted = !_icon4.isHighlighted;
 }
 
 @end

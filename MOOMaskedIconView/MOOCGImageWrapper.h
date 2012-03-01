@@ -1,5 +1,5 @@
 //
-//  MOODiscardableCGImage.h
+//  MOOCGImageWrapper.h
 //  MOOMaskedIconView
 //
 //  Created by Peyton Randolph on 2/27/12.
@@ -10,10 +10,6 @@
 @interface MOOCGImageWrapper : NSObject
 {
     CGImageRef _CGImage;
-    
-    NSUInteger _refCount;
-    
-    BOOL _accessed;
 }
 
 @property (assign) CGImageRef CGImage;
