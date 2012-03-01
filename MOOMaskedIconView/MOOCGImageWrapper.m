@@ -49,10 +49,12 @@
 {
     @synchronized(self)
     {
-        if (CGImage == self.CGImage)
+        if (CGImage == _CGImage)
             return;
         
-        CGImageRelease(self.CGImage);
+        if (_CGImage != NULL) {
+            CGImageRelease(_CGImage);
+        }
         _CGImage = CGImageRetain(CGImage);
     }    
 }

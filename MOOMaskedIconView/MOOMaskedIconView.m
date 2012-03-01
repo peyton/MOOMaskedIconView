@@ -460,13 +460,16 @@ NSCache *_defaultMaskCache;
     // Fetch mask if it exists
     NSString *key = [imageName stringByAppendingString:NSStringFromCGSize(size)];
     CGImageRef mask = CGImageRetain(((MOOCGImageWrapper *)[[[self class] defaultMaskCache] objectForKey:key]).CGImage);
-    if (!mask)
-        CGImageCreateMaskFromImageNamed(imageName, size);
+    if (!mask) {
+        mask = CGImageCreateMaskFromImageNamed(imageName, size);
+    }
     self.mask = mask;
     
     // Cache mask
-    if ([[self class] shouldCacheMaskForKey:key])
+    if ([[self class] shouldCacheMaskForKey:key]) {
         [[[self class] defaultMaskCache] setObject:[MOOCGImageWrapper wrapperWithCGImage:mask] forKey:key];
+    }
+    
     CGImageRelease(mask);
 }
 
@@ -802,9 +805,9 @@ static NSURL *NSURLWithResourceNamed(NSString *resourceName, NSBundle *bundle)
 CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
 {
     // If no image is passed, return nothing
-    if (source == nil)
+    if (source == nil) {
         return NULL;
-
+    }
     // Variables for image creation
     CGSize imageSize = CGSizeZero;
     size_t bytesPerRow = 0;
@@ -830,15 +833,20 @@ CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
         CGContextRelease(context);
     }
     else 
-    {
+    {   
         // Default size
         imageSize = CGSizeMake(CGImageGetWidth(source), CGImageGetHeight(source));
         bytesPerRow = CGImageGetBytesPerRow(source);
+        
+        // retain source to ensure same retain count in both conditions
+        CFRetain(source);
     }
 
     // Create mask
     CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), CGImageGetBitsPerPixel(source), bytesPerRow, CGImageGetDataProvider(source), NULL, NO);
-
+    
+    // release the source as it has been retained locally
+    CFRelease(source);
     return maskRef;
 }
 
