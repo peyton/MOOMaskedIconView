@@ -85,8 +85,26 @@ NSCache *_defaultMaskCache;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if (!(self = [super initWithFrame:frame]))
+    if (!(self = [super initWithFrame:frame])) {
         return nil;
+    }
+    
+    [self setupView];
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        [self setupView];
+    }
+    
+    return self;
+}
+
+- (void)setupView {
     
     // Set view defaults
     self.backgroundColor = [UIColor clearColor];
@@ -104,7 +122,6 @@ NSCache *_defaultMaskCache;
     [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:NULL];
     [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:NULL];
     
-    return self;
 }
 
 - (id)initWithImage:(UIImage *)image;
