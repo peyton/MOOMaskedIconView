@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name     = 'MOOMaskedIconView'
-  s.version  = '0.1.0'
+  s.version  = '0.2.0'
   s.license  = 'Public domain / MIT'
   s.summary  = 'UIView subclass that uses black-and-white masks to draw icons.'
   s.homepage = 'https://github.com/peyton/MOOMaskedIconView'
   s.author   = { 'Peyton Randolph' => '_@peytn.com' }
-  s.source   = { :git => 'https://github.com/peyton/MOOMaskedIconView.git', :tag => 'v0.1.0' }
+  s.source   = { :git => 'https://github.com/peyton/MOOMaskedIconView.git', :branch => '0.2-devel' }
   s.description = 'MOOMaskedIconView is a UIView subclass that uses ' \
                   'black-and-white masks to draw icons of different ' \
                   'styles at any size or resolution. It\'s like Photoshop ' \
