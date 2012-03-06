@@ -866,6 +866,8 @@ CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
     CGSize imageSize = CGSizeZero;
     size_t bytesPerRow = 0;
     const CGFloat scale = [UIScreen mainScreen].scale;
+    
+    CGImageRef maskSource; // The source to work create the mask from. Differs from `source` in that it may be resized
 
     if (size.width > 0.0f && size.height > 0.0f) 
     {
@@ -882,8 +884,7 @@ CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
         
         CGContextSetInterpolationQuality(context, kCGInterpolationLow);
         CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, imageSize.width, imageSize.height), source);
-        CGImageRelease(source);
-        source = CGBitmapContextCreateImage(context);
+        maskSource = CGBitmapContextCreateImage(context);
         CGContextRelease(context);
     }
     else 
@@ -892,15 +893,15 @@ CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
         imageSize = CGSizeMake(CGImageGetWidth(source), CGImageGetHeight(source));
         bytesPerRow = CGImageGetBytesPerRow(source);
         
-        // retain source to ensure same retain count in both conditions
-        CFRetain(source);
+        // Retain maskSource to match the created image's retain count above
+        maskSource = CGImageRetain(source);
     }
 
     // Create mask
-    CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), CGImageGetBitsPerPixel(source), bytesPerRow, CGImageGetDataProvider(source), NULL, NO);
+    CGImageRef maskRef = CGImageMaskCreate(imageSize.width, imageSize.height, CGImageGetBitsPerComponent(maskSource), CGImageGetBitsPerPixel(maskSource), bytesPerRow, CGImageGetDataProvider(maskSource), NULL, NO);
     
     // release the source as it has been retained locally
-    CFRelease(source);
+    CGImageRelease(maskSource);
     return maskRef;
 }
 
