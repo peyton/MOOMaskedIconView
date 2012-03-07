@@ -10,10 +10,11 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "AHHelper.h"
+#import "Support/AHHelper.h"
 #import "MOOCGImageWrapper.h"
 #import "MOOResourceList.h"
 #import "MOOStyleTrait.h"
+#import "Support/CGContextBlocks.h"
 
 // Keys for KVO
 static NSString * const MOOHighlightedKeyPath = @"highlighted";
@@ -270,7 +271,7 @@ NSCache *_defaultMaskCache;
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGImageRef invertedMask = NULL;
+    __block CGImageRef invertedMask = NULL;
     
     // Flip coordinates so images don't draw upside down
     CGContextTranslateCTM(context, 0.0f, CGRectGetHeight(rect));
@@ -291,151 +292,145 @@ NSCache *_defaultMaskCache;
     // Draw outer glow
     if (self.outerGlowRadius > 0.0f)
     {
-        CGContextSaveGState(context);
-        
-        CGContextSetShadowWithColor(context, CGSizeZero, self.outerGlowRadius, (self.outerGlowColor) ? self.outerGlowColor.CGColor : [UIColor blackColor].CGColor);
-        
-        CGContextBeginTransparencyLayer(context, NULL);
-        CGContextClipToMask(context, imageRect, self.mask);
-
-        UIColor *fillColor = [UIColor blackColor];
-        if (self.outerGlowColor)
-        {
-            CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.outerGlowColor.CGColor, 1.0f);
-            fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
-            CGColorRelease(outerGlowColorFullOpacity);
-        }
-        
-        [fillColor set];
-        
-        CGContextFillRect(context, imageRect);
-        CGContextEndTransparencyLayer(context);
-        
-        CGContextRestoreGState(context);
+        CGContextState(context, ^{
+            CGContextSetShadowWithColor(context, CGSizeZero, self.outerGlowRadius, (self.outerGlowColor) ? self.outerGlowColor.CGColor : [UIColor blackColor].CGColor);
+            
+            CGContextTransparencyLayer(context, ^{
+                CGContextClipToMask(context, imageRect, self.mask);
+                
+                UIColor *fillColor = [UIColor blackColor];
+                if (self.outerGlowColor)
+                {
+                    CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.outerGlowColor.CGColor, 1.0f);
+                    fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
+                    CGColorRelease(outerGlowColorFullOpacity);
+                }
+                
+                [fillColor set];
+                
+                CGContextFillRect(context, imageRect);
+            });
+        });
     }
     
     // Draw shadow
     if (!CGSizeEqualToSize(self.shadowOffset, CGSizeZero))
     {
-        CGContextSaveGState(context);
-        [((self.shadowColor) ? self.shadowColor : [UIColor blackColor]) set];
-
-        CGContextClipToMask(context, shadowRect, self.mask);
+        CGContextState(context, ^{
+            [((self.shadowColor) ? self.shadowColor : [UIColor blackColor]) set];
+            
+            CGContextClipToMask(context, shadowRect, self.mask);
+            
+            // Clip to inverted mask to prevent icon from being filled
+            if (self.clipsShadow)
+            {
+                if (!invertedMask)
+                    invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+                CGContextClipToMask(context, imageRect, invertedMask);
+            }
+            
+            CGContextFillRect(context, shadowRect);
+        });
+    }
+    
+    // Push state before clipping to icon
+    CGContextState(context, ^{
+        // Clip drawing to icon image
+        CGContextClipToMask(context, imageRect, self.mask);
         
-        // Clip to inverted mask to prevent icon from being filled
-        if (self.clipsShadow)
+        // Fill icon
+        CGContextState(context, ^{
+            if (self.gradient && !(self.highlighted && self.highlightedColor))
+            {
+                // Draw gradient
+                
+                // Because the context is flipped, the start and end points must be swapped
+                CGPoint startPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect) + CGRectGetHeight(imageRect));
+                CGPoint endPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect));
+                CGContextDrawLinearGradient(context, self.gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+            } else {
+                // Draw solid color
+                if (self.highlighted && self.highlightedColor)
+                    [self.highlightedColor set];
+                else
+                    [self.color set];
+                
+                CGContextFillRect(context, imageRect);
+            }
+        });
+        
+        if (self.pattern)
         {
-            if (!invertedMask)
-                invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
-            CGContextClipToMask(context, imageRect, invertedMask);
+            CGContextState(context, ^{
+                CGContextSetBlendMode(context, self.patternBlendMode);
+                [self.pattern set];
+                CGContextFillRect(context, imageRect);
+            });
         }
-        
-        CGContextFillRect(context, shadowRect);
-        CGContextRestoreGState(context);
-    }
-    
-    CGContextSaveGState(context); // Push state before clipping to icon
-    // Clip drawing to icon image
-    CGContextClipToMask(context, imageRect, self.mask);
-    
-    // Fill icon
-    CGContextSaveGState(context); // Save state before filling
-    
-    if (self.gradient && !(self.highlighted && self.highlightedColor))
-    {
-        // Draw gradient
-        
-        // Because the context is flipped, the start and end points must be swapped
-        CGPoint startPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect) + CGRectGetHeight(imageRect));
-        CGPoint endPoint = CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect));
-        CGContextDrawLinearGradient(context, self.gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
-    } else {
-        // Draw solid color
-        if (self.highlighted && self.highlightedColor)
-            [self.highlightedColor set];
-        else
-            [self.color set];
-        
-        CGContextFillRect(context, imageRect);
-    }
-    CGContextRestoreGState(context); // Restore state after filling
-    
-    if (self.pattern)
-    {
-        CGContextSaveGState(context);
-        CGContextSetBlendMode(context, self.patternBlendMode);
-        [self.pattern set];
-        CGContextFillRect(context, imageRect);
-        CGContextRestoreGState(context);
-    }
-    
-    CGContextRestoreGState(context); // Pop state clipping to icon
+    });
     
     // Draw inner glow
     if (self.innerGlowRadius > 0.0f)
     {
-        CGContextSaveGState(context);
-        
-        // Clip to inverted mask
-        if (!invertedMask)
-            invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
-        
-        CGContextClipToRect(context, imageRect);
-        // Transparency layers create a drawing-context-within-a-drawing-context, allowing clearing without affecting what's been previously drawn.
-        CGContextBeginTransparencyLayer(context, NULL);
-        CGContextSetShadowWithColor(context, CGSizeZero, self.innerGlowRadius, (self.innerGlowColor) ? self.innerGlowColor.CGColor : [UIColor blackColor].CGColor);
-        
-        // Begin another transparency layer for the actual glow.
-        CGContextBeginTransparencyLayer(context, NULL);
-        CGContextClipToMask(context, imageRect, invertedMask);
-
-        UIColor *fillColor = [UIColor blackColor];
-        if (self.innerGlowColor)
-        {
-            CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.innerGlowColor.CGColor, 1.0f);
-            fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
-            CGColorRelease(outerGlowColorFullOpacity);
-        }
-        
-        [fillColor set];
-
-        CGContextFillRect(context, self.bounds);
-        CGContextEndTransparencyLayer(context); // End glow layer
-        
-        CGContextClipToMask(context, imageRect, invertedMask); // Reclip before clearing
-        CGContextClearRect(context, imageRect); // Clear color drawn
-        CGContextEndTransparencyLayer(context); // End makeshift context-within-a-context.
-        
-        CGContextRestoreGState(context);
+        CGContextState(context, ^{
+            // Clip to inverted mask
+            if (!invertedMask)
+                invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+            
+            CGContextClipToRect(context, imageRect);
+            // Transparency layers create a drawing-context-within-a-drawing-context, allowing clearing without affecting what's been previously drawn.
+            CGContextTransparencyLayer(context, ^{
+                CGContextSetShadowWithColor(context, CGSizeZero, self.innerGlowRadius, (self.innerGlowColor) ? self.innerGlowColor.CGColor : [UIColor blackColor].CGColor);
+                
+                // Begin another transparency layer for the actual glow.
+                CGContextTransparencyLayer(context, ^{
+                    CGContextClipToMask(context, imageRect, invertedMask);
+                    
+                    UIColor *fillColor = [UIColor blackColor];
+                    if (self.innerGlowColor)
+                    {
+                        CGColorRef outerGlowColorFullOpacity = CGColorCreateCopyWithAlpha(self.innerGlowColor.CGColor, 1.0f);
+                        fillColor = [UIColor colorWithCGColor:outerGlowColorFullOpacity];
+                        CGColorRelease(outerGlowColorFullOpacity);
+                    }
+                    
+                    [fillColor set];
+                    
+                    CGContextFillRect(context, self.bounds);
+                });
+                
+                CGContextClipToMask(context, imageRect, invertedMask); // Reclip before clearing
+                CGContextClearRect(context, imageRect); // Clear color drawn
+            });
+        });
     }
 
     CGContextClipToMask(context, imageRect, self.mask);
     // Draw inner shadow
     if (!CGSizeEqualToSize(self.innerShadowOffset, CGSizeZero))
-    {
-        CGContextSaveGState(context);
-        
-        // Clip to inverted mask to prevent main area from being filled
-        if (!invertedMask)
-            invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
-        
-        // Clip to inverted mask translated by innerShadowOffset
-        CGAffineTransform innerShadowOffsetTransform = CGAffineTransformMakeTranslation(self.innerShadowOffset.width, -self.innerShadowOffset.height);
-        CGContextClipToMask(context, CGRectApplyAffineTransform(imageRect, innerShadowOffsetTransform), invertedMask);            
-        // Fill inner shadow color
-        [self.innerShadowColor set];
-        CGContextFillRect(context, imageRect);
-        CGContextRestoreGState(context);
+    {        
+        CGContextState(context, ^{
+            // Clip to inverted mask to prevent main area from being filled
+            if (!invertedMask)
+                invertedMask = CGImageCreateInvertedMaskWithMask(self.mask);
+            
+            // Clip to inverted mask translated by innerShadowOffset
+            CGAffineTransform innerShadowOffsetTransform = CGAffineTransformMakeTranslation(self.innerShadowOffset.width, -self.innerShadowOffset.height);
+            CGContextClipToMask(context, CGRectApplyAffineTransform(imageRect, innerShadowOffsetTransform), invertedMask);            
+            // Fill inner shadow color
+            [self.innerShadowColor set];
+            CGContextFillRect(context, imageRect);
+        });
     }
     CGImageRelease(invertedMask); // Done with invertedMask
         
     // Draw overlay
     if (self.overlay)
     {
-        CGContextSaveGState(context);
-        CGContextSetBlendMode(context, self.overlayBlendMode);
-        CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
-        CGContextRestoreGState(context);
+        CGContextState(context, ^{
+            CGContextSetBlendMode(context, self.overlayBlendMode);
+            CGContextDrawImage(context, self.bounds, self.overlay.CGImage);
+        });
     }
 }
 
