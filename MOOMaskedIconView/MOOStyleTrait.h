@@ -9,14 +9,17 @@
 #import "MOOMaskedIconView.h"
 
 /**
- MOOStyleTrait is a protocol defining the basic operations of a style trait.
+ * MOOStyleTrait is a protocol defining the basic operations of a style trait.
  */
 @protocol MOOStyleTrait <NSObject>
 
+/**
+ * The underlying style protocol defining all properties.
+ */
 @property (nonatomic, strong, readonly) Protocol *styleProtocol;
 
 /**
- * Creates and returns a new, autoreleased trait
+ * Creates and returns a new, autoreleased trait.
  */
 + (id<MOOStyleTrait>)trait;
 
@@ -50,7 +53,7 @@
 @end
 
 /**
- MOOStyleTrait is an implementation of <MOOStyleTrait> that conforms to <MOOMaskedIconViewStyles>
+ * MOOStyleTrait is an implementation of MOOStyleTrait that conforms to <MOOMaskedIconViewStyles>
  */
 @interface MOOStyleTrait : NSObject <MOOMaskedIconViewStyles, MOOStyleTrait>
 
