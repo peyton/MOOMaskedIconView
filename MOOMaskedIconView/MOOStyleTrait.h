@@ -5,7 +5,6 @@
 //  Created by Peyton Randolph on 2/26/12.
 //
 
-#import <UIKit/UIKit.h>
 
 #import "MOOMaskedIconView.h"
 

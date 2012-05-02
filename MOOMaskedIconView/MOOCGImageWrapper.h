@@ -5,7 +5,6 @@
 //  Created by Peyton Randolph on 2/27/12.
 //
 
-#import <Foundation/Foundation.h>
 
 @interface MOOCGImageWrapper : NSObject
 {

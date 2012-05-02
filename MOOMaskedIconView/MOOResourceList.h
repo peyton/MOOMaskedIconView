@@ -5,8 +5,6 @@
 //  Created by Peyton Randolph on 2/27/12.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 /**
  MOOResourceList lists resources which should be cached and provides background rendering of itself.

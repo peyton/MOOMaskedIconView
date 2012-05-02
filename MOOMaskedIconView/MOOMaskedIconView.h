@@ -5,8 +5,6 @@
 //  Created by Peyton Randolph on 2/6/12.
 //
 
-#import <UIKit/UIKit.h>
-
 
 typedef void (^DrawingBlock)(CGContextRef context);
 
