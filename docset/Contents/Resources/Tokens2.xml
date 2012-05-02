@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MOOResourceList.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MOOResourceList</TokenIdentifier>
+			<Abstract type="html">MOOResourceList lists resources which should be cached and provides background rendering of itself.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/MOOResourceRegistry</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithResourceNames:</TokenIdentifier>
+			<Abstract type="html">Initializes a resource list with an array of resource names, e.g. {"Icon1.pdf", "Icon2.pdf", "Icon3.pdf"}</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithPlistNamed:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/clm/MOOResourceList/listWithResourceNames:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (id)initWithResourceNames:(NSArray *)resourceNames</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>resourceNames</Name>
+					<Abstract type="html">An array of resource names. Note: Names are not paths.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithResourceNames:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithPlistNamed:</TokenIdentifier>
+			<Abstract type="html">Initializes a resource list with an array taken from a given property list</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithResourceNames:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/clm/MOOResourceList/listWithPlistNamed:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (id)initWithPlistNamed:(NSString *)plistName</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>plistName</Name>
+					<Abstract type="html">The name of the plist of resource names to load</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithPlistNamed:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MOOResourceList/listWithResourceNames:</TokenIdentifier>
+			<Abstract type="html">Creates a resource list with an array of resource names, e.g. {"Icon1.pdf", "Icon2.pdf", "Icon3.pdf"}</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithResourceNames:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (MOOResourceList *)listWithResourceNames:(NSArray *)resourceNames</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>resourceNames</Name>
+					<Abstract type="html">An array of resource names. Note: Names are not paths.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/listWithResourceNames:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MOOResourceList/listWithPlistNamed:</TokenIdentifier>
+			<Abstract type="html">Creates a resource list with an array taken from a given property list</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/initWithPlistNamed:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (MOOResourceList *)listWithPlistNamed:(NSString *)plistName</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>plistName</Name>
+					<Abstract type="html">The name of the plist of resource names to load</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/listWithPlistNamed:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceList/renderMasksInBackground</TokenIdentifier>
+			<Abstract type="html">Renders and caches masks of every resource in the list in a background queue.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>- (void)renderMasksInBackground</Declaration>
+			
+			
+			<Anchor>//api/name/renderMasksInBackground</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MOOResourceList/defaultRenderQueue</TokenIdentifier>
+			<Abstract type="html">The default background render queue.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>+ (dispatch_queue_t)defaultRenderQueue</Declaration>
+			
+			
+			<Anchor>//api/name/defaultRenderQueue</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

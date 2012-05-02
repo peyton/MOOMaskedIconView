@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/MOOMaskedIconViewStyles.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/MOOMaskedIconViewStyles</TokenIdentifier>
+			<Abstract type="html">MOOMaskedIconViewStyles is a protocol that abstracts the configurable styles from MOOMaskedIconView, allowing others to reuse the same set of styles.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/MOOMaskedIconView</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/cl/MOOStyleTrait</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setColor:</TokenIdentifier>
+			<Abstract type="html">Fill color painted when the icon view is unhighlighted.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/highlightedColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *color</Declaration>
+			
+			
+			<Anchor>//api/name/color</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/color</TokenIdentifier>
+			<Abstract type="html">Fill color painted when the icon view is unhighlighted.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/highlightedColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *color</Declaration>
+			
+			
+			<Anchor>//api/name/color</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setHighlightedColor:</TokenIdentifier>
+			<Abstract type="html">Fill color painted when the icon view is highlighted.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/color</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *highlightedColor</Declaration>
+			
+			
+			<Anchor>//api/name/highlightedColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/highlightedColor</TokenIdentifier>
+			<Abstract type="html">Fill color painted when the icon view is highlighted.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/color</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *highlightedColor</Declaration>
+			
+			
+			<Anchor>//api/name/highlightedColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setPattern:</TokenIdentifier>
+			<Abstract type="html">A pattern composited over the icon. Created with UIColor's colorWithPatternImage:.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *pattern</Declaration>
+			
+			
+			<Anchor>//api/name/pattern</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/pattern</TokenIdentifier>
+			<Abstract type="html">A pattern composited over the icon. Created with UIColor's colorWithPatternImage:.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *pattern</Declaration>
+			
+			
+			<Anchor>//api/name/pattern</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setPatternBlendMode:</TokenIdentifier>
+			<Abstract type="html">The blend mode under which the pattern is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGBlendMode patternBlendMode</Declaration>
+			
+			
+			<Anchor>//api/name/patternBlendMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/patternBlendMode</TokenIdentifier>
+			<Abstract type="html">The blend mode under which the pattern is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGBlendMode patternBlendMode</Declaration>
+			
+			
+			<Anchor>//api/name/patternBlendMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setOverlay:</TokenIdentifier>
+			<Abstract type="html">An image composited over the icon after drawing's done.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlayBlendMode</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIImage *overlay</Declaration>
+			
+			
+			<Anchor>//api/name/overlay</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlay</TokenIdentifier>
+			<Abstract type="html">An image composited over the icon after drawing's done.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlayBlendMode</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIImage *overlay</Declaration>
+			
+			
+			<Anchor>//api/name/overlay</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setOverlayBlendMode:</TokenIdentifier>
+			<Abstract type="html">The blend mode under which the overlay is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlay</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGBlendMode overlayBlendMode</Declaration>
+			
+			
+			<Anchor>//api/name/overlayBlendMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlayBlendMode</TokenIdentifier>
+			<Abstract type="html">The blend mode under which the overlay is drawn. Defaults to kCGBlendModeNormal. For a list of options see "CGBlendMode".</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/overlay</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGBlendMode overlayBlendMode</Declaration>
+			
+			
+			<Anchor>//api/name/overlayBlendMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setDrawingBlock:</TokenIdentifier>
+			<Abstract type="html">A block called with the current context at the end of every drawing. Has signature void (^DrawingBlock)(CGContextRef context).</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) DrawingBlock drawingBlock</Declaration>
+			
+			
+			<Anchor>//api/name/drawingBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/drawingBlock</TokenIdentifier>
+			<Abstract type="html">A block called with the current context at the end of every drawing. Has signature void (^DrawingBlock)(CGContextRef context).</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) DrawingBlock drawingBlock</Declaration>
+			
+			
+			<Anchor>//api/name/drawingBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setGradientStartColor:</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's start location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientEndColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *gradientStartColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientStartColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientStartColor</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's start location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientEndColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *gradientStartColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientStartColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setGradientEndColor:</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's end location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientStartColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *gradientEndColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientEndColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientEndColor</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's end location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientStartColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *gradientEndColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientEndColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setGradientColors:</TokenIdentifier>
+			<Abstract type="html">An optional array of UIColors defining the color of the gradient at each stop. Setting gradientColors clears gradientStartColor and gradientEndColor.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientLocations</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) NSArray *gradientColors</Declaration>
+			
+			
+			<Anchor>//api/name/gradientColors</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+			<Abstract type="html">An optional array of UIColors defining the color of the gradient at each stop. Setting gradientColors clears gradientStartColor and gradientEndColor.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientLocations</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) NSArray *gradientColors</Declaration>
+			
+			
+			<Anchor>//api/name/gradientColors</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setGradientLocations:</TokenIdentifier>
+			<Abstract type="html">An optional array of NSNumber objects defining the location of each gradient stop.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) NSArray *gradientLocations</Declaration>
+			
+			
+			<Anchor>//api/name/gradientLocations</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientLocations</TokenIdentifier>
+			<Abstract type="html">An optional array of NSNumber objects defining the location of each gradient stop.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) NSArray *gradientLocations</Declaration>
+			
+			
+			<Anchor>//api/name/gradientLocations</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setGradientType:</TokenIdentifier>
+			<Abstract type="html">Style of gradient drawn. MOOGradientTypeLinear is the sole option right now.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) MOOGradientType gradientType</Declaration>
+			
+			
+			<Anchor>//api/name/gradientType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientType</TokenIdentifier>
+			<Abstract type="html">Style of gradient drawn. MOOGradientTypeLinear is the sole option right now.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) MOOGradientType gradientType</Declaration>
+			
+			
+			<Anchor>//api/name/gradientType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setShadowColor:</TokenIdentifier>
+			<Abstract type="html">Specifies shadow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *shadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/shadowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowColor</TokenIdentifier>
+			<Abstract type="html">Specifies shadow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *shadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/shadowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setShadowOffset:</TokenIdentifier>
+			<Abstract type="html">Specifies shadow offset.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGSize shadowOffset</Declaration>
+			
+			
+			<Anchor>//api/name/shadowOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowOffset</TokenIdentifier>
+			<Abstract type="html">Specifies shadow offset.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGSize shadowOffset</Declaration>
+			
+			
+			<Anchor>//api/name/shadowOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setClipsShadow:</TokenIdentifier>
+			<Abstract type="html">Set to YES if your icon is translucent and you don't want the shadow showing through.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) BOOL clipsShadow</Declaration>
+			
+			
+			<Anchor>//api/name/clipsShadow</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/clipsShadow</TokenIdentifier>
+			<Abstract type="html">Set to YES if your icon is translucent and you don't want the shadow showing through.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/shadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) BOOL clipsShadow</Declaration>
+			
+			
+			<Anchor>//api/name/clipsShadow</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setInnerShadowColor:</TokenIdentifier>
+			<Abstract type="html">Specifies inner shadow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *innerShadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/innerShadowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowColor</TokenIdentifier>
+			<Abstract type="html">Specifies inner shadow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowOffset</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *innerShadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/innerShadowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setInnerShadowOffset:</TokenIdentifier>
+			<Abstract type="html">Specifies inner shadow offset.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGSize innerShadowOffset</Declaration>
+			
+			
+			<Anchor>//api/name/innerShadowOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowOffset</TokenIdentifier>
+			<Abstract type="html">Specifies inner shadow offset.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerShadowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGSize innerShadowOffset</Declaration>
+			
+			
+			<Anchor>//api/name/innerShadowOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setOuterGlowColor:</TokenIdentifier>
+			<Abstract type="html">Specifies outer glow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowRadius</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *outerGlowColor</Declaration>
+			
+			
+			<Anchor>//api/name/outerGlowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowColor</TokenIdentifier>
+			<Abstract type="html">Specifies outer glow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowRadius</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *outerGlowColor</Declaration>
+			
+			
+			<Anchor>//api/name/outerGlowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setOuterGlowRadius:</TokenIdentifier>
+			<Abstract type="html">Specifies the total displacement of the outer glow in points.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat outerGlowRadius</Declaration>
+			
+			
+			<Anchor>//api/name/outerGlowRadius</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowRadius</TokenIdentifier>
+			<Abstract type="html">Specifies the total displacement of the outer glow in points.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/outerGlowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat outerGlowRadius</Declaration>
+			
+			
+			<Anchor>//api/name/outerGlowRadius</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setInnerGlowColor:</TokenIdentifier>
+			<Abstract type="html">Specifies inner glow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowRadius</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *innerGlowColor</Declaration>
+			
+			
+			<Anchor>//api/name/innerGlowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowColor</TokenIdentifier>
+			<Abstract type="html">Specifies inner glow color.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowRadius</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *innerGlowColor</Declaration>
+			
+			
+			<Anchor>//api/name/innerGlowColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MOOMaskedIconViewStyles/setInnerGlowRadius:</TokenIdentifier>
+			<Abstract type="html">Specifies the total displacement of the inner glow in points.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat innerGlowRadius</Declaration>
+			
+			
+			<Anchor>//api/name/innerGlowRadius</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowRadius</TokenIdentifier>
+			<Abstract type="html">Specifies the total displacement of the inner glow in points.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/innerGlowColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat innerGlowRadius</Declaration>
+			
+			
+			<Anchor>//api/name/innerGlowRadius</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

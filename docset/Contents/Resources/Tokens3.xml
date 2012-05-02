@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MOOResourceRegistry.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MOOResourceRegistry</TokenIdentifier>
+			<Abstract type="html">MOOResourceRegistry registers resource lists that should be cached. After a MOOMaskedIconView renders its mask, it checks with the sharedRegistry to see whether the newly-created mask should go in the cache.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/setResourceLists:</TokenIdentifier>
+			<Abstract type="html">The array of resourceLists tracked by the registry</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSArray *resourceLists</Declaration>
+			
+			
+			<Anchor>//api/name/resourceLists</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MOOResourceRegistry/resourceLists</TokenIdentifier>
+			<Abstract type="html">The array of resourceLists tracked by the registry</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSArray *resourceLists</Declaration>
+			
+			
+			<Anchor>//api/name/resourceLists</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/registerList:</TokenIdentifier>
+			<Abstract type="html">Registers a resource list for querying by MOOMaskedIconView instances</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/deregisterList:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)registerList:(MOOResourceList *)resourceList</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>resourceList</Name>
+					<Abstract type="html">The resource list to register</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/registerList:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/deregisterList:</TokenIdentifier>
+			<Abstract type="html">Deregisters a resource list from querying by MOOMaskedIconView instances</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/registerList:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)deregisterList:(MOOResourceList *)resourceList</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>resourceList</Name>
+					<Abstract type="html">The resource list to deregister</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/deregisterList:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOResourceRegistry/shouldCacheResourceWithKey:</TokenIdentifier>
+			<Abstract type="html">Iterates through the resource list and returns whether the resource with key key should be cached.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)shouldCacheResourceWithKey:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The cache key of the queried resource</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">Whether the resource with key key should go into the cache</Abstract></ReturnValue>
+			<Anchor>//api/name/shouldCacheResourceWithKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MOOResourceRegistry/sharedRegistry</TokenIdentifier>
+			<Abstract type="html">A shared registry.</Abstract>
+			<DeclaredIn>MOOResourceList.h</DeclaredIn>			
+			
+			<Declaration>+ (MOOResourceRegistry *)sharedRegistry</Declaration>
+			
+			<ReturnValue><Abstract type="html">A shared registry.</Abstract></ReturnValue>
+			<Anchor>//api/name/sharedRegistry</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

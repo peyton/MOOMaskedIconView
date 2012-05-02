@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.peyton.MOOMaskedIconView.MOOMaskedIconView</string>
+	<key>CFBundleName</key>
+	<string>MOOMaskedIconView Documentation</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	
+	
+	
+	
+	<key>DocSetFeedName</key>
+	<string>MOOMaskedIconView Documentation</string>
+	<key>DocSetFeedURL</key>
+	<string>http://peytn.com/MOOMaskedIconView/com.peyton.MOOMaskedIconView.MOOMaskedIconView.atom</string>
+	<key>DocSetMinimumXcodeVersion</key>
+	<string>3.0</string>
+	
+	<key>DocSetPublisherIdentifier</key>
+	<string>com.peyton.MOOMaskedIconView.documentation</string>
+	<key>DocSetPublisherName</key>
+	<string>Peyton Randolph</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2012 Peyton Randolph. All rights reserved.</string>
+</dict>
+</plist>

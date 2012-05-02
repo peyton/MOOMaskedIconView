@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MOOMaskedIconView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MOOMaskedIconView</TokenIdentifier>
+			<Abstract type="html">MOOMaskedIconView is a UIView subclass that uses black-and-white masks to draw icons of different styles at any size or resolution. It's like Photoshop layer styles, using the same technique as UITabBar to generate various effects from a single icon mask.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/MOOMaskedIconViewStyles</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/cl/MOOStyleTrait</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setHighlighted:</TokenIdentifier>
+			<Abstract type="html">Whether the icon view is in its highlighted state.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, getter=isHighlighted) BOOL highlighted</Declaration>
+			
+			
+			<Anchor>//api/name/highlighted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MOOMaskedIconView/highlighted</TokenIdentifier>
+			<Abstract type="html">Whether the icon view is in its highlighted state.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, getter=isHighlighted) BOOL highlighted</Declaration>
+			
+			
+			<Anchor>//api/name/highlighted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setMask:</TokenIdentifier>
+			<Abstract type="html">The current CGImage mask held by the view. Read-only.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGImageRef mask</Declaration>
+			
+			
+			<Anchor>//api/name/mask</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MOOMaskedIconView/mask</TokenIdentifier>
+			<Abstract type="html">The current CGImage mask held by the view. Read-only.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGImageRef mask</Declaration>
+			
+			
+			<Anchor>//api/name/mask</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setTrait:</TokenIdentifier>
+			<Abstract type="html">Returns a trait composed of the icon's current style properties.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/mixInTrait:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) id&lt;&gt; trait</Declaration>
+			
+			
+			<Anchor>//api/name/trait</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MOOMaskedIconView/trait</TokenIdentifier>
+			<Abstract type="html">Returns a trait composed of the icon's current style properties.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/mixInTrait:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) id&lt;&gt; trait</Declaration>
+			
+			
+			<Anchor>//api/name/trait</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/mixInTrait:</TokenIdentifier>
+			<Abstract type="html">Apply the properties of the passed-in trait in addition to the icon's current properties.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/MOOMaskedIconView/trait</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)mixInTrait:(id&lt;MOOStyleTrait&gt;)trait</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>trait</Name>
+					<Abstract type="html">The trait to mix in.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/mixInTrait:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/renderImage</TokenIdentifier>
+			<Abstract type="html">Render the icon unhighlighted to a UIImage.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/renderHighlightedImage</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIImage *)renderImage</Declaration>
+			
+			
+			<Anchor>//api/name/renderImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/renderHighlightedImage</TokenIdentifier>
+			<Abstract type="html">Render the icon highlighted to a UIImage.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/renderImage</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIImage *)renderHighlightedImage</Declaration>
+			
+			
+			<Anchor>//api/name/renderHighlightedImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setGradientColors:</TokenIdentifier>
+			<Abstract type="html">An optional array of UIColors defining the color of the gradient at each stop. Setting gradientColors clears gradientStartColor and gradientEndColor.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientLocations</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)setGradientColors:(NSArray *)gradientColors</Declaration>
+			
+			
+			<Anchor>//api/name/setGradientColors:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/gradientStartColor</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's start location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientEndColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIColor *)gradientStartColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientStartColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setGradientStartColor:</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's start location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientEndColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)setGradientStartColor:(UIColor *)gradientStartColor</Declaration>
+			
+			
+			<Anchor>//api/name/setGradientStartColor:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/gradientEndColor</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's end location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientStartColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIColor *)gradientEndColor</Declaration>
+			
+			
+			<Anchor>//api/name/gradientEndColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOMaskedIconView/setGradientEndColor:</TokenIdentifier>
+			<Abstract type="html">The color filled at the gradient's end location. Cleared by gradientColors if that's set.</Abstract>
+			<DeclaredIn>MOOMaskedIconView.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientStartColor</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfp/MOOMaskedIconViewStyles/gradientColors</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)setGradientEndColor:(UIColor *)gradientEndColor</Declaration>
+			
+			
+			<Anchor>//api/name/setGradientEndColor:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

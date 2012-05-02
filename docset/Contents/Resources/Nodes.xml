@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>MOOMaskedIconView</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		<Node id="1">
+			<Name>MOOMaskedIconView</Name>
+			<Path>Classes/MOOMaskedIconView.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>MOOResourceList</Name>
+			<Path>Classes/MOOResourceList.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>MOOResourceRegistry</Name>
+			<Path>Classes/MOOResourceRegistry.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>MOOStyleTrait</Name>
+			<Path>Classes/MOOStyleTrait.html</Path>
+		</Node>
+		
+		
+		<Node id="5">
+			<Name>MOOMaskedIconViewStyles</Name>
+			<Path>Protocols/MOOMaskedIconViewStyles.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>MOOStyleTrait</Name>
+			<Path>Protocols/MOOStyleTrait.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

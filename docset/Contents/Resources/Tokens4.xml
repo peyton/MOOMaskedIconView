@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MOOStyleTrait.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MOOStyleTrait</TokenIdentifier>
+			<Abstract type="html">MOOStyleTrait is an implementation of MOOStyleTrait that conforms to MOOMaskedIconViewStyles</Abstract>
+			<DeclaredIn>MOOStyleTrait.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MOOStyleTrait/trait</TokenIdentifier>
+			<Abstract type="html">Creates and returns a new, autoreleased trait.</Abstract>
+			<DeclaredIn>MOOStyleTrait.h</DeclaredIn>			
+			
+			<Declaration>+ (MOOStyleTrait *)trait</Declaration>
+			
+			
+			<Anchor>//api/name/trait</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOStyleTrait/styleProtocol</TokenIdentifier>
+			<Abstract type="html">The underlying style protocol defining all properties.</Abstract>
+			<DeclaredIn>MOOStyleTrait.m</DeclaredIn>			
+			
+			<Declaration>- (Protocol *)styleProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/styleProtocol</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOStyleTrait/mixInTrait:</TokenIdentifier>
+			<Abstract type="html">Overwrites properties of the current trait with values from another trait as long as those values are set on the other trait.</Abstract>
+			<DeclaredIn>MOOStyleTrait.m</DeclaredIn>			
+			
+			<Declaration>- (void)mixInTrait:(id&lt;MOOStyleTrait&gt;)otherTrait</Declaration>
+			
+			
+			<Anchor>//api/name/mixInTrait:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOStyleTrait/mixInTraits:</TokenIdentifier>
+			<Abstract type="html">Calls mixInTrait: on every element in an array of traits.</Abstract>
+			<DeclaredIn>MOOStyleTrait.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/MOOStyleTrait/mixInTrait:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)mixInTraits:(NSArray *)traits</Declaration>
+			
+			
+			<Anchor>//api/name/mixInTraits:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOStyleTrait/traitMixedWithTrait:</TokenIdentifier>
+			<Abstract type="html">Creates a new trait composed of the current trait and a passed-in trait. Does not overwrite properties on the callee, unlike mixInTrait:.</Abstract>
+			<DeclaredIn>MOOStyleTrait.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/MOOStyleTrait/mixInTrait:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (MOOStyleTrait *)traitMixedWithTrait:(MOOStyleTrait *)otherTrait</Declaration>
+			
+			
+			<Anchor>//api/name/traitMixedWithTrait:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MOOStyleTrait/traitMixedWithTraits:</TokenIdentifier>
+			<Abstract type="html">Creates a trait composed of the current trait and an array of other traits. Does not overwrite properties on the callee, unlike mixInTraits:.</Abstract>
+			<DeclaredIn>MOOStyleTrait.m</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/MOOStyleTrait/traitMixedWithTrait:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/MOOStyleTrait/mixInTrait:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (MOOStyleTrait *)traitMixedWithTraits:(NSArray *)otherTraits</Declaration>
+			
+			
+			<Anchor>//api/name/traitMixedWithTraits:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
