@@ -693,28 +693,28 @@ NSCache *_defaultMaskCache;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-    if ([keyPath isEqualToString:MOOHighlightedKeyPath] ||
-        [keyPath isEqualToString:MOOMaskKeyPath] ||
-        [keyPath isEqualToString:MOOOverlayKeyPath])
+    if (context == (__bridge void *)MOOHighlightedKeyPath ||
+        context == (__bridge void *)MOOMaskKeyPath ||
+        context == (__bridge void *)MOOOverlayKeyPath)
     {
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:MOOShadowColorKeyPath] ||
-        [keyPath isEqualToString:MOOShadowOffsetKeyPath] ||
-        [keyPath isEqualToString:MOOOuterGlowRadiusKeyPath])
+    if (context == (__bridge void *)MOOShadowColorKeyPath ||
+        context == (__bridge void *)MOOShadowOffsetKeyPath ||
+        context == (__bridge void *)MOOOuterGlowRadiusKeyPath)
     {
         [self sizeToFit];
         [self setNeedsDisplay];
         return;
     }
     
-    if ([keyPath isEqualToString:MOOGradientStartColorKeyPath] ||
-        [keyPath isEqualToString:MOOGradientEndColorKeyPath] ||
-        [keyPath isEqualToString:MOOGradientColorsKeyPath] ||
-        [keyPath isEqualToString:MOOGradientLocationsKeyPath] ||
-        [keyPath isEqualToString:MOOGradientTypeKeyPath])
+    if (context == (__bridge void *)MOOGradientStartColorKeyPath ||
+        context == (__bridge void *)MOOGradientEndColorKeyPath ||
+        context == (__bridge void *)MOOGradientColorsKeyPath ||
+        context == (__bridge void *)MOOGradientLocationsKeyPath ||
+        context == (__bridge void *)MOOGradientTypeKeyPath)
     {
         [self _setNeedsGradient];
         [self setNeedsDisplay];
@@ -748,17 +748,17 @@ NSCache *_defaultMaskCache;
 {
     
     // Set up observing
-    [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOMaskKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOOverlayKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientStartColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientEndColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientColorsKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientLocationsKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOGradientTypeKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOShadowColorKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:NULL];
-    [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:NULL];
+    [self addObserver:self forKeyPath:MOOHighlightedKeyPath options:0 context:(__bridge void *)MOOHighlightedKeyPath];
+    [self addObserver:self forKeyPath:MOOMaskKeyPath options:0 context:(__bridge void *)MOOMaskKeyPath];
+    [self addObserver:self forKeyPath:MOOOverlayKeyPath options:0 context:(__bridge void *)MOOOverlayKeyPath];
+    [self addObserver:self forKeyPath:MOOGradientStartColorKeyPath options:0 context:(__bridge void *)MOOGradientStartColorKeyPath];
+    [self addObserver:self forKeyPath:MOOGradientEndColorKeyPath options:0 context:(__bridge void *)MOOGradientEndColorKeyPath];
+    [self addObserver:self forKeyPath:MOOGradientColorsKeyPath options:0 context:(__bridge void *)MOOGradientColorsKeyPath];
+    [self addObserver:self forKeyPath:MOOGradientLocationsKeyPath options:0 context:(__bridge void *)MOOGradientLocationsKeyPath];
+    [self addObserver:self forKeyPath:MOOGradientTypeKeyPath options:0 context:(__bridge void *)MOOGradientTypeKeyPath];
+    [self addObserver:self forKeyPath:MOOShadowColorKeyPath options:0 context:(__bridge void *)MOOShadowColorKeyPath];
+    [self addObserver:self forKeyPath:MOOShadowOffsetKeyPath options:0 context:(__bridge void *)MOOShadowOffsetKeyPath];
+    [self addObserver:self forKeyPath:MOOOuterGlowRadiusKeyPath options:0 context:(__bridge void *)MOOOuterGlowRadiusKeyPath];
 }
 
 - (void)_configureViewWithDefaults;
