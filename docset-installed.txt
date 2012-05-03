@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/peyton/Library/Developer/Shared/Documentation/DocSets/com.peytn.MOOMaskedIconView.MOOMaskedIconView.docset
+Time: 2012-05-03 00:09:03 +0000

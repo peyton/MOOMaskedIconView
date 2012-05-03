@@ -5,13 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.peyton.MOOMaskedIconView.MOOMaskedIconView</string>
+	<string>com.peytn.MOOMaskedIconView.MOOMaskedIconView</string>
 	<key>CFBundleName</key>
 	<string>MOOMaskedIconView Documentation</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.2</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.2</string>
 	
 	
 	
@@ -19,12 +19,12 @@
 	<key>DocSetFeedName</key>
 	<string>MOOMaskedIconView Documentation</string>
 	<key>DocSetFeedURL</key>
-	<string>http://peytn.com/MOOMaskedIconView/com.peyton.MOOMaskedIconView.MOOMaskedIconView.atom</string>
+	<string>http://peytn.com/MOOMaskedIconView/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom</string>
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>
 	
 	<key>DocSetPublisherIdentifier</key>
-	<string>com.peyton.MOOMaskedIconView.documentation</string>
+	<string>com.peytn.MOOMaskedIconView.documentation</string>
 	<key>DocSetPublisherName</key>
 	<string>Peyton Randolph</string>
 	<key>NSHumanReadableCopyright</key>
