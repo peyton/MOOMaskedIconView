@@ -1,18 +1,18 @@
 <?xml version="1.0" standalone="no"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
-    <id>http://peytn.com/MOOMaskedIconView/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom/20120502190904</id>
+    <id>http://peytn.com/MOOMaskedIconView/publish/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom/20120502191343</id>
     <title type="text">MOOMaskedIconView Documentation</title>
     <rights>Copyright © 2012 Peyton Randolph. All rights reserved.</rights>
-    <link rel="self" href="http://peytn.com/MOOMaskedIconView/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom"></link>
+    <link rel="self" href="http://peytn.com/MOOMaskedIconView/publish/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom"></link>
     <docset:publisherName>Peyton Randolph</docset:publisherName>
     <docset:publisherID>com.peytn.MOOMaskedIconView.documentation</docset:publisherID>
-    <updated>2012-05-02T19:09:04-05:00</updated>
+    <updated>2012-05-02T19:13:43-05:00</updated>
     <entry>
         <id>tag:peytn.com,2012-05-02:com.peytn.MOOMaskedIconView.MOOMaskedIconView/0.2.0</id>
         <title type="text">MOOMaskedIconView Documentation</title>
-        <updated>2012-05-02T19:09:04-05:00</updated>
+        <updated>2012-05-02T19:13:43-05:00</updated>
         <content type="text">MOOMaskedIconView Documentation (v0.2.0)</content>
-        <link rel="enclosure" type="application/octet-stream" href="http://peytn.com/MOOMaskedIconView/com.peytn.MOOMaskedIconView.MOOMaskedIconView-0.2.xar" length="71290"></link>
+        <link rel="enclosure" type="application/octet-stream" href="http://peytn.com/MOOMaskedIconView/publish/com.peytn.MOOMaskedIconView.MOOMaskedIconView-0.2.xar" length="71136"></link>
         <docset:identifier>com.peytn.MOOMaskedIconView.MOOMaskedIconView</docset:identifier>
         <docset:version>0.2.0</docset:version>
         <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>

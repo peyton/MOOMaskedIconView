@@ -19,7 +19,7 @@
 	<key>DocSetFeedName</key>
 	<string>MOOMaskedIconView Documentation</string>
 	<key>DocSetFeedURL</key>
-	<string>http://peytn.com/MOOMaskedIconView/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom</string>
+	<string>http://peytn.com/MOOMaskedIconView/publish/com.peytn.MOOMaskedIconView.MOOMaskedIconView.atom</string>
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>
 	
