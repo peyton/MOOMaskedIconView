@@ -53,9 +53,16 @@ OS X. PDFs are best—they're easy to maintain and resolution independent.
 
 For more examples, check out the [Demo Project](https://github.com/peyton/MOOMaskedIconView/tree/master/Demo%20Project).
 
-For the full list of styleable properties, see [MOOMaskedIconViewStyles](http://peytn.com/MOOMaskedIconView/html/Protocols/MOOMaskedIconViewStyles.html).
+For the full list of styleable properties, see [*MOOMaskedIconViewStyles*](http://peytn.com/MOOMaskedIconView/html/Protocols/MOOMaskedIconViewStyles.html).
 
 For information on reusable styles, caching, and other advanced topics, see [*Advanced Use*](https://github.com/peyton/MOOMaskedIconView/wiki/Advanced-Use).
+
+#Documentation
+-----------
+
+See [*MOOMaskedIconView Reference*](http://peytn.com/MOOMaskedIconView/html/).
+
+Of course, it's nice to see documentation in the "Quick Help" window. Here's [how to make that happen](https://github.com/peyton/MOOMaskedIconView/wiki/Installing-Documentation).
 
 #How to install
 -----------
@@ -106,7 +113,7 @@ An image mask is a black-and-white image that clips drawing. Quartz clipping fol
 * Gray pixels render with an alpha value of 1 - *source pixel's gray value*.
 
 Mask images may not use an alpha channel, so icons with transparency must be set on a white background. For more information about Quartz image masking, see
-the [Quartz 2D Programming Guide](https://developer.apple.com/library/ios/#documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/dq_images.html%23//apple_ref/doc/uid/TP30001066-CH212-CJBHDDBE).
+the [*Quartz 2D Programming Guide*](https://developer.apple.com/library/ios/#documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/dq_images.html%23//apple_ref/doc/uid/TP30001066-CH212-CJBHDDBE).
 
 #Scalable icons with PDFs
 ---------
