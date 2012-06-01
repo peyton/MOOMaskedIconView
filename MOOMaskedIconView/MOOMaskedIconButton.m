@@ -24,6 +24,7 @@ static NSString * const MOODisabledStyleKeyPath = @"disabledStyle";
 @synthesize disabledStyle = _disabledStyle;
 
 @synthesize contentEdgeInsets = _contentEdgeInsets;
+@synthesize highlightedContentOffset = _highlightedContentOffset;
 
 - (id)initWithFrame:(CGRect)frame;
 {
@@ -85,6 +86,9 @@ static NSString * const MOODisabledStyleKeyPath = @"disabledStyle";
     [self.icon sizeToFit];
     CGRect iconFrame = self.icon.frame;
     iconFrame.origin = CGPointMake(self.contentEdgeInsets.left, self.contentEdgeInsets.top);
+    if (self.isHighlighted)
+        iconFrame.origin = CGPointApplyAffineTransform(iconFrame.origin, CGAffineTransformMakeTranslation(self.highlightedContentOffset.width, self.highlightedContentOffset.height));
+    
     self.icon.frame = iconFrame;
 }
 

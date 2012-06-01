@@ -16,6 +16,7 @@
     id<MOOStyleTrait> _disabledStyle;
     
     UIEdgeInsets _contentEdgeInsets;
+    CGSize _highlightedContentOffset;
     
     struct {
         BOOL needsStyling: 1;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) id<MOOStyleTrait> disabledStyle;
 
 @property (nonatomic, assign) UIEdgeInsets contentEdgeInsets;
+@property (nonatomic, assign) CGSize highlightedContentOffset;
 
 - (id)initWithIcon:(MOOMaskedIconView *)icon;
 
