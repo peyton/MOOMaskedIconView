@@ -961,7 +961,7 @@ CGImageRef CGImageCreateMaskFromResourceNamed(NSString *resourceName, CGSize siz
         return CGImageCreateMaskFromPDFNamed(resourceName, size);
 
     return CGImageCreateMaskFromImageNamed(resourceName, size);
-};
+}
 
 /*
  * CGImageCreateInvertedMaskWithMask.
