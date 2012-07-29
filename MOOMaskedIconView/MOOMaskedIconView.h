@@ -265,6 +265,8 @@ typedef enum {
 - (id)initWithImageNamed:(NSString *)imageName size:(CGSize)size;
 - (id)initWithPDFNamed:(NSString *)pdfName;
 - (id)initWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+- (id)initWithPDFData:(NSData *)pdfData;
+- (id)initWithPDFData:(NSData *)pdfData size:(CGSize)size;
 - (id)initWithResourceNamed:(NSString *)resourceName;
 - (id)initWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
@@ -275,6 +277,8 @@ typedef enum {
 + (MOOMaskedIconView *)iconWithImageNamed:(NSString *)imageName size:(CGSize)size;
 + (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName;
 + (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
++ (MOOMaskedIconView *)iconWithPDFData:(NSData *)pdfData;
++ (MOOMaskedIconView *)iconWithPDFData:(NSData *)pdfData size:(CGSize)size;
 + (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName;
 + (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
@@ -285,6 +289,8 @@ typedef enum {
 - (void)configureWithImageNamed:(NSString *)imageName size:(CGSize)size;
 - (void)configureWithPDFNamed:(NSString *)pdfName;
 - (void)configureWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
+- (void)configureWithPDFData:(NSData *)pdfData;
+- (void)configureWithPDFData:(NSData *)pdfData size:(CGSize)size;
 - (void)configureWithResourceNamed:(NSString *)resourceName;
 - (void)configureWithResourceNamed:(NSString *)resourceName size:(CGSize)size;
 
@@ -353,6 +359,16 @@ CGImageRef CGImageCreateMaskFromImageNamed(NSString *imageName, CGSize size);
  * Create a mask CGImage from a given pdf name for a given size.
  */
 CGImageRef CGImageCreateMaskFromPDFNamed(NSString *pdfName, CGSize size);
+
+/**
+ * Create a mask CGImage from a given pdf data for a given size.
+ */
+CGImageRef CGImageCreateMaskFromPDFData(NSData *pdfData, CGSize size);
+
+/**
+ * Create a mask CGImage from a given pdf page for a given size.
+ */
+CGImageRef CGImageCreateMaskFromPDFPage(CGPDFPageRef page, CGSize size);
 
 /**
  * Create a mask CGImage from a given resource name for a given size

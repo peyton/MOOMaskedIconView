@@ -160,6 +160,21 @@ NSCache *_defaultMaskCache;
     return self;
 }
 
+- (id)initWithPDFData:(NSData *)pdfData
+{
+    return [self initWithPDFData:pdfData size:CGSizeZero];
+}
+
+- (id)initWithPDFData:(NSData *)pdfData size:(CGSize)size
+{
+    if (!(self = [self initWithFrame:CGRectZero]))
+        return nil;
+    
+    [self configureWithPDFData:pdfData size:size];
+    
+    return self;
+}
+
 - (id)initWithResourceNamed:(NSString *)resourceName;
 {
     return [self initWithResourceNamed:resourceName size:CGSizeZero];
@@ -246,6 +261,16 @@ NSCache *_defaultMaskCache;
 + (MOOMaskedIconView *)iconWithPDFNamed:(NSString *)pdfName size:(CGSize)size;
 {
     return AH_AUTORELEASE([[self alloc] initWithPDFNamed:pdfName size:size]);
+}
+
++ (MOOMaskedIconView *)iconWithPDFData:(NSData *)pdfData
+{
+    return AH_AUTORELEASE([[self alloc] initWithPDFData:pdfData]);
+}
+
++ (MOOMaskedIconView *)iconWithPDFData:(NSData *)pdfData size:(CGSize)size
+{
+    return AH_AUTORELEASE([[self alloc] initWithPDFData:pdfData size:size]);
 }
 
 + (MOOMaskedIconView *)iconWithResourceNamed:(NSString *)resourceName;
@@ -501,6 +526,18 @@ NSCache *_defaultMaskCache;
     // Cache mask
     if ([[self class] shouldCacheMaskForKey:key])
         [[[self class] defaultMaskCache] setObject:[MOOCGImageWrapper wrapperWithCGImage:mask] forKey:key];
+    CGImageRelease(mask);
+}
+
+- (void)configureWithPDFData:(NSData *)pdfData
+{
+    [self configureWithPDFData:pdfData size:CGSizeZero];
+}
+
+- (void)configureWithPDFData:(NSData *)pdfData size:(CGSize)size
+{
+    CGImageRef mask = CGImageCreateMaskFromPDFData(pdfData, size);
+    self.mask = mask;
     CGImageRelease(mask);
 }
 
@@ -928,8 +965,39 @@ CGImageRef CGImageCreateMaskFromPDFNamed(NSString *pdfName, CGSize size)
         return NULL;
     }
     
+    CGImageRef maskRef = CGImageCreateMaskFromPDFPage(firstPage, size);
+    CGPDFDocumentRelease(pdf);
+    
+    return maskRef;
+}
+
+CGImageRef CGImageCreateMaskFromPDFData(NSData *pdfData, CGSize size)
+{
+    if (!pdfData)
+        return NULL;
+    
+    // Grab pdf
+    CGDataProviderRef pdfDataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef) pdfData);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(pdfDataProvider);
+    CGPDFPageRef firstPage = CGPDFDocumentGetPage(pdf, 1);
+    CGDataProviderRelease(pdfDataProvider);
+    
+    if (firstPage == NULL)
+    {
+        CGPDFDocumentRelease(pdf);
+        return NULL;
+    }
+    
+    CGImageRef maskRef = CGImageCreateMaskFromPDFPage(firstPage, size);
+    CGPDFDocumentRelease(pdf);
+    
+    return maskRef;
+}
+
+CGImageRef CGImageCreateMaskFromPDFPage(CGPDFPageRef page, CGSize size)
+{
     // Calculate metrics
-    const CGRect mediaRect = CGPDFPageGetBoxRect(firstPage, kCGPDFCropBox);
+    const CGRect mediaRect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
     const CGSize pdfSize = (size.width > 0.0f && size.height > 0.0f) ? size : mediaRect.size;
     
     // Set up context
@@ -945,8 +1013,7 @@ CGImageRef CGImageCreateMaskFromPDFNamed(NSString *pdfName, CGSize size)
     CGContextTranslateCTM(context, 0.0f, -mediaRect.size.height);
     
     // Draw pdf
-    CGContextDrawPDFPage(context, firstPage);
-    CGPDFDocumentRelease(pdf);
+    CGContextDrawPDFPage(context, page);
     
     // Create image to mask
     CGImageRef imageToMask = CGBitmapContextCreateImage(context);
@@ -1024,4 +1091,3 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
     
 	return invertedImage;
 }
-
