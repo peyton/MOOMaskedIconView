@@ -1078,7 +1078,9 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
 	vDSP_vfltu8(dataGray, 2, dataAsFloat, 1, pixelsCount);
 	vDSP_vsmsa(dataAsFloat, 1, &__negativeMultiplier, &max, dataAsFloat, 1, pixelsCount);
 	vDSP_vclip(dataAsFloat, 1, &min, &max, dataAsFloat, 1, pixelsCount);
-	vDSP_vfixu8(dataAsFloat, 1, dataGray, 2, pixelsCount);
+    // The following line generates memory access errors on iOS 6+ and doesn't appear to be necessary.
+    // todo: figure out why float->uint conversion fails
+//	vDSP_vfixu8(dataAsFloat, 1, dataGray, 2, pixelsCount);
     
     // Create new image in the gray color space, since RGB images aren't valid masks
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
