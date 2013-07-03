@@ -916,7 +916,7 @@ CGImageRef CGImageCreateMaskFromCGImage(CGImageRef source, CGSize size)
         bytesPerRow = imageSize.width * CGColorSpaceGetNumberOfComponents(colorspace);
         
         // Create bitmap context
-        CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), bytesPerRow, colorspace, kCGImageAlphaNone);
+        CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height, CGImageGetBitsPerComponent(source), bytesPerRow, colorspace, kCGBitmapAlphaInfoMask & kCGImageAlphaNone);
         CGColorSpaceRelease(colorspace);
         
         CGContextSetInterpolationQuality(context, kCGInterpolationLow);
