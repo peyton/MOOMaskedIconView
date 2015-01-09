@@ -1067,7 +1067,7 @@ static CGImageRef CGImageCreateInvertedMaskWithMask(CGImageRef sourceMask)
     
 	const size_t pixelsCount = width * height;
 	float* dataAsFloat = (float*)malloc(sizeof(float) * pixelsCount);
-    CGFloat min = 0.0f, max = 255.0f;
+    float min = 0.0f, max = 255.0f;
 	UInt8* dataGray = data + 1;
     
 	/// vDSP_vsmsa() = multiply then add
